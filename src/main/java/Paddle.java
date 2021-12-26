@@ -1,7 +1,6 @@
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import static com.googlecode.lanterna.Symbols.BLOCK_SOLID;
 import static com.googlecode.lanterna.Symbols.SOLID_SQUARE;
 
 public class Paddle extends Element{
