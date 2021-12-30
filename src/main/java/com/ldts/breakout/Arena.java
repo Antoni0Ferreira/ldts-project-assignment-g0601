@@ -39,6 +39,7 @@ public class Arena {
         screen.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(Constants.WIDTH, Constants.HEIGHT), ' ');
         paddle.draw(screen);
+        ball.draw(screen);
         for(Wall wall: walls){
             wall.draw(screen);
         }
