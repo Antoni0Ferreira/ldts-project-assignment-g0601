@@ -20,6 +20,7 @@ public class Arena {
         this.walls = createWalls();
     }
 
+    // Only for tests
     public Arena(Paddle paddle){
         this.paddle = paddle;
         this.walls = createWalls();

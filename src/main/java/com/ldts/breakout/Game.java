@@ -32,6 +32,12 @@ public class Game {
 
     }
 
+    // Only for tests
+    public Game(Arena arena){
+        this.arena = arena;
+    }
+
+
     public void draw() throws IOException{
         screen.clear();
         arena.draw(screen.newTextGraphics());

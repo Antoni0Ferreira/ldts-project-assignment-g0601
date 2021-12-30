@@ -91,16 +91,5 @@ class ArenaTest extends spock.lang.Specification {
         newPosition == new Position(Constants.BORDER_RIGHT_X - 6, Constants.INIT_PADDLE_Y)
     }
 
-/*    def "testing process key #1"(){
-        given:
-        def key = Mock(KeyStroke.class)
-        def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
-        def arena = new Arena(paddle)
-
-        when: "we want to move the paddle to the left"
-        key.getKeyType() >> KeyType.ArrowLeft
-        arena.movePaddle(arena.moveLeft())
-    }*/
-
 
 }
