@@ -24,6 +24,19 @@ class ArenaTest extends spock.lang.Specification {
         newPosition == new Position(Constants.INIT_PADDLE_X - 1, Constants.INIT_PADDLE_Y)
     }
 
+    def "testing moving right"() {
+        given:
+        def paddle = Mock(Paddle.class)
+        def arena = new Arena(paddle)
+
+        paddle.getPosition() >> new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y)
+
+        when:
+        def newPosition = arena.moveRight()
+
+        then:
+        newPosition == new Position(Constants.INIT_PADDLE_X + 1, Constants.INIT_PADDLE_Y)
+    }
 
 /*    def "testing paddle movement #1"(){
 
