@@ -38,7 +38,7 @@ class ArenaTest extends spock.lang.Specification {
         newPosition == new Position(Constants.INIT_PADDLE_X + 1, Constants.INIT_PADDLE_Y)
     }
 
-/*    def "testing paddle movement #1"(){
+    def "testing paddle movement #1"(){
 
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
@@ -102,5 +102,4 @@ class ArenaTest extends spock.lang.Specification {
         arena.movePaddle(paddle.moveLeft())
     }
 
- */
 }
