@@ -12,20 +12,28 @@ import java.util.List;
 
 
 public class Arena {
+    private final Ball ball;
     private final Paddle paddle;
     private final List<Wall> walls;
 
     public Arena(){
+        ball = new Ball();
         paddle = new Paddle();
         this.walls = createWalls();
     }
 
     // Only for tests
     public Arena(Paddle paddle){
+        ball = new Ball();
         this.paddle = paddle;
         this.walls = createWalls();
 
     }
+
+    public Ball getBall() {
+        return ball;
+    }
+
 
     public void draw(TextGraphics screen) {
         screen.setBackgroundColor(TextColor.Factory.fromString("#000000"));
