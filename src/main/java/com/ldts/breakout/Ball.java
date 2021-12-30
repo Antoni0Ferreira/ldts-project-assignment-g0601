@@ -20,6 +20,10 @@ public class Ball extends Element{
         this.dirY = 1;
     }
 
+    public Ball(Position position, int dirX, int dirY){ super(position);
+        this.dirX = dirX;
+        this.dirY = dirY;}
+
     public void setState(boolean state) {
         this.state = state;
     }
@@ -42,6 +46,11 @@ public class Ball extends Element{
             dirY = -dirY;
             setState(false);
         }
+        if(getPosition().getY() >= Constants.BORDER_BOTTOM_Y){
+            dirY = -dirY;
+            setState(false);
+        }
+
         getPosition().setX(getPosition().getX()+dirX);
         getPosition().setY(getPosition().getY()+dirY);}
 
