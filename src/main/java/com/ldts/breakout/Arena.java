@@ -23,7 +23,6 @@ public class Arena {
     public Arena(Paddle paddle){
         this.paddle = paddle;
         this.walls = createWalls();
-
     }
 
     public void draw(TextGraphics screen) {
