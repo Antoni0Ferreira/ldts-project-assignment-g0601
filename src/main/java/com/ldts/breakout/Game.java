@@ -54,9 +54,35 @@ public class Game {
         }
     }
 
+    public class MultiThread extends Thread{
+        @Override
+        public void run(){
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            while(true){
+                try {
+                    sleep(30);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    draw();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                arena.getBall().move();
+            }
+        }
+
+    }
+
     public void run(){
         try {
-
+            MultiThread multiThread = new MultiThread();
+            multiThread.start();
             while(true) {
                 draw();
                 com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
@@ -71,5 +97,6 @@ public class Game {
         } catch (IOException e){
             e.printStackTrace();
         }
+
     }
 }
