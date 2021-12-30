@@ -11,6 +11,7 @@ public class Paddle extends Element{
 
     public Paddle() { super(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y); }
 
+    // Only for tests
     public Paddle(Position position) { super(position); }
 
 
