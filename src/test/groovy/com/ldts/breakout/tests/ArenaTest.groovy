@@ -9,40 +9,6 @@ import com.ldts.breakout.Position
 
 class ArenaTest extends spock.lang.Specification{
 
-    def "testing moving paddle left"(){
-        given:
-        def position = Mock(Position.class)
-        def paddle = new Paddl(position);
-
-        paddle.getPosition().getX() >> Constants.INIT_PADDLE_X
-        paddle.getPosition().getY() >> Constants.INIT_PADDLE_Y
-
-        when:
-        def newPositionX = paddle.moveLeft().getX()
-        def newPositionY = paddle.moveLeft().getY()
-
-        then:
-        newPositionX == Constants.INIT_PADDLE_X - 1
-        newPositionY == Constants.INIT_PADDLE_Y
-
-    }
-
-    def "test moving paddle right"(){
-        given:
-        def position = Mock(Position.class)
-        def paddle = new Paddle(position);
-
-        paddle.getPosition().getX() >> Constants.INIT_PADDLE_X
-        paddle.getPosition().getY() >> Constants.INIT_PADDLE_Y
-
-        when:
-        def newPositionX = paddle.moveLeft().getX()
-        def newPositionY = paddle.moveLeft().getY()
-
-        then:
-        newPositionX == Constants.INIT_PADDLE_X - 1
-        newPositionY == Constants.INIT_PADDLE_Y
-    }
 
     def "testing paddle movement #1"(){
         given:
