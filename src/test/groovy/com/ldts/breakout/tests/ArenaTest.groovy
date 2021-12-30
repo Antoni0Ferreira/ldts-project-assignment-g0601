@@ -7,10 +7,26 @@ import com.ldts.breakout.Constants
 import com.ldts.breakout.Paddle
 import com.ldts.breakout.Position
 
-class ArenaTest extends spock.lang.Specification{
+class ArenaTest extends spock.lang.Specification {
 
 
-    def "testing paddle movement #1"(){
+    def "testing moving left"() {
+        given:
+        def paddle = Mock(Paddle.class)
+        def arena = new Arena(paddle)
+
+        paddle.getPosition() >> new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y)
+
+        when:
+        def newPosition = arena.moveLeft()
+
+        then:
+        newPosition == new Position(Constants.INIT_PADDLE_X - 1, Constants.INIT_PADDLE_Y)
+    }
+
+
+/*    def "testing paddle movement #1"(){
+
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
         def arena = new Arena(paddle)
@@ -72,4 +88,6 @@ class ArenaTest extends spock.lang.Specification{
         key.getKeyType() >> KeyType.ArrowLeft
         arena.movePaddle(paddle.moveLeft())
     }
+
+ */
 }
