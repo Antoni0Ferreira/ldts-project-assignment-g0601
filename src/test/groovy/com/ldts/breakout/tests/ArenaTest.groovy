@@ -7,44 +7,24 @@ import com.ldts.breakout.Constants
 import com.ldts.breakout.Paddle
 import com.ldts.breakout.Position
 
-class ArenaTest extends spock.lang.Specification{
+class ArenaTest extends spock.lang.Specification {
 
-    def "testing moving paddle left"(){
+    def "testing moving left"() {
         given:
-        def position = Mock(Position.class)
-        def paddle = new Paddl(position);
+        def paddle = Mock(Paddle.class)
+        def arena = new Arena(paddle)
 
-        paddle.getPosition().getX() >> Constants.INIT_PADDLE_X
-        paddle.getPosition().getY() >> Constants.INIT_PADDLE_Y
+        paddle.getPosition() >> new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y)
 
         when:
-        def newPositionX = paddle.moveLeft().getX()
-        def newPositionY = paddle.moveLeft().getY()
+        def newPosition = arena.moveLeft()
 
         then:
-        newPositionX == Constants.INIT_PADDLE_X - 1
-        newPositionY == Constants.INIT_PADDLE_Y
-
+        newPosition == new Position(Constants.INIT_PADDLE_X - 1, Constants.INIT_PADDLE_Y)
     }
 
-    def "test moving paddle right"(){
-        given:
-        def position = Mock(Position.class)
-        def paddle = new Paddle(position);
 
-        paddle.getPosition().getX() >> Constants.INIT_PADDLE_X
-        paddle.getPosition().getY() >> Constants.INIT_PADDLE_Y
-
-        when:
-        def newPositionX = paddle.moveLeft().getX()
-        def newPositionY = paddle.moveLeft().getY()
-
-        then:
-        newPositionX == Constants.INIT_PADDLE_X - 1
-        newPositionY == Constants.INIT_PADDLE_Y
-    }
-
-    def "testing paddle movement #1"(){
+/*    def "testing paddle movement #1"(){
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
         def arena = new Arena(paddle)
@@ -106,4 +86,6 @@ class ArenaTest extends spock.lang.Specification{
         key.getKeyType() >> KeyType.ArrowLeft
         arena.movePaddle(paddle.moveLeft())
     }
+
+ */
 }
