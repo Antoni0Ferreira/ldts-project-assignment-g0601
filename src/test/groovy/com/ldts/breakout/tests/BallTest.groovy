@@ -98,4 +98,31 @@ class BallTest extends spock.lang.Specification{
         newPosition == new Position(Constants.BORDER_RIGHT_X-1,1)
     }
 
+    def "testing ball collision paddle #1"(){
+        given:
+        def ball = new Ball(new Position(Constants.INIT_PADDLE_X + 4, Constants.INIT_PADDLE_Y - 1),1,1)
+
+        when: "the ball moves and collides with the paddle"
+        ball.move()
+        ball.hitPaddle()
+        ball.move()
+        def newPosition = ball.getPosition()
+
+        then:
+        newPosition == new Position(Constants.INIT_PADDLE_X + 6, Constants.INIT_PADDLE_Y - 1)
+    }
+
+    def "testing ball collision paddle #2"(){
+        given:
+        def ball = new Ball(new Position(Constants.INIT_PADDLE_X + 4, Constants.INIT_PADDLE_Y - 1),-1,1)
+
+        when: "the ball moves and collides with the paddle"
+        ball.move()
+        ball.hitPaddle()
+        ball.move()
+        def newPosition = ball.getPosition()
+
+        then:
+        newPosition == new Position(Constants.INIT_PADDLE_X + 2, Constants.INIT_PADDLE_Y - 1)
+    }
 }

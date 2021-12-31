@@ -29,6 +29,12 @@ public class Arena {
         this.walls = createWalls();
     }
 
+    public Arena(Paddle paddle,Ball ball){
+        this.paddle = paddle;
+        this.ball = ball;
+        this.walls = createWalls();
+    }
+
     public Ball getBall() {
         return ball;
     }
@@ -37,8 +43,8 @@ public class Arena {
     public void draw(TextGraphics screen) {
         screen.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(Constants.WIDTH, Constants.HEIGHT), ' ');
-        paddle.draw(screen);
         ball.draw(screen);
+        paddle.draw(screen);
         for(Wall wall: walls){
             wall.draw(screen);
         }
@@ -68,5 +74,11 @@ public class Arena {
             walls.add(new Wall(Constants.WIDTH - 1, r));
         }
         return walls;
+    }
+
+    public void hitsPaddle() {
+        if(ball.getRect().intersects(paddle.getRect())){
+            ball.hitPaddle();
+        }
     }
 }
