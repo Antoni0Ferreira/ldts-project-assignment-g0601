@@ -28,7 +28,12 @@ public class Arena implements ArenaObserver{
         ball = new Ball();
         this.paddle = paddle;
         this.walls = createWalls();
+    }
 
+    public Arena(Paddle paddle,Ball ball){
+        this.paddle = paddle;
+        this.ball = ball;
+        this.walls = createWalls();
     }
 
     public Ball getBall() {
@@ -39,8 +44,8 @@ public class Arena implements ArenaObserver{
     public void draw(TextGraphics screen) {
         screen.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(Constants.WIDTH, Constants.HEIGHT), ' ');
-        paddle.draw(screen);
         ball.draw(screen);
+        paddle.draw(screen);
         for(Wall wall: walls){
             wall.draw(screen);
         }
@@ -72,10 +77,9 @@ public class Arena implements ArenaObserver{
         return walls;
     }
 
-    @Override
-    public void ballPaddleCollision() {
+    public void hitsPaddle() {
         if(ball.getRect().intersects(paddle.getRect())){
-            ball.setPaddleCollision(true);
+            ball.hitPaddle();
         }
     }
 }
