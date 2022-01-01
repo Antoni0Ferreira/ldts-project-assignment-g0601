@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Arena {
+public class Arena implements ArenaObserver{
     private final Ball ball;
     private final Paddle paddle;
     private final List<Wall> walls;
+    private boolean ballPaddleCollision = false;
 
     public Arena(){
         ball = new Ball();
@@ -69,5 +70,12 @@ public class Arena {
             walls.add(new Wall(Constants.WIDTH - 1, r));
         }
         return walls;
+    }
+
+    @Override
+    public void ballPaddleCollision() {
+        if(ball.getRect().intersects(paddle.getRect())){
+            ball.setPaddleCollision(true);
+        }
     }
 }

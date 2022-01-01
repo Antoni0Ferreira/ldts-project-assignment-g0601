@@ -10,9 +10,9 @@ import java.awt.*;
 import static com.googlecode.lanterna.Symbols.FACE_BLACK;
 
 public class Ball extends Element{
-
     private int dirX, dirY;
-    boolean state = false;
+    boolean destroyedBrick = false;
+    boolean paddleCollision = false;
 
     public Ball() {
         super(Constants.INIT_BALL_X,Constants.INIT_BALL_Y);
@@ -24,9 +24,8 @@ public class Ball extends Element{
         this.dirX = dirX;
         this.dirY = dirY;}
 
-    public void setState(boolean state) {
-        this.state = state;
-    }
+    public void setDestroyedBrick(boolean destroyedBrick) {this.destroyedBrick = destroyedBrick;}
+    public void setPaddleCollision(boolean paddleCollision){this.paddleCollision = paddleCollision;}
 
     @Override
     public void draw(TextGraphics graphics) {
@@ -44,11 +43,11 @@ public class Ball extends Element{
 
         if(getPosition().getY() <= Constants.BORDER_TOP_Y){
             dirY = -dirY;
-            setState(false);
+            setDestroyedBrick(false);
         }
         if(getPosition().getY() >= Constants.BORDER_BOTTOM_Y){
             dirY = -dirY;
-            setState(false);
+            setDestroyedBrick(false);
         }
 
         getPosition().setX(getPosition().getX()+dirX);
@@ -56,7 +55,7 @@ public class Ball extends Element{
 
     public void hitPaddle(){
         dirY = -dirY;
-        setState(false);
+        setDestroyedBrick(false);
     }
 
     public void hitBrick(){
@@ -66,7 +65,7 @@ public class Ball extends Element{
         else if(dirY == -1){
             dirY = -dirY;
         }
-        setState(true);
+        setDestroyedBrick(true);
     }
 
     public int getDirX() {
@@ -77,12 +76,13 @@ public class Ball extends Element{
         return dirY;
     }
 
-    public boolean getState() {
-        return state;
+    public boolean getDestroyedBrick() {
+        return destroyedBrick;
     }
 
     Rectangle getRect() {
         return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);
     }
+
 
 }
