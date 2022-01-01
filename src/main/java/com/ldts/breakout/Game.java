@@ -79,8 +79,8 @@ public class Game {
 
     public void run(){
         try {
-            BallThread ballThread = new BallThread();
-            ballThread.start();
+            BallThread BallThread = new BallThread();
+            BallThread.start();
             while(true) {
                 draw();
                 com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
@@ -88,7 +88,7 @@ public class Game {
                 if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q')){
                     stopThread = true;
                     screen.close();
-                    ballThread.interrupt();
+                    BallThread.interrupt();
                     return;
                 }
 

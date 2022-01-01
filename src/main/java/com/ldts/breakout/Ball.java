@@ -11,8 +11,7 @@ import static com.googlecode.lanterna.Symbols.FACE_BLACK;
 
 public class Ball extends Element{
     private int dirX, dirY;
-    boolean destroyedBrick = false;
-    boolean paddleCollision = false;
+    private boolean destroyedBrick = false;
 
     public Ball() {
         super(Constants.INIT_BALL_X,Constants.INIT_BALL_Y);
@@ -25,7 +24,6 @@ public class Ball extends Element{
         this.dirY = dirY;}
 
     public void setDestroyedBrick(boolean destroyedBrick) {this.destroyedBrick = destroyedBrick;}
-    public void setPaddleCollision(boolean paddleCollision){this.paddleCollision = paddleCollision;}
 
     @Override
     public void draw(TextGraphics graphics) {
