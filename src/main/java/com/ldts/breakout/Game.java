@@ -55,7 +55,7 @@ public class Game {
         }
     }
 
-    public class MultiThread extends Thread{
+    public class BallThread extends Thread{
         @Override
         public void run(){
 
@@ -79,8 +79,8 @@ public class Game {
 
     public void run(){
         try {
-            MultiThread multiThread = new MultiThread();
-            multiThread.start();
+            BallThread ballThread = new BallThread();
+            ballThread.start();
             while(true) {
                 draw();
                 com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
@@ -88,7 +88,7 @@ public class Game {
                 if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q')){
                     stopThread = true;
                     screen.close();
-                    multiThread.interrupt();
+                    ballThread.interrupt();
                     return;
                 }
 

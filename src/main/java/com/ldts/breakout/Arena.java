@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Arena implements ArenaObserver{
+public class Arena{
     private final Ball ball;
     private final Paddle paddle;
     private final List<Wall> walls;
