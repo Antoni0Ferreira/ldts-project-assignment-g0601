@@ -12,7 +12,7 @@ import static com.googlecode.lanterna.Symbols.FACE_BLACK;
 public class Ball extends Element{
 
     private int dirX, dirY;
-    boolean state = false;
+    private boolean state = false;
 
     public Ball() {
         super(Constants.INIT_BALL_X,Constants.INIT_BALL_Y);
