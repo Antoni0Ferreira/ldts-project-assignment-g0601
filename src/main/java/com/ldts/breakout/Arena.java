@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Arena {
+public class Arena{
     private final Ball ball;
     private final Paddle paddle;
     private final List<Wall> walls;
+    private boolean ballPaddleCollision = false;
 
     public Arena(){
         ball = new Ball();
