@@ -8,20 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wall extends Element{
-    private List<Wall> walls;
 
-
-    public Wall(int x, int y) {
-        super(x,y);
+    public Wall(Position position) {
+        super(position);
     }
 
-    public Position getPosition() {
-        return  position;
-    }
-    public void setPosition(Position position){
-        this.position = position;
-    }
-
+    @Override
     public void draw(TextGraphics graphics) {
         switch (getPosition().getY()){
             case 4 -> graphics.setBackgroundColor(TextColor.Factory.fromString("#FF0000"));
