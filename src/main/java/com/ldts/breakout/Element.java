@@ -21,4 +21,3 @@ public abstract class Element {
 
     public abstract void draw(TextGraphics graphics);
 }
-

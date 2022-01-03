@@ -1,7 +1,6 @@
 package com.ldts.breakout;
 
 public interface Constants {
-
     int WIDTH = 57;
     int HEIGHT = 40;
     int BALL_WIDTH = 1;

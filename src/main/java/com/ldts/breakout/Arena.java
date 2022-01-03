@@ -67,12 +67,12 @@ public class Arena{
     private List<Wall> createWalls() {
         ArrayList<Wall> walls = new ArrayList <>();
         for (int c = 0; c < Constants.WIDTH; c++) {
-            walls.add(new Wall(c, 0));
-            walls.add(new Wall(c, Constants.HEIGHT - 1));
+            walls.add(new Wall(new Position(c,0)));
+            walls.add(new Wall(new Position(c, Constants.HEIGHT - 1)));
         }
         for (int r = 1; r < Constants.HEIGHT - 1; r++) {
-            walls.add(new Wall(0, r));
-            walls.add(new Wall(Constants.WIDTH - 1, r));
+            walls.add(new Wall(new Position(0, r)));
+            walls.add(new Wall(new Position(Constants.WIDTH - 1, r)));
         }
         return walls;
     }
