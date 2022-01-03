@@ -57,7 +57,6 @@ public class Ball extends Element{
     }
 
     public void hitBrick(){
-        
         if(dirY == 1)
             dirY = -dirY;
         else if(dirY == -1){
@@ -78,7 +77,7 @@ public class Ball extends Element{
         return destroyedBrick;
     }
 
-    Rectangle getRect() {
+    public Rectangle getRect() {
         return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);
     }
 

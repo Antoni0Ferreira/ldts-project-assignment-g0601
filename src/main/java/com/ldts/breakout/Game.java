@@ -71,6 +71,10 @@ public class Game {
                     e.printStackTrace();
                 }
                 arena.hitsPaddle();
+
+                if(!arena.getBall().getDestroyedBrick())
+                    arena.hitsBrick();
+
                 arena.getBall().move();
             }
         }

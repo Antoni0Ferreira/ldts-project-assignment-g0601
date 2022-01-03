@@ -13,7 +13,6 @@ public class Wall extends Element{
         super(position);
     }
 
-
     @Override
     public void draw(TextGraphics graphics) {
         switch (getPosition().getY()){

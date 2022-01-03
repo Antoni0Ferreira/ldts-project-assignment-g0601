@@ -15,30 +15,68 @@ public class Arena{
     private final Ball ball;
     private final Paddle paddle;
     private final List<Wall> walls;
-    private boolean ballPaddleCollision = false;
+    private final List<Brick> bricks;
+    private final Points points;
+    private final boolean ballPaddleCollision = false;
 
     public Arena(){
         ball = new Ball();
         paddle = new Paddle();
-        this.walls = createWalls();
+        walls = createWalls();
+        bricks = createBricks();
+        points = new Points();
     }
 
     // Only for tests
     public Arena(Paddle paddle){
         ball = new Ball();
         this.paddle = paddle;
-        this.walls = createWalls();
+        walls = createWalls();
+        bricks = new ArrayList<Brick>();
+        points = new Points();
     }
 
+    //Only for tests
     public Arena(Paddle paddle,Ball ball){
         this.paddle = paddle;
         this.ball = ball;
-        this.walls = createWalls();
+        walls = createWalls();
+        bricks = new ArrayList<Brick>();
+        points = new Points();
+    }
+
+    //Only for tests
+    public Arena(Ball ball){
+        this.ball = ball;
+        bricks = new ArrayList<Brick>();
+        paddle = new Paddle();
+        walls = createWalls();
+        points = new Points();
+    }
+
+    //Only for tests
+    public Arena(Ball ball, List<Brick> bricks){
+        this.ball = ball;
+        this.bricks = bricks;
+        paddle = new Paddle();
+        walls = createWalls();
+        points = new Points();
+    }
+
+    //Only for tests
+    public Arena(Points points){
+        ball = new Ball();
+        bricks = new ArrayList<Brick>();
+        paddle = new Paddle();
+        walls = createWalls();
+        this.points = points;
     }
 
     public Ball getBall() {
         return ball;
     }
+
+    public int getPoints() {return points.getNumPoints();}
 
 
     public void draw(TextGraphics screen) {
@@ -46,9 +84,15 @@ public class Arena{
         screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(Constants.WIDTH, Constants.HEIGHT), ' ');
         ball.draw(screen);
         paddle.draw(screen);
+        points.draw(screen);
+        for(Brick brick: bricks){
+            if(!brick.isDestroyed())
+                brick.draw(screen);
+        }
         for(Wall wall: walls){
             wall.draw(screen);
         }
+
     }
 
     public Position moveLeft() {return new Position(paddle.getPosition().getX() - 1, paddle.getPosition().getY());}
@@ -77,9 +121,31 @@ public class Arena{
         return walls;
     }
 
+    public List<Brick> createBricks() {
+        ArrayList<Brick> bricks = new ArrayList <>();
+        for(int i = 0; i < 5; i++){
+            int count = 0;
+            for(int j = 0; j < 7; j++){
+                bricks.add(new Brick(new Position(j + 1 + count ,i + 4)));
+                count += 7;
+            }
+        }
+        return bricks;
+    }
+
     public void hitsPaddle() {
         if(ball.getRect().intersects(paddle.getRect())){
             ball.hitPaddle();
+        }
+    }
+
+    public void hitsBrick() {
+        for(Brick brick: bricks){
+            if(ball.getRect().intersects(brick.getRect()) && !brick.isDestroyed()){
+                ball.hitBrick();
+                brick.setDestroyed(true);
+                points.add(brick.getPoints());
+            }
         }
     }
 }

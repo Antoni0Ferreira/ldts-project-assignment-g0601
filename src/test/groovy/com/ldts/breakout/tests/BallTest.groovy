@@ -125,4 +125,71 @@ class BallTest extends spock.lang.Specification{
         then:
         newPosition == new Position(Constants.INIT_PADDLE_X + 2, Constants.INIT_PADDLE_Y - 1)
     }
+
+    def "testing ball collides with top border"(){
+        given:
+        def ball = new Ball(new Position(4, 2),1,-1)
+        ball.setDestroyedBrick(true)
+
+        when: "ball moves and collides with the top border"
+        for(int i = 0; i < 2; i++){
+            ball.move()
+        }
+        def wasBrickDestroyed =  ball.getDestroyedBrick()
+
+        then:
+        wasBrickDestroyed == false
+    }
+
+    def "testing ball collision brick #1"(){
+        given:
+        def ball = new Ball(new Position(4, 5),-1,-1)
+
+        when: "the ball moves and collides with a brick"
+        ball.move()
+        ball.hitBrick()
+        ball.move()
+        def newPosition = ball.getPosition()
+        def wasBrickDestroyed = ball.getDestroyedBrick()
+
+        then:
+        newPosition == new Position(2,5)
+        wasBrickDestroyed == true
+    }
+
+    def "testing ball collision brick #2"(){
+        given:
+        def ball = new Ball(new Position(4, 5),1,-1)
+
+        when: "the ball moves and collides with a brick"
+        ball.move()
+        ball.hitBrick()
+        ball.move()
+        def newPosition = ball.getPosition()
+        def wasBrickDestroyed = ball.getDestroyedBrick()
+
+        then:
+        newPosition == new Position(6,5)
+        wasBrickDestroyed == true
+    }
+
+    def "testing ball collision brick #3"(){
+        given:
+        def ball = new Ball(new Position(4, 2),1,-1)
+        ball.setDestroyedBrick(true)
+
+        when: "the ball moves, collides with the top border and then with a brick right after"
+        for(int i = 0; i < 2; i++){
+            ball.move()
+        }
+        def ballHitTopBorder = ball.getDestroyedBrick()
+        ball.move()
+        ball.hitBrick()
+        def wasBrickDestroyed = ball.getDestroyedBrick()
+
+
+        then:
+        ballHitTopBorder == false
+        wasBrickDestroyed == true
+    }
 }
