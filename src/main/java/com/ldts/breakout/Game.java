@@ -12,7 +12,8 @@ import java.io.IOException;
 
 public class Game {
     private Screen screen;
-    private Arena arena;
+    private final Arena arena;
+    private boolean stopThread = false;
 
     public Game(){
 
@@ -54,15 +55,46 @@ public class Game {
         }
     }
 
+    public class BallThread extends Thread{
+        @Override
+        public void run(){
+
+            while(!stopThread){
+                try {
+                    sleep(30);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    draw();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                arena.hitsPaddle();
+
+                if(!arena.getBall().getDestroyedBrick())
+                    arena.hitsBrick();
+
+                arena.getBall().move();
+            }
+        }
+
+    }
+
     public void run(){
         try {
-
+            BallThread BallThread = new BallThread();
+            BallThread.start();
             while(true) {
                 draw();
                 com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
                 processKey(key);
-                if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q'))
+                if (key.getKeyType() == KeyType.Character && key.getCharacter() == ('q')){
+                    stopThread = true;
                     screen.close();
+                    BallThread.interrupt();
+                    return;
+                }
 
                 if (key.getKeyType() == KeyType.EOF)
                     break;
@@ -71,5 +103,6 @@ public class Game {
         } catch (IOException e){
             e.printStackTrace();
         }
+
     }
 }
