@@ -7,6 +7,7 @@ import com.ldts.breakout.Ball
 import com.ldts.breakout.Brick
 import com.ldts.breakout.Constants
 import com.ldts.breakout.Paddle
+import com.ldts.breakout.Points
 import com.ldts.breakout.Position
 
 class ArenaTest extends spock.lang.Specification {
@@ -197,6 +198,28 @@ class ArenaTest extends spock.lang.Specification {
         then:
         isDestroyed == false
         points == 0
+    }
+
+    def "testing game won"(){
+        given:
+        def points = Mock(Points.class)
+        def arena = new Arena(points)
+        points.getNumPoints() >> 602
+        when:
+        def gameEnded = arena.gameWon()
+        then:
+        gameEnded == true
+
+    }
+
+    def "testing game lost"(){
+        given:
+        def ball = new Ball(new Position(10, 36), 1, 1)
+        def arena = new Arena(ball)
+        when:
+        def gameEnded = arena.gameLost()
+        then:
+        gameEnded == true
     }
 
 }

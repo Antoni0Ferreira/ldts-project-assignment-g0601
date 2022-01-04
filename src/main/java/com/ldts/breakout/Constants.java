@@ -22,5 +22,6 @@ public interface Constants {
     int LIGHT_ORANGE_BRICK = 10;
     int YELLOW_BRICK = 5;
     int BLUE_BRICK = 1;
+    int MAX_POINTS = 7 * RED_BRICK + 7 * DARK_ORANGE_BRICK + 7 * LIGHT_ORANGE_BRICK + 7 * YELLOW_BRICK + 7 * BLUE_BRICK;
 
 }
