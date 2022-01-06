@@ -6,7 +6,9 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
+import com.googlecode.lanterna.screen.Screen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,6 @@ public class Arena{
     private final List<Wall> walls;
     private final List<Brick> bricks;
     private final Points points;
-    private final boolean ballPaddleCollision = false;
 
     public Arena(){
         ball = new Ball();
@@ -92,7 +93,6 @@ public class Arena{
         for(Wall wall: walls){
             wall.draw(screen);
         }
-
     }
 
     public Position moveLeft() {return new Position(paddle.getPosition().getX() - 1, paddle.getPosition().getY());}
@@ -112,10 +112,10 @@ public class Arena{
         ArrayList<Wall> walls = new ArrayList <>();
         for (int c = 0; c < Constants.WIDTH; c++) {
             walls.add(new Wall(new Position(c,0)));
-            walls.add(new Wall(new Position(c,Constants.HEIGHT - 1)));
+            walls.add(new Wall(new Position(c, Constants.HEIGHT - 1)));
         }
         for (int r = 1; r < Constants.HEIGHT - 1; r++) {
-            walls.add(new Wall(new Position(0,r)));
+            walls.add(new Wall(new Position(0, r)));
             walls.add(new Wall(new Position(Constants.WIDTH - 1, r)));
         }
         return walls;
@@ -147,5 +147,25 @@ public class Arena{
                 points.add(brick.getPoints());
             }
         }
+    }
+
+    public boolean gameLost() {
+        return ball.getPosition().getY() > Constants.INIT_PADDLE_Y;
+    }
+
+    public void printLost(TextGraphics screen){
+        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
+        screen.putString(Constants.WIDTH/2 - 5, Constants.HEIGHT /2 - 3, "YOU LOST!");
+        screen.putString(Constants.WIDTH/2 - 8, Constants.HEIGHT /2, "PRESS Q TO EXIT");
+    }
+
+    public boolean gameWon() {
+        return points.getNumPoints() == Constants.MAX_POINTS;
+    }
+
+    public void printWon(TextGraphics screen){
+        screen.setForegroundColor(TextColor.Factory.fromString("#0066FF"));
+        screen.putString(Constants.WIDTH/2 - 3, Constants.HEIGHT /2 - 3, "YOU WON!");
+        screen.putString(Constants.WIDTH/2 - 7, Constants.HEIGHT /2 , "PRESS Q TO EXIT");
     }
 }
