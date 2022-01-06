@@ -93,7 +93,6 @@ public class Arena{
         for(Wall wall: walls){
             wall.draw(screen);
         }
-
     }
 
     public Position moveLeft() {return new Position(paddle.getPosition().getX() - 1, paddle.getPosition().getY());}

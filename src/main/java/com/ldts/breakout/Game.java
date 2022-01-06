@@ -62,6 +62,24 @@ public class Game {
         }
     }
 
+    private void gameEnded(boolean gameWon){
+        try{
+            stopThread = true;
+            endGame = true;
+            if(gameWon) arena.printWon(screen.newTextGraphics());
+            else arena.printLost(screen.newTextGraphics());
+            screen.refresh();
+            com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
+            while(key.getCharacter() != 'q'){
+                key = screen.readInput();
+            }
+            screen.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public class BallThread extends Thread{
         @Override
         public void run(){
@@ -75,31 +93,10 @@ public class Game {
 
                     if(!arena.getBall().getDestroyedBrick())
                         arena.hitsBrick();
-                    screen.clear();
-                    if(arena.gameLost()){
-                        stopThread = true;
-                        endGame = true;
-                        arena.printLost(screen.newTextGraphics());
-                        screen.refresh();
-                        com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-                        while(key.getCharacter() != 'q'){
-                            key = screen.readInput();
-                        }
-                        screen.close();
-                    }
-                    screen.clear();
-                    if(arena.gameWon()){
-                        stopThread = true;
-                        endGame = true;
-                        arena.printWon(screen.newTextGraphics());
-                        screen.refresh();
-                        com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-                        while(key.getCharacter() != 'q'){
-                            key = screen.readInput();
-                        }
-                        screen.close();
-                    }
 
+                    screen.clear();
+                    if(arena.gameLost()){gameEnded(false);}
+                    if(arena.gameWon()){gameEnded(true);}
                     arena.getBall().move();
                 }
             }
