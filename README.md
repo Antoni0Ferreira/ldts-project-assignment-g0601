@@ -7,6 +7,10 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 You can find the more detailed report [here](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/docs/README.md).
 
+### UML CLASS DIAGRAM
+
+![](https://i.imgur.com/2L2pQ26.jpg)
+
 ### IMAGES
 
 ![](https://i.imgur.com/qZc2FTw.png)
