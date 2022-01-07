@@ -52,7 +52,7 @@ shared by the majority of the classes. This way, we don't have to keep implement
 
 **Implementation**
 
-![](https://i.imgur.com/zightXA.png)
+![](https://i.imgur.com/VutqToB.png)
 
 The following link shows how the pattern was introduced in our code:
 
