@@ -7,7 +7,7 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 ### IMPLEMENTED FEATURES 
 
-- **Moving Paddle** - The paddle will move to left/right when the left/right arrow key is pressed. (1)
+- **Moving Paddle** - The paddle will move to the left/right when the left/right arrow key is pressed. (1)
 - **Constantly Moving Ball** - The ball will have an autonomous and continuous movement, which is created by a thread. (2)
 - **Hitting the Ball** - By moving the paddle, the player will try to hit the ball.
 - **Destroying a Brick** - When you can destroy a brick by bouncing the ball on it, you will get a certain amount of points.
@@ -83,7 +83,7 @@ solution for them.
 - **Wall**
 
 Even though they help us organize our code, these classes don't do anything special, they're basically data containers 
-for other classes, due to the fact of not having any additional functionality.
+for other classes, due to the fact of them not having any additional functionality.
 
 A way to solve this problematic situation could be the implementation of the **Move Method**, where we include, for example, the points system in the Arena class.
 
