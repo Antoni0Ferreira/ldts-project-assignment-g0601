@@ -1,4 +1,4 @@
-package com.ldts.breakout.tests
+package com.ldts.breakout
 
 import com.googlecode.lanterna.input.KeyStroke
 import com.googlecode.lanterna.input.KeyType

@@ -70,7 +70,7 @@ public class Game {
             else arena.printLost(screen.newTextGraphics());
             screen.refresh();
             com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-            while(key.getCharacter() != 'q'){
+            while(key.getKeyType() == KeyType.Character && toLowerCase(key.getCharacter()) != ('q')){
                 key = screen.readInput();
             }
             screen.close();
