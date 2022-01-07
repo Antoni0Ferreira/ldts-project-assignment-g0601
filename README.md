@@ -12,6 +12,15 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 - **Hitting the Ball** - By moving the paddle, the player will try to hit the ball.
 - **Destroying a Brick** - When you can destroy a brick by bouncing the ball on it, you will get a certain amount of points
 
+(1)
+
+![](https://i.imgur.com/kmFUiVX.png)
+
+(2)
+
+![](https://i.imgur.com/prkkDuH.png)
+![](https://i.imgur.com/9HpwUqQ.png)
+
 ### PLANNED FEATURES  
 
 - **Simple Main Menu** - A main menu that will let you start the game or close it.
@@ -35,8 +44,11 @@ shared by the majority of the classes. This way, we don't have to keep implement
 
 **Implementation**
 
-The following image shows how the pattern was introduced in our code:
+![](https://i.imgur.com/zightXA.png)
 
+The following link shows how the pattern was introduced in our code:
+
+ - [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Element.java)
 
 **Consequences**
 
@@ -59,8 +71,10 @@ instead of having the ball keep asking the arena if the it hit the paddle or a b
 
 **Implementation**
 
-The following image shows how the pattern was introduced in our code:
+The following links show how the pattern was introduced in our code:
 
+- [Arena](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Arena.java#L136)
+- [Ball](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Ball.java#L54)
 
 **Consequences**
 
@@ -68,7 +82,7 @@ The use of the Observer pattern in the current design allows us to have the foll
 - By using this pattern, when the ball moves a position, the arena is simultaneously updated and will notify the ball when it hits the paddle or destroys a brick, letting it
 update its movement, according to the situation.
 
-#### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
+### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 Although we identified various code smells, there's the need to point out that some will not be changed in the final version of the code, since we couldn't find any
 solution for them.
@@ -109,6 +123,9 @@ So, to solve this problem, we can only define the important constants and utiliz
 
 #### COVERAGE REPORT
 ![](https://i.imgur.com/o3fuFIc.png)
+
+#### MUTATION TEST
+You can check this [link](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/test/pitest/202201070024) for the mutation test
 
 ### SELF-EVALUATION
 
