@@ -1,4 +1,4 @@
-package com.ldts.breakout.tests
+package com.ldts.breakout
 
 import com.ldts.breakout.Ball
 import com.ldts.breakout.Constants

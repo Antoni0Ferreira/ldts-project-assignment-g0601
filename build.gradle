@@ -2,9 +2,10 @@ plugins {
     id 'groovy'
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.6.0'
 }
 
-group 'org.example'
+group 'com.ldts.breakout'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -27,5 +28,10 @@ test {
 }
 
 application {
-    mainClass.set("src/main/java/com/ldts/breakout/Application.java")
+    mainClass.set("Application")
+}
+
+pitest {
+    junit5PluginVersion = '0.12'
+    pitestVersion = '1.6.7'
 }
