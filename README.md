@@ -14,17 +14,25 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 (1)
 
-![](https://i.imgur.com/kmFUiVX.png)
-
-(2)
-
 ![](https://i.imgur.com/prkkDuH.png)
 ![](https://i.imgur.com/9HpwUqQ.png)
 
+(2)
+
+![](https://i.imgur.com/kmFUiVX.png)
+
 ### PLANNED FEATURES  
 
-- **Simple Main Menu** - A main menu that will let you start the game or close it.
-- **Player Lives** - The player will only have 3 lives to try and win the game.
+- **Simple Main Menu** - A main menu that will let you start the game, read the instructions or close it. (1)
+- **Player Lives** - The player will only have 3 lives to try and win the game. (2)
+
+(1)
+
+![](https://i.imgur.com/SleueHm.png)
+
+(2)
+
+![](https://i.imgur.com/UueNvJd.png)
 
 ### DESIGN  
 
@@ -40,7 +48,7 @@ that do the same (for example, a draw method).
 **The Pattern**
 
 In order to solve the considered problem, we decided to apply the Factory Method pattern, since it allows us to define a general/abstract class that has all the common methods
-shared by the majority of the classes. This way, we don't have to keep implementing the same methods over and over again, we can have.
+shared by the majority of the classes. This way, we don't have to keep implementing the same methods over and over again.
 
 **Implementation**
 
@@ -55,32 +63,6 @@ The following link shows how the pattern was introduced in our code:
 The use of the Factory pattern in the current design allows us to have the following consequence:
 - As we previously stated, when we create a new class, we already have, in this case, a draw method, since it extends the class Element. To make it specific to the class, we'll
 only have to **Override** the draw method.
-
-
-#### ALWAYS CHECKING BALL COLLISIONS
-
-**Problem in Context**
-
-Whether we want to know if the ball hit the paddle or destroyed a brick, we initially kept asking the arena if the position of the paddle/brick was equal to the ball's position,
-everytime we moved the ball. This then led to us having a large number of complex 'if' operations, which is a code smell that needs to be dealt with.
-
-**The Pattern**
-
-With this in mind, we decided to implement the Observer pattern. In this case, the ball will be the 'observer' and the arena will be an 'observable'. Consequently,
-instead of having the ball keep asking the arena if the it hit the paddle or a brick, the arena will instead notify the ball of a collision.
-
-**Implementation**
-
-The following links show how the pattern was introduced in our code:
-
-- [Arena](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Arena.java#L136)
-- [Ball](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Ball.java#L54)
-
-**Consequences**
-
-The use of the Observer pattern in the current design allows us to have the following consequence:
-- By using this pattern, when the ball moves a position, the arena is simultaneously updated and will notify the ball when it hits the paddle or destroys a brick, letting it
-update its movement, according to the situation.
 
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
