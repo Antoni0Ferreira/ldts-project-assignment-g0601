@@ -10,7 +10,7 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 - **Moving Paddle** - The paddle will move to left/right when the left/right arrow key is pressed. (1)
 - **Constantly Moving Ball** - The ball will have an autonomous and continuous movement, which is created by a thread. (2)
 - **Hitting the Ball** - By moving the paddle, the player will try to hit the ball.
-- **Destroying a Brick** - When you can destroy a brick by bouncing the ball on it, you will get a certain amount of points
+- **Destroying a Brick** - When you can destroy a brick by bouncing the ball on it, you will get a certain amount of points.
 
 (1)
 
@@ -35,6 +35,8 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 ![](https://i.imgur.com/UueNvJd.png)
 
 ### DESIGN  
+
+At this stage of the project, the number of design patterns implemented is quite low. However, in the later stages, this number will definitely increase.
 
 -------
 
@@ -83,7 +85,7 @@ solution for them.
 Even though they help us organize our code, these classes don't do anything special, they're basically data containers 
 for other classes, due to the fact of not having any additional functionality.
 
-A way to solve this problematic situation could be de implementation of the **Move Method**, where we include, for example, the points system in the Arena class.
+A way to solve this problematic situation could be the implementation of the **Move Method**, where we include, for example, the points system in the Arena class.
 
 #### BLOATERS
 
@@ -92,7 +94,8 @@ A way to solve this problematic situation could be de implementation of the **Mo
 While implementing the code for our game, we've come to realize that the size of our Arena class was growing quite rapidly, since it deals with a lot of features, like the
 paddle movement, the creation of walls and bricks, the verification of the requirements for ending the game...
 
-With this in mind, in order to minimize the size of this class, we could Extract this class seperate many of its methods into diferent components.
+With this in mind, in order to minimize the size of this class, we could apply the **Extract Method**, where we seperate many of its methods into diferent components
+and other classes.
 
 **Primitive Obsession**
 
@@ -107,11 +110,11 @@ So, to solve this problem, we can only define the important constants and utiliz
 ![](https://i.imgur.com/o3fuFIc.png)
 
 #### MUTATION TEST
-You can check this [link](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/test/pitest/202201070024) for the mutation test
+You can check this [link](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/test/pitest/202201070024) for the mutation test.
 
 ### SELF-EVALUATION
 
-All of the members participated equally in the process of making this project, giving it their best to try and develop a high quality project. Everyone collaborated by creating
+All of the members participated equally in the process of making this project, giving it their best to try and develop a high quality game. Everyone collaborated by creating
 classes, implementing methods or even doing commits.
 
 - **António Ferreira** - 34%
