@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass.set("Application")
+    mainClass.set("src/main/java/com/ldts/breakout/Application.java")
 }
 
 pitest {
