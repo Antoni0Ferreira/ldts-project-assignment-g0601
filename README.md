@@ -9,6 +9,8 @@ You can find the more detailed report [here](https://github.com/FEUP-LDTS-2021/l
 
 ### UML CLASS DIAGRAM
 
+(please click on the image for more detail)
+
 ![](https://i.imgur.com/2L2pQ26.jpg)
 
 ### IMAGES
