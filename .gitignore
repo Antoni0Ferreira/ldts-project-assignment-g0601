@@ -3,3 +3,5 @@ out/
 build/
 *.iml
 /.gradle/
+/.gradle/buildOutputCleanup/
+/.gradle/7.1/
