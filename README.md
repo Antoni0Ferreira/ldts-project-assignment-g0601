@@ -22,3 +22,6 @@ You can find the more detailed report [here](https://github.com/FEUP-LDTS-2021/l
 
 ![](https://i.imgur.com/rF3vE8Z.png)
 ![](https://i.imgur.com/pyVT9Tm.png)
+
+![](https://i.imgur.com/o00uOxr.png)
+![](https://i.imgur.com/98CeRx0.png)
