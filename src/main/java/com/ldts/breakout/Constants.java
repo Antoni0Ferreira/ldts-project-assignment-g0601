@@ -15,8 +15,10 @@ public interface Constants {
     int BORDER_LEFT_X = 1;
     int BORDER_BOTTOM_Y = 38;
     int BORDER_TOP_Y = 1;
-    int POINTS_X = 1;
-    int POINTS_Y = 1;
+    int POINTS_X = 3;
+    int POINTS_Y = 37;
+    int LIVES_X = 53;
+    int LIVES_Y = 37;
     int RED_BRICK = 50;
     int DARK_ORANGE_BRICK = 20;
     int LIGHT_ORANGE_BRICK = 10;

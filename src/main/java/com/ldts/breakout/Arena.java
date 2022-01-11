@@ -184,6 +184,6 @@ public class Arena{
     public void drawLives(TextGraphics screen){
         screen.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         screen.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
-        screen.putString(53, 1, Integer.toString(lives) + HEART);
+        screen.putString(Constants.LIVES_X, Constants.LIVES_Y, Integer.toString(lives) + HEART);
     }
 }

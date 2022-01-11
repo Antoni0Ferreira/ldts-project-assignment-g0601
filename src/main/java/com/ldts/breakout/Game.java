@@ -10,7 +10,10 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 import static java.lang.Character.toLowerCase;
@@ -24,9 +27,30 @@ public class Game {
     private int speed = 60;
 
     public Game(){
+        // Load Font
+        File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
+        Font font = null;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+// Register Font
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(font);
+
+//Configure Default Terminal Factory
+        DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(Constants.WIDTH, Constants.HEIGHT));
+        Font loadedFont = font.deriveFont(Font.PLAIN, 15);
+        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
+        defaultTerminalFactory.setForceAWTOverSwing(true);
+        defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
 
         try{
-            Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(Constants.WIDTH, Constants.HEIGHT)).createTerminal();
+            Terminal terminal = defaultTerminalFactory.createTerminal();
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
