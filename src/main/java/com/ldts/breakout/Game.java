@@ -21,6 +21,7 @@ public class Game {
     private final Arena arena;
     private boolean stopThread = false;
     private boolean endGame = false;
+    private int speed = 60;
 
     public Game(){
 
@@ -80,53 +81,70 @@ public class Game {
         }
     }
 
+    private void updateSpeed(){
+        if(speed > 30)
+            speed =  60 - (arena.getPoints() / 30) * 2;
+    }
+
     public class BallThread extends Thread{
         @Override
         public void run(){
+                try {
+                    while (arena.getLives() > 0) {
+                        arena.getBall().setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));
+                        draw();
+                        sleep(1000);
+                        while (!stopThread) {
+                            sleep(speed);
+                            draw();
+                            arena.hitsPaddle();
 
-            try{
-                sleep(1000);
-                while(!stopThread){
-                    sleep(50);
-                    draw();
-                    arena.hitsPaddle();
-
-                    if(!arena.getBall().getDestroyedBrick())
-                        arena.hitsBrick();
-
-                    screen.clear();
-                    if(arena.gameLost()){gameEnded(false);}
-                    if(arena.gameWon()){gameEnded(true);}
-                    arena.getBall().move();
+                            if (!arena.getBall().getDestroyedBrick())
+                                arena.hitsBrick();
+                            updateSpeed();
+                            screen.clear();
+                            if (arena.gameLost()) {
+                                arena.loseLive();
+                                break;
+                            }
+                            if (arena.gameWon()) {
+                                gameEnded(true);
+                            }
+                            arena.getBall().move();
+                        }
+                    }
                 }
-            }
             catch (IOException | InterruptedException e) {
                     e.printStackTrace();
             }
+
+            gameEnded(false);
         }
     }
 
-    public void run(){
-        try {
-            BallThread BallThread = new BallThread();
-            BallThread.start();
-            while(!endGame) {
-                draw();
-                com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-                processKey(key);
-                if (key.getKeyType() == KeyType.Character && toLowerCase(key.getCharacter()) == ('q')){
-                    stopThread = true;
-                    screen.close();
-                    BallThread.interrupt();
-                    return;
+    public void run() {
+            try {
+                BallThread BallThread = new BallThread();
+                BallThread.start();
+                while (!endGame) {
+                    draw();
+                    com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
+                    processKey(key);
+                    if (key.getKeyType() == KeyType.Character && toLowerCase(key.getCharacter()) == ('q')) {
+                        stopThread = true;
+                        screen.close();
+                        BallThread.interrupt();
+                        return;
+                    }
+                    if (key.getKeyType() == KeyType.EOF)
+                        break;
+
                 }
-                if (key.getKeyType() == KeyType.EOF)
-                    break;
-
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
 
     }
-}
+
+    }
+

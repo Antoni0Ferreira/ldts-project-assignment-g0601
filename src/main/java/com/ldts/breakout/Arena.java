@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.googlecode.lanterna.Symbols.HEART;
+
 
 public class Arena{
     private final Ball ball;
@@ -19,6 +21,7 @@ public class Arena{
     private final List<Wall> walls;
     private final List<Brick> bricks;
     private final Points points;
+    private int lives = 3;
 
     public Arena(){
         ball = new Ball();
@@ -93,6 +96,7 @@ public class Arena{
         for(Wall wall: walls){
             wall.draw(screen);
         }
+        drawLives(screen);
     }
 
     public Position moveLeft() {return new Position(paddle.getPosition().getX() - 1, paddle.getPosition().getY());}
@@ -167,5 +171,19 @@ public class Arena{
         screen.setForegroundColor(TextColor.Factory.fromString("#0066FF"));
         screen.putString(Constants.WIDTH/2 - 3, Constants.HEIGHT /2 - 3, "YOU WON!");
         screen.putString(Constants.WIDTH/2 - 7, Constants.HEIGHT /2 , "PRESS Q TO EXIT");
+    }
+
+    public int getLives(){
+        return lives;
+    }
+
+    public void loseLive(){
+        lives -= 1;
+    }
+
+    public void drawLives(TextGraphics screen){
+        screen.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        screen.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
+        screen.putString(53, 1, Integer.toString(lives) + HEART);
     }
 }

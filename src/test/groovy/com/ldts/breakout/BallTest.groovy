@@ -192,4 +192,21 @@ class BallTest extends spock.lang.Specification{
         ballHitTopBorder == false
         wasBrickDestroyed == true
     }
+
+    def "testing lives #1"(){
+        given:
+        def ball = new Ball(new Position(10, 34), 1, 1)
+        def arena = new Arena(ball)
+
+        when:
+        ball.move()
+        ball.move()
+        if(arena.gameLost()){
+            arena.loseLive()
+        }
+
+        then:
+        arena.getLives() == 2
+
+    }
 }
