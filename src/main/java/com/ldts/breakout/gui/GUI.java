@@ -1,23 +1,16 @@
 package com.ldts.breakout.gui;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.ldts.breakout.Position;
+import com.ldts.breakout.model.Menu;
+import com.ldts.breakout.model.MenuOption;
+import com.ldts.breakout.model.Position;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
 public interface GUI {
 
     enum ACTION{
-        LEFT,RIGHT
+        LEFT,RIGHT,QUIT,UP,DOWN,CHOOSE
     }
 
     TextGraphics createTextGraphics();
@@ -33,16 +26,25 @@ public interface GUI {
 
     void close() throws IOException;
 
-    void addKeyBoardListener(KeyBoardObserver obs)
+    void addKeyBoardListener(KeyBoardObserver observer);
 
-    void drawBall(Position position, TextGraphics textGraphics);
+    void drawBall(Position position);
 
-    void drawPaddle(Position position, TextGraphics textGraphics);
+    void drawPaddle(Position position);
 
-    void drawPoints(int numPoints, Position position, TextGraphics textGraphics);
+    void drawPoints(int numPoints, Position position);
+    void drawInfo(int points);
 
-    void drawWall(Position position, TextGraphics textGraphics);
+    void drawWall(Position position);
 
-    void drawBrick(int points, Position position, TextGraphics textGraphics);
+    void drawBrick(int points, Position position);
+
+    void drawButton(Position bPos, Position tPos, String text, String textColor);
+    
+    void drawTitle(Position position, String text, String color);
+
+    void drawMenuOption(char option, Position position);
+
+    void drawInfo(int points, int lives);
 
 }

@@ -1,4 +1,4 @@
-package com.ldts.breakout;
+package com.ldts.breakout.model;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 
@@ -19,5 +19,5 @@ public abstract class Element {
         this.position = position;
     }
 
-    public abstract void draw(TextGraphics graphics);
+
 }

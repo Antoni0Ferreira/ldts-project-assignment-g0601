@@ -1,15 +1,11 @@
-package com.ldts.breakout;
-
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
+package com.ldts.breakout.model;
+import com.ldts.breakout.Constants;
 
 import java.awt.*;
 
 import static com.googlecode.lanterna.Symbols.FACE_BLACK;
 
-public class Ball extends Element{
+public class Ball extends Element {
     private int dirX, dirY;
     private boolean destroyedBrick = false;
 
@@ -21,18 +17,10 @@ public class Ball extends Element{
 
     public Ball(Position position, int dirX, int dirY){ super(position);
         this.dirX = dirX;
-        this.dirY = dirY;}
-
-    public void setDestroyedBrick(boolean destroyedBrick) {this.destroyedBrick = destroyedBrick;}
-
-    @Override
-    public void draw(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.setCharacter(new TerminalPosition(getPosition().getX(), getPosition().getY()),FACE_BLACK);
+        this.dirY = dirY;
     }
 
-    public void move(){
+/*    public void move(){
         if(getPosition().getX() <= Constants.BORDER_LEFT_X) {
             dirX = -dirX;
         }
@@ -63,12 +51,11 @@ public class Ball extends Element{
             dirY = -dirY;
         }
         setDestroyedBrick(true);
-    }
+    }*/
 
     public int getDirX() {
         return dirX;
     }
-
     public int getDirY() {
         return dirY;
     }
@@ -76,6 +63,7 @@ public class Ball extends Element{
     public boolean getDestroyedBrick() {
         return destroyedBrick;
     }
+    public void setDestroyedBrick(boolean destroyedBrick) {this.destroyedBrick = destroyedBrick;}
 
     public Rectangle getRect() {
         return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);

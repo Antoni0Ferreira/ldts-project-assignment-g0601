@@ -1,15 +1,13 @@
 package com.ldts.breakout;
 
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.ldts.breakout.state.GameState;
 
 import java.io.IOException;
 
@@ -18,7 +16,8 @@ import static java.lang.String.valueOf;
 
 public class Game {
     private Screen screen;
-    private final Arena arena;
+    private final OtherArena arena;
+    private GameState gameState;
     private boolean stopThread = false;
     private boolean endGame = false;
 
@@ -36,13 +35,13 @@ public class Game {
             e.printStackTrace();
         }
 
-        arena = new Arena();
+        arena = new OtherArena();
 
     }
 
     // Only for tests
-    public Game(Arena arena){
-        this.arena = arena;
+    public Game(OtherArena otherArena){
+        this.arena = otherArena;
     }
 
 
@@ -128,5 +127,11 @@ public class Game {
             e.printStackTrace();
         }
 
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+        if (gameState != null)
+            this.gameState.start();
     }
 }

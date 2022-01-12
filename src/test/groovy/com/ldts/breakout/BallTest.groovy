@@ -1,8 +1,7 @@
 package com.ldts.breakout
 
-import com.ldts.breakout.Ball
-import com.ldts.breakout.Constants
-import com.ldts.breakout.Position
+import com.ldts.breakout.model.Ball
+import com.ldts.breakout.model.Position
 
 class BallTest extends spock.lang.Specification{
 

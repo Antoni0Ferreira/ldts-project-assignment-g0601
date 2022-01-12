@@ -1,12 +1,9 @@
 package com.ldts.breakout
 
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
-import com.ldts.breakout.Arena
-import com.ldts.breakout.Constants
-import com.ldts.breakout.Game
-import com.ldts.breakout.Paddle
-import com.ldts.breakout.Position
+import com.googlecode.lanterna.input.KeyType
+import com.ldts.breakout.model.Paddle
+import com.ldts.breakout.model.Position
 
 class GameTest extends spock.lang.Specification{
 
@@ -14,7 +11,7 @@ class GameTest extends spock.lang.Specification{
         given:
         def key = Mock(KeyStroke.class)
         def paddle = new Paddle()
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
         def game = new Game(arena)
 
         key.getKeyType() >> KeyType.ArrowLeft
@@ -31,7 +28,7 @@ class GameTest extends spock.lang.Specification{
         given:
         def key = Mock(KeyStroke.class)
         def paddle = new Paddle()
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
         def game = new Game(arena)
 
         key.getKeyType() >> KeyType.ArrowRight
@@ -48,7 +45,7 @@ class GameTest extends spock.lang.Specification{
         given:
         def key = Mock(KeyStroke.class)
         def paddle = new Paddle()
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
         def game = new Game(arena)
 
         key.getKeyType() >> KeyType.ArrowDown // o método processKey apenas aceita input ArrowRight e ArrowLeft

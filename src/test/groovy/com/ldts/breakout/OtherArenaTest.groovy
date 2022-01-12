@@ -1,22 +1,19 @@
 package com.ldts.breakout
 
-import com.googlecode.lanterna.input.KeyStroke
-import com.googlecode.lanterna.input.KeyType
-import com.ldts.breakout.Arena
-import com.ldts.breakout.Ball
-import com.ldts.breakout.Brick
-import com.ldts.breakout.Constants
-import com.ldts.breakout.Paddle
-import com.ldts.breakout.Points
-import com.ldts.breakout.Position
 
-class ArenaTest extends spock.lang.Specification {
+import com.ldts.breakout.model.Ball
+import com.ldts.breakout.model.Brick
+import com.ldts.breakout.model.Paddle
+import com.ldts.breakout.model.Points
+import com.ldts.breakout.model.Position
+
+class OtherArenaTest extends spock.lang.Specification {
 
 
     def "testing moving left"() {
         given:
         def paddle = Mock(Paddle.class)
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
 
         paddle.getPosition() >> new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y)
 
@@ -30,7 +27,7 @@ class ArenaTest extends spock.lang.Specification {
     def "testing moving right"() {
         given:
         def paddle = Mock(Paddle.class)
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
 
         paddle.getPosition() >> new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y)
 
@@ -45,7 +42,7 @@ class ArenaTest extends spock.lang.Specification {
 
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
 
         when:
         arena.movePaddle(arena.moveLeft())
@@ -58,7 +55,7 @@ class ArenaTest extends spock.lang.Specification {
     def "testing paddle movement #2"(){
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
 
         when:
         arena.movePaddle(arena.moveRight())
@@ -71,7 +68,7 @@ class ArenaTest extends spock.lang.Specification {
     def "testing paddle movement #3"(){
         given:
         def paddle = new Paddle(new Position(1, Constants.INIT_PADDLE_Y))
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
 
         when:
         arena.movePaddle(arena.moveLeft())
@@ -84,7 +81,7 @@ class ArenaTest extends spock.lang.Specification {
     def "testing paddle movement #4"(){
         given:
         def paddle = new Paddle(new Position(Constants.BORDER_RIGHT_X - 6, Constants.INIT_PADDLE_Y))
-        def arena = new Arena(paddle)
+        def arena = new OtherArena(paddle)
 
         when:
         arena.movePaddle(arena.moveRight())
@@ -98,7 +95,7 @@ class ArenaTest extends spock.lang.Specification {
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X,Constants.INIT_PADDLE_Y))
         def ball = new Ball(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y),1,1)
-        def arena = new Arena(paddle,ball)
+        def arena = new OtherArena(paddle,ball)
 
         when:
         arena.movePaddle(arena.moveRight())
@@ -115,7 +112,7 @@ class ArenaTest extends spock.lang.Specification {
         given:
         def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X,Constants.INIT_PADDLE_Y))
         def ball = new Ball(new Position(Constants.INIT_PADDLE_X + 4, Constants.INIT_PADDLE_Y - 1),1,1)
-        def arena = new Arena(paddle,ball)
+        def arena = new OtherArena(paddle,ball)
 
         when:
         arena.movePaddle(arena.moveRight())
@@ -133,7 +130,7 @@ class ArenaTest extends spock.lang.Specification {
         def ball = new Ball(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y),1,1)
         def brick = Mock(Brick.class)
         brick.getPosition() >> new Position(Constants.INIT_BALL_X + 5, Constants.INIT_BALL_Y -3)
-        def arena = new Arena(ball)
+        def arena = new OtherArena(ball)
 
         when:
         arena.getBall().move()
@@ -149,7 +146,7 @@ class ArenaTest extends spock.lang.Specification {
         def ball = new Ball(new Position(Constants.INIT_BALL_X + 4, Constants.INIT_BALL_Y - 4),1,1)
         def brick = Mock(Brick.class)
         brick.getPosition() >> new Position(Constants.INIT_BALL_X + 5, Constants.INIT_BALL_Y -3)
-        def arena = new Arena(ball)
+        def arena = new OtherArena(ball)
 
         when:
         arena.getBall().move()
@@ -167,7 +164,7 @@ class ArenaTest extends spock.lang.Specification {
         brick.setPoints(30)
         def bricks = new ArrayList<Brick>()
         bricks.add(brick)
-        def arena = new Arena(ball,bricks)
+        def arena = new OtherArena(ball,bricks)
 
         when:
         arena.getBall().move()
@@ -187,7 +184,7 @@ class ArenaTest extends spock.lang.Specification {
         brick.setPoints(30)
         def bricks = new ArrayList<Brick>()
         bricks.add(brick)
-        def arena = new Arena(ball,bricks)
+        def arena = new OtherArena(ball,bricks)
 
         when:
         arena.getBall().move()
@@ -203,7 +200,7 @@ class ArenaTest extends spock.lang.Specification {
     def "testing game won"(){
         given:
         def points = Mock(Points.class)
-        def arena = new Arena(points)
+        def arena = new OtherArena(points)
         points.getNumPoints() >> 602
         when:
         def gameEnded = arena.gameWon()
@@ -215,7 +212,7 @@ class ArenaTest extends spock.lang.Specification {
     def "testing game lost"(){
         given:
         def ball = new Ball(new Position(10, 36), 1, 1)
-        def arena = new Arena(ball)
+        def arena = new OtherArena(ball)
         when:
         def gameEnded = arena.gameLost()
         then:
