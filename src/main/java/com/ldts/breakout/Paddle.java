@@ -19,7 +19,7 @@ public class Paddle extends Element{
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#FF7000"));
         graphics.drawRectangle(new TerminalPosition(getPosition().getX(), getPosition().getY()),
-                new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),SOLID_SQUARE);
+                new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),'-');
     }
 
     Rectangle getRect() {

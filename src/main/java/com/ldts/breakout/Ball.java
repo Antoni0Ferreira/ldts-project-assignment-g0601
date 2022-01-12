@@ -29,7 +29,7 @@ public class Ball extends Element{
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
         graphics.enableModifiers(SGR.BOLD);
-        graphics.setCharacter(new TerminalPosition(getPosition().getX(), getPosition().getY()),FACE_BLACK);
+        graphics.setCharacter(new TerminalPosition(getPosition().getX(), getPosition().getY()),'@');
     }
 
     public void move(){

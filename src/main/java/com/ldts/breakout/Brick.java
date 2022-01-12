@@ -52,7 +52,7 @@ public class Brick extends Element {
             case Constants.BLUE_BRICK -> graphics.setForegroundColor(TextColor.Factory.fromString("#008FFF"));
         }
         graphics.drawRectangle(new TerminalPosition(getPosition().getX(), getPosition().getY()),
-                new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),SOLID_SQUARE);
+                new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),'-');
     }
 
     Rectangle getRect() {
