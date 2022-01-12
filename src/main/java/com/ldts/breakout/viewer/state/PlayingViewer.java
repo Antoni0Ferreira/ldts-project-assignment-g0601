@@ -17,7 +17,7 @@ public class PlayingViewer extends StateViewer {
 
     @Override
     public void draw() throws IOException{
-        gui.drawInfo(paddle.getPoints());
+        gui.drawInfo(paddle.getPoints(),paddle.getLives());
         gui.refresh();
     }
 }

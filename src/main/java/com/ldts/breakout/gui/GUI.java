@@ -33,7 +33,8 @@ public interface GUI {
     void drawPaddle(Position position);
 
     void drawPoints(int numPoints, Position position);
-    void drawInfo(int points);
+    
+    void drawInfo(int points, int lives);
 
     void drawWall(Position position);
 
@@ -45,6 +46,6 @@ public interface GUI {
 
     void drawMenuOption(char option, Position position);
 
-    void drawInfo(int points, int lives);
+
 
 }

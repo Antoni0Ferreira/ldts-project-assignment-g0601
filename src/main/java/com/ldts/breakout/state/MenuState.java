@@ -8,28 +8,42 @@ import com.ldts.breakout.model.Button;
 import com.ldts.breakout.model.Menu;
 import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.command.MenuButtonCommand;
+import com.ldts.breakout.viewer.state.MenuViewer;
+import com.ldts.breakout.viewer.state.StateViewer;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenuState extends GameState {
+public class MenuState extends GameState{
     private MenuController menuController;
 
-    public Menustate(Game game, GUI gui) throws IOException {
-        List<Button> buttons = Arrays.asList();
-        Button playButton = new Button(new Position(Constants.INIT_BALL_X, 15), "PLAY", new MenuButtonCommand(PlayingState(game,gui)));
-        Button instButton = new Button(new Position(Constants.INIT_BALL_X, 20), "INSTRUCTIONS", new MenuButtonCommand(InstructionsState(game, gui)));
-        Button quitButton = new Button(new Position(Constants.INIT_BALL_X, 25), "QUIT", new MenuButtonCommand(null));
+    public MenuState(Game game, GUI gui) throws IOException{
+        super(game,Arrays.asList(
+                new Button(new Position(Constants.INIT_BALL_X - 4, 15), "PLAY", new MenuButtonCommand(new PlayingState(game,gui)),"#FFFFFF"),
+                new Button(new Position(Constants.INIT_BALL_X - 5, 20), "INSTRUCTIONS", new MenuButtonCommand(new InstructionsState(game, gui)),"#FFFFFF"),
+                new Button(new Position(Constants.INIT_BALL_X - 3, 25), "QUIT", new MenuButtonCommand(null),"#FFFFFF")
+
+        ));
+       this.menuController = new MenuController(this,gui);
+
     }
 
     @Override
     public void start() {
-        game.getKeyboardObserver().setListener(menuController);
+        game.getKeyBoardObserver().setListener(menuController);
     }
 
     @Override
     public void step(Game game, long time) throws IOException {
+        this.menuController.step();
+    }
 
+    public MenuController getMenuController() {
+        return menuController;
+    }
+
+    public void setMenuController(MenuController menuController) {
+        this.menuController = menuController;
     }
 }

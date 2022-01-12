@@ -7,6 +7,8 @@ import com.ldts.breakout.model.arena.Arena;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.viewer.ArenaViewer;
 
+import java.io.IOException;
+
 public class ArenaController extends GameController {
     private final GameState gameState;
     private final ArenaViewer arenaViewer;
@@ -20,11 +22,19 @@ public class ArenaController extends GameController {
         this.ballController = new BallController();
         this.paddleController = new PaddleController(arena.getPaddle());
     }
-    
+
     public PaddleController getPaddleController(){return paddleController;}
-    
+
     public void doAction(GUI.ACTION action){
         Position nextPosition = paddleController.doAction(action);
+    }
+
+    @Override
+    public void step(Game game, long time) throws IOException {
+        /*updateBullets();
+        enemyController.step(game, time);
+        bombController.step(game, time);
+        ArenaViewer.draw();*/
     }
 
 

@@ -5,20 +5,20 @@ import com.ldts.breakout.model.arena.Arena;
 
 import java.io.IOException;
 
-public class BallController extends GameController {
-    private final ArenaController arenaController;
+public class BallController {
+    private  ArenaController arenaController;
     private long lastMovement;
     private long beginningGameTime;
-
+/*
     public BallController(Arena arena, ArenaController arenaController){
         super(arena);
 
         this.arenaController = arenaController;
         this.lastMovement = 0;
         this.beginningGameTime = 0;
-    }
+    }*/
 
-    public class BallThread extends Thread{
+/*    public class BallThread extends Thread{
         @Override
         public void run(){
 
@@ -42,5 +42,5 @@ public class BallController extends GameController {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

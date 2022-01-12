@@ -7,7 +7,13 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.ldts.breakout.gui.GUI;
+import com.ldts.breakout.gui.KeyBoardObserver;
+import com.ldts.breakout.gui.LanternaGUI;
 import com.ldts.breakout.state.GameState;
+import com.ldts.breakout.state.MenuState;
+import com.ldts.breakout.state.KeyBoardListener;
+import org.apache.tools.ant.taskdefs.launcher.MacCommandLauncher;
 
 import java.io.IOException;
 
@@ -16,13 +22,21 @@ import static java.lang.String.valueOf;
 
 public class Game {
     private Screen screen;
-    private final OtherArena arena;
+    //private final OtherArena arena;
     private GameState gameState;
     private boolean stopThread = false;
     private boolean endGame = false;
+    private KeyBoardObserver keyBoardObserver;
+    private GUI gui;
+    private int fps;
 
-    public Game(){
+    public Game(int fps) throws IOException{
+        gui = new LanternaGUI();
+        keyBoardObserver = new KeyBoardObserver();
+        this.fps = fps;
+        this.gameState = new MenuState(this,gui);
 
+/*
         try{
             Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(Constants.WIDTH, Constants.HEIGHT)).createTerminal();
             screen = new TerminalScreen(terminal);
@@ -36,22 +50,23 @@ public class Game {
         }
 
         arena = new OtherArena();
+*/
 
     }
 
     // Only for tests
-    public Game(OtherArena otherArena){
+    /*public Game(OtherArena otherArena){
         this.arena = otherArena;
-    }
+    }*/
 
 
-    public void draw() throws IOException{
+    /*public void draw() throws IOException{
         screen.clear();
         arena.draw(screen.newTextGraphics());
         screen.refresh();
-    }
+    }*/
 
-    private void processKey(KeyStroke key) {
+    /*private void processKey(KeyStroke key) {
         System.out.println(key);
         if (key.getKeyType() == KeyType.ArrowRight) {
             arena.movePaddle(arena.moveRight());
@@ -59,9 +74,9 @@ public class Game {
         if (key.getKeyType() == KeyType.ArrowLeft) {
             arena.movePaddle(arena.moveLeft());
         }
-    }
+    }*/
 
-    private void gameEnded(boolean gameWon){
+    /*private void gameEnded(boolean gameWon){
         try{
             stopThread = true;
             endGame = true;
@@ -77,9 +92,9 @@ public class Game {
         catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    public class BallThread extends Thread{
+    /*public class BallThread extends Thread{
         @Override
         public void run(){
 
@@ -127,11 +142,39 @@ public class Game {
             e.printStackTrace();
         }
 
+    }*/
+
+    public void start() throws IOException {
+        int frameTime = 1000 / this.fps;
+
+        gui.addKeyBoardListener(keyBoardObserver);
+        this.gameState.start();
+
+        while (gameState != null){
+            long startTime = System.currentTimeMillis();
+
+            gameState.step(this, startTime);
+
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            long sleepTime = frameTime - elapsedTime;
+
+            if (sleepTime > 0) try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+
+            }
+        }
+
+        gui.close();
     }
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
         if (gameState != null)
             this.gameState.start();
+    }
+
+    public KeyBoardObserver getKeyBoardObserver() {
+        return keyBoardObserver;
     }
 }
