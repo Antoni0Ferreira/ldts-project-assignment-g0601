@@ -60,7 +60,11 @@ public class LanternaGUI implements GUI {
     }
 
     public AWTTerminalFontConfiguration loadFont() throws FontFormatException,IOException{
+<<<<<<< HEAD
         File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
+=======
+        File fontFile = new File("..\\BreakoutGame\\resources\\PressStart2P.ttf");
+>>>>>>> 9b0adadc96928009e8ea65837a982a14b3da64a9
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
