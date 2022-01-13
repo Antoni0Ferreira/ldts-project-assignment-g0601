@@ -66,7 +66,9 @@ public class ArenaController extends GameController {
     }
 
     public void lostLife(){
-        ballController.resetBall();
+        if (ballController.getModel().getBall().getPosition().getY() > Constants.INIT_PADDLE_Y)
+            ballController.resetBall();
+            paddleController.lostLife();
     }
     
 
