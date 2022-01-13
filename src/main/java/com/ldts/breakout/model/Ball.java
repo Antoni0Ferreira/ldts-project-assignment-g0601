@@ -20,7 +20,7 @@ public class Ball extends Element {
         this.dirY = dirY;
     }
 
-/*    public void move(){
+    public void move(){
         if(getPosition().getX() <= Constants.BORDER_LEFT_X) {
             dirX = -dirX;
         }
@@ -51,7 +51,7 @@ public class Ball extends Element {
             dirY = -dirY;
         }
         setDestroyedBrick(true);
-    }*/
+    }
 
     public int getDirX() {
         return dirX;
@@ -60,14 +60,12 @@ public class Ball extends Element {
         return dirY;
     }
 
+    public void setDirX(int dirX) {this.dirX = dirX;}
+    public void setDirY(int dirY) {this.dirY = dirY;}
+
     public boolean getDestroyedBrick() {
         return destroyedBrick;
     }
     public void setDestroyedBrick(boolean destroyedBrick) {this.destroyedBrick = destroyedBrick;}
-
-    public Rectangle getRect() {
-        return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);
-    }
-
 
 }

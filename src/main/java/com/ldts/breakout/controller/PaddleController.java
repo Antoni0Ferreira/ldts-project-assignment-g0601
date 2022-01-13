@@ -31,5 +31,9 @@ public class PaddleController {
 
     public Paddle getPaddle() {return paddle;}
 
+    public void addPoints(int value){paddle.updatePoints(value);}
+
+    public void lifeLost(){paddle.updateLives();}
+
     public void resetPaddle(){paddle.setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));}
 }

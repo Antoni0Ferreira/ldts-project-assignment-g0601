@@ -16,6 +16,9 @@ public class PlayingState extends GameState {
 
     public PlayingState(Game game, GUI gui) throws IOException{
         super(game, Arrays.asList());
+
+        gui.refresh();
+        gui.clear();
         this.arena = new ArenaLoader().createArena();
         this.playingController = new PlayingController(this,gui,arena);
     }
@@ -25,5 +28,7 @@ public class PlayingState extends GameState {
         game.getKeyBoardObserver().setListener(playingController);
     }
     @Override
-    public void step(Game game, long time){}
+    public void step(Game game, long time) throws IOException{
+        playingController.step(game, time);
+    }
 }

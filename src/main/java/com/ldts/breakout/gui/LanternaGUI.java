@@ -15,6 +15,7 @@ import com.ldts.breakout.model.Menu;
 import com.ldts.breakout.model.MenuOption;
 import com.ldts.breakout.model.Position;
 import org.w3c.dom.Text;
+import static com.googlecode.lanterna.Symbols.HEART;
 
 import java.awt.*;
 import java.io.File;
@@ -26,8 +27,9 @@ import static com.googlecode.lanterna.Symbols.SOLID_SQUARE;
 public class LanternaGUI implements GUI {
     private final TerminalScreen screen;
 
-    public LanternaGUI() throws IOException {
-        Terminal terminal = createTerminal();
+    public LanternaGUI() throws IOException, FontFormatException {
+        AWTTerminalFontConfiguration fontConfig = loadFont();
+        Terminal terminal = createTerminal(fontConfig);
         screen = createScreen(terminal);
     }
 
@@ -41,9 +43,24 @@ public class LanternaGUI implements GUI {
         return terminalScreen;
     }
 
-    public Terminal createTerminal() throws IOException{
-        // Load Font
-        File fontFile = new File("..\\resources\\PressStart2P.ttf");
+    public Terminal createTerminal(AWTTerminalFontConfiguration fontConfig) throws IOException{
+        TerminalSize terminalSize = new TerminalSize(Constants.WIDTH, Constants.HEIGHT);
+        /*DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+        defaultTerminalFactory.setForceAWTOverSwing(true);
+        defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+
+        DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+        Terminal terminal = terminalFactory.createTerminal();*/
+        DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+        defaultTerminalFactory.setForceAWTOverSwing(true);
+        defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+        Terminal terminal = defaultTerminalFactory.createTerminal();
+
+        return terminal;
+    }
+
+    public AWTTerminalFontConfiguration loadFont() throws FontFormatException,IOException{
+        File fontFile = new File("..\\BreakoutGame\\resources\\PressStart2P.ttf");
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -53,20 +70,12 @@ public class LanternaGUI implements GUI {
             e.printStackTrace();
         }
 
-// Register Font
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
 
-//Configure Default Terminal Factory
-        DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(Constants.WIDTH, Constants.HEIGHT));
         Font loadedFont = font.deriveFont(Font.PLAIN, 15);
         AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-        defaultTerminalFactory.setForceAWTOverSwing(true);
-        defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-        TerminalSize terminalSize = new TerminalSize(Constants.WIDTH, Constants.HEIGHT);
-        DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-        Terminal terminal = terminalFactory.createTerminal();
-        return terminal;
+        return fontConfig;
     }
 
     public TerminalSize getSize(){
@@ -112,7 +121,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void addKeyBoardListener(KeyBoardObserver observer){
-        //((AWTTerminalFrame) screen.getTerminal()).getComponent(0).addKeyListener(observer);
+        ((AWTTerminalFrame) screen.getTerminal()).getComponent(0).addKeyListener(observer);
     }
 
     @Override
@@ -135,8 +144,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawPoints(int numPoints, Position position){
-        TextGraphics textGraphics = createTextGraphics();
-        drawText(textGraphics,position,String.valueOf(numPoints),"#FF00FF");
+        //TextGraphics textGraphics = createTextGraphics();
+        //drawText(textGraphics,position,String.valueOf(numPoints),"#FF00FF");
 /*        textGraphics.setForegroundColor(TextColor.Factory.fromString("#FF00FF"));
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(position.getX(), position.getY()), String.valueOf(numPoints));*/
@@ -156,11 +165,13 @@ public class LanternaGUI implements GUI {
             default -> color = "#FFFFFF";
         }
         //textGraphics.putString(new TerminalPosition(position.getX(), position.getY()), " ");
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString(color));
         drawText(textGraphics,position," ",color);
     }
 
     @Override
     public void drawBrick(int points, Position position){
+
         TextGraphics textGraphics = createTextGraphics();
         String color = "";
         switch (points){
@@ -256,6 +267,6 @@ public class LanternaGUI implements GUI {
     public void drawInfo(int points, int lives){
         TextGraphics textGraphics = screen.newTextGraphics();
         drawText(textGraphics, new Position(3, 37), Integer.toString(points), "#FF00FF");
-        drawText(textGraphics, new Position(53, 37), Integer.toString(lives), "#FF0000");
+        drawText(textGraphics, new Position(53, 37), Integer.toString(lives) + HEART, "#FF0000");
     }
 }

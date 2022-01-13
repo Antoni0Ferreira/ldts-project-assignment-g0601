@@ -12,6 +12,7 @@ public class MenuButtonCommand implements Command{
         if(nextState != null)
             nextState.changeState(nextState);
         return true;
+
     }
 
     @Override

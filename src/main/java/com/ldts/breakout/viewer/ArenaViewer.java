@@ -3,6 +3,7 @@ package com.ldts.breakout.viewer;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Element;
 import com.ldts.breakout.model.arena.Arena;
+import com.ldts.breakout.model.Brick;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ArenaViewer {
         drawElement(this.arena.getPaddle(),new PaddleViewer());
         drawElement(this.arena.getPoints(), new PointsViewer());
         drawElements(this.arena.getWalls(), new WallViewer());
-        drawElements(this.arena.getBricks(), new BrickViewer());
+        drawBricks(this.arena.getBricks(), new BrickViewer());
 
         gui.refresh();
     }
@@ -37,5 +38,11 @@ public class ArenaViewer {
 
     private <T extends Element> void drawElement(T element, ElementViewer<T> viewer){
         viewer.drawElement(element,gui);
+    }
+
+    private void drawBricks(List<Brick> elements, ElementViewer<Brick> viewer){
+        for(Brick element: elements)
+            if(!element.isDestroyed())
+                drawElement(element,viewer);
     }
 }

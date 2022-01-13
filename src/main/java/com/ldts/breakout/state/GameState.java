@@ -4,6 +4,7 @@ import com.ldts.breakout.Game;
 import com.ldts.breakout.model.Button;
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 
 public abstract class GameState {
     protected final Game game;

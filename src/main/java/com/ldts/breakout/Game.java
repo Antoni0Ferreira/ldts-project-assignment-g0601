@@ -11,10 +11,12 @@ import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.gui.KeyBoardObserver;
 import com.ldts.breakout.gui.LanternaGUI;
 import com.ldts.breakout.state.GameState;
+import com.ldts.breakout.state.InstructionsState;
 import com.ldts.breakout.state.MenuState;
 import com.ldts.breakout.state.KeyBoardListener;
 import org.apache.tools.ant.taskdefs.launcher.MacCommandLauncher;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static java.lang.Character.toLowerCase;
@@ -30,7 +32,7 @@ public class Game {
     private GUI gui;
     private int fps;
 
-    public Game(int fps) throws IOException{
+    public Game(int fps) throws IOException, FontFormatException {
         gui = new LanternaGUI();
         keyBoardObserver = new KeyBoardObserver();
         this.fps = fps;

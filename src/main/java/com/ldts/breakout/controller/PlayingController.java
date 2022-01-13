@@ -9,6 +9,7 @@ import com.ldts.breakout.state.KeyBoardListener;
 import com.ldts.breakout.viewer.state.PlayingViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -30,9 +31,9 @@ public class PlayingController extends GameController implements KeyBoardListene
     private void changeState(GameState gameState){this.gameState.changeState(gameState);}
 
     @Override
-    public void step(Game game, long time){
-
-
+    public void step(Game game, long time) throws IOException {
+        arenaController.step(game,time);
+        playingViewer.draw();
 
     }
     

@@ -28,7 +28,7 @@ public class Paddle extends Element {
     public void updatePoints(int value) {points += value;}
 
     public int getLives() {return lives;}
-    public void updateLives(int value){lives -= value;}
+    public void updateLives(){lives -= 1;}
 
     public Rectangle getRect() {
         return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);

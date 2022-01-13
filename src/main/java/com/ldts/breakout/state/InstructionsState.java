@@ -6,15 +6,18 @@ import com.ldts.breakout.model.Button;
 import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.command.MenuButtonCommand;
 
+
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class InstructionsState extends GameState{
         private InstructionsController instructionsController;
 
         public InstructionsState(Game game, GUI gui) throws IOException {
-                super(game, Collections.singletonList(new Button(new Position(20,22),"PLAY", new MenuButtonCommand(new PlayingState(game,gui)),"#FFFFFF")));
+                super(game, Arrays.asList(new Button(new Position(4,35),"PLAY GAME (PRESS ENTER)", new MenuButtonCommand(new PlayingState(game,gui)),"#FFFFFF")));
                 this.instructionsController = new InstructionsController(this,gui);
+                getButtons().get(0).activate();
         }
 
         @Override

@@ -26,5 +26,12 @@ public abstract class StateViewer {
         }
     }
 
+    protected int getYActiveButton(){
+        for(Button button:buttons){
+            if(button.isActive()) return button.getPosition().getY();
+        }
+        return -1;
+    }
+
     protected void drawBackground() {gui.drawBackground(textGraphics);}
 }

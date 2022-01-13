@@ -1,6 +1,10 @@
 package com.ldts.breakout.model;
 
 public class Menu extends Element{
+    public int arrow_y = 15;
+    public int getArrow(){
+        return arrow_y;
+    }
     public enum Option {START, INST, EXIT}
 
     Option selected;

@@ -20,13 +20,13 @@ public class MenuState extends GameState{
 
     public MenuState(Game game, GUI gui) throws IOException{
         super(game,Arrays.asList(
-                new Button(new Position(Constants.INIT_BALL_X - 4, 15), "PLAY", new MenuButtonCommand(new PlayingState(game,gui)),"#FFFFFF"),
-                new Button(new Position(Constants.INIT_BALL_X - 5, 20), "INSTRUCTIONS", new MenuButtonCommand(new InstructionsState(game, gui)),"#FFFFFF"),
-                new Button(new Position(Constants.INIT_BALL_X - 3, 25), "QUIT", new MenuButtonCommand(null),"#FFFFFF")
+                new Button(new Position(Constants.INIT_BALL_X - 2, 15), "PLAY", new MenuButtonCommand(new PlayingState(game,gui)),"#FFFFFF"),
+                new Button(new Position(Constants.INIT_BALL_X - 6, 20), "INSTRUCTIONS", new MenuButtonCommand(new InstructionsState(game, gui)),"#FFFFFF"),
+                new Button(new Position(Constants.INIT_BALL_X - 2, 25), "QUIT", new MenuButtonCommand(null),"#FFFFFF")
 
         ));
        this.menuController = new MenuController(this,gui);
-
+       getButtons().get(0).activate();
     }
 
     @Override

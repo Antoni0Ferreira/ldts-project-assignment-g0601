@@ -18,7 +18,7 @@ public class KeyBoardObserver extends KeyAdapter {
             case KeyEvent.VK_UP -> listener.keyPressed(GUI.ACTION.UP);
             case KeyEvent.VK_DOWN -> listener.keyPressed(GUI.ACTION.DOWN);
             case KeyEvent.VK_Q -> listener.keyPressed(GUI.ACTION.QUIT);
-            case KeyEvent.VK_SPACE -> listener.keyPressed(GUI.ACTION.CHOOSE);
+            case KeyEvent.VK_ENTER -> listener.keyPressed(GUI.ACTION.CHOOSE);
         }
     }
 

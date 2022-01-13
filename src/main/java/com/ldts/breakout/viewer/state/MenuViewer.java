@@ -25,6 +25,7 @@ public class MenuViewer extends StateViewer {
         gui.clear();
         drawBackground();
         drawButtons(buttons, new ButtonViewer());
+        gui.drawTitle(new Position(Constants.INIT_BALL_X - 12, getYActiveButton()), "&'", "#FF0000");
         gui.refresh();
     }
 }
