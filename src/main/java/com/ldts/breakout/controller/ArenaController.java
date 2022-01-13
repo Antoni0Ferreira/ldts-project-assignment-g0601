@@ -7,10 +7,14 @@ import com.ldts.breakout.model.Brick;
 import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.arena.Arena;
 import com.ldts.breakout.state.GameState;
+import com.ldts.breakout.state.MenuState;
 import com.ldts.breakout.viewer.ArenaViewer;
+import com.ldts.breakout.viewer.state.EndGameViewer;
 
 import java.io.IOException;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class ArenaController extends GameController {
     private final GameState gameState;
@@ -43,6 +47,17 @@ public class ArenaController extends GameController {
         ballController.step(game, time);
         lostLife();
         arenaViewer.draw();
+        if(paddleController.getPaddle().getLives() == 0){
+            EndGameViewer endGameViewer = new EndGameViewer(arenaViewer.getGui(),null,false);
+            endGameViewer.draw();
+            gameState.changeState(new MenuState(this.gameState.getGame(), arenaViewer.getGui()));
+        }
+        else if(paddleController.getPaddle().getPoints() == Constants.MAX_POINTS){
+            EndGameViewer endGameViewer = new EndGameViewer(arenaViewer.getGui(),null,true);
+            endGameViewer.draw();
+            gameState.changeState(new MenuState(this.gameState.getGame(), arenaViewer.getGui()));
+        }
+
     }
 
     public boolean hitsPaddle(){
