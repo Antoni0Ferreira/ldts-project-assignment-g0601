@@ -72,6 +72,5 @@ public class MenuController implements KeyBoardListener {
             if(index != -1)
                 gameState.getButtons().get(index).getCommand().execute();
         }
-
     }
 }
