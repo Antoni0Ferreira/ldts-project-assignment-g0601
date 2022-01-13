@@ -1,6 +1,7 @@
 package com.ldts.breakout.controller;
 
 import com.ldts.breakout.Game;
+import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.arena.Arena;
 import com.ldts.breakout.model.Ball;
 import com.ldts.breakout.Constants;
@@ -86,5 +87,10 @@ public class BallController extends GameController{
         if(!ball.getDestroyedBrick())
             arenaController.hitsBrick();
         move();
+    }
+
+    public void resetBall(){
+        ball.setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));
+        ball.setDestroyedBrick(false);
     }
 }

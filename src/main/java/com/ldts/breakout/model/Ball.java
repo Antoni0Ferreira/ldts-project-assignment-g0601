@@ -45,11 +45,7 @@ public class Ball extends Element {
     }
 
     public void hitBrick(){
-        if(dirY == 1)
-            dirY = -dirY;
-        else if(dirY == -1){
-            dirY = -dirY;
-        }
+        dirY = -dirY;
         setDestroyedBrick(true);
     }
 

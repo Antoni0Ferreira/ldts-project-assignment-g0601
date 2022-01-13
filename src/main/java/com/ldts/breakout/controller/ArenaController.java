@@ -30,6 +30,9 @@ public class ArenaController extends GameController {
     public PaddleController getPaddleController(){return paddleController;}
 
     public void doAction(GUI.ACTION action){
+        if(action == GUI.ACTION.QUIT){
+            gameState.changeState(null);
+        }
         Position nextPosition = paddleController.doAction(action);
         paddleController.movePaddle(nextPosition);
     }
@@ -37,6 +40,7 @@ public class ArenaController extends GameController {
     @Override
     public void step(Game game, long time) throws IOException {
         ballController.step(game, time);
+        lostLife();
         arenaViewer.draw();
     }
 
@@ -58,6 +62,13 @@ public class ArenaController extends GameController {
             }
         }
         return false;
+    }
+
+    public void lostLife(){
+        if(ballController.getModel().getBall().getPosition().getY() > paddleController.getPaddle().getPosition().getY()){
+            paddleController.lifeLost();
+            ballController.resetBall();
+        }
     }
 
 
