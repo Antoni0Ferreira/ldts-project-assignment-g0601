@@ -1,19 +1,22 @@
 package com.ldts.breakout;
 
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.ldts.breakout.gui.GUI;
+import com.ldts.breakout.gui.KeyBoardObserver;
+import com.ldts.breakout.gui.LanternaGUI;
+import com.ldts.breakout.state.GameState;
+import com.ldts.breakout.state.InstructionsState;
+import com.ldts.breakout.state.MenuState;
+import com.ldts.breakout.state.KeyBoardListener;
+import org.apache.tools.ant.taskdefs.launcher.MacCommandLauncher;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 import static java.lang.Character.toLowerCase;
@@ -21,36 +24,23 @@ import static java.lang.String.valueOf;
 
 public class Game {
     private Screen screen;
-    private final Arena arena;
+    //private final OtherArena arena;
+    private GameState gameState;
     private boolean stopThread = false;
     private boolean endGame = false;
-    private int speed = 60;
+    private KeyBoardObserver keyBoardObserver;
+    private GUI gui;
+    private int fps;
 
-    public Game(){
-        // Load Font
-        File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
-        Font font = null;
-        try {
-            font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Game(int fps) throws IOException, FontFormatException {
+        gui = new LanternaGUI();
+        keyBoardObserver = new KeyBoardObserver();
+        this.fps = fps;
+        this.gameState = new MenuState(this,gui);
 
-// Register Font
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(font);
-
-//Configure Default Terminal Factory
-        DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(Constants.WIDTH, Constants.HEIGHT));
-        Font loadedFont = font.deriveFont(Font.PLAIN, 15);
-        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-        defaultTerminalFactory.setForceAWTOverSwing(true);
-        defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-
+/*
         try{
-            Terminal terminal = defaultTerminalFactory.createTerminal();
+            Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(Constants.WIDTH, Constants.HEIGHT)).createTerminal();
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
@@ -61,23 +51,24 @@ public class Game {
             e.printStackTrace();
         }
 
-        arena = new Arena();
+        arena = new OtherArena();
+*/
 
     }
 
     // Only for tests
-    public Game(Arena arena){
-        this.arena = arena;
-    }
+    /*public Game(OtherArena otherArena){
+        this.arena = otherArena;
+    }*/
 
 
-    public void draw() throws IOException{
+    /*public void draw() throws IOException{
         screen.clear();
         arena.draw(screen.newTextGraphics());
         screen.refresh();
-    }
+    }*/
 
-    private void processKey(KeyStroke key) {
+    /*private void processKey(KeyStroke key) {
         System.out.println(key);
         if (key.getKeyType() == KeyType.ArrowRight) {
             arena.movePaddle(arena.moveRight());
@@ -85,9 +76,9 @@ public class Game {
         if (key.getKeyType() == KeyType.ArrowLeft) {
             arena.movePaddle(arena.moveLeft());
         }
-    }
+    }*/
 
-    private void gameEnded(boolean gameWon){
+    /*private void gameEnded(boolean gameWon){
         try{
             stopThread = true;
             endGame = true;
@@ -103,72 +94,89 @@ public class Game {
         catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    private void updateSpeed(){
-        if(speed > 30)
-            speed =  60 - (arena.getPoints() / 30) * 2;
-    }
-
-    public class BallThread extends Thread{
+    /*public class BallThread extends Thread{
         @Override
         public void run(){
-                try {
-                    while (arena.getLives() > 0) {
-                        arena.getBall().setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));
-                        draw();
-                        sleep(1000);
-                        while (!stopThread) {
-                            sleep(speed);
-                            draw();
-                            arena.hitsPaddle();
 
-                            if (!arena.getBall().getDestroyedBrick())
-                                arena.hitsBrick();
-                            updateSpeed();
-                            screen.clear();
-                            if (arena.gameLost()) {
-                                arena.loseLive();
-                                break;
-                            }
-                            if (arena.gameWon()) {
-                                gameEnded(true);
-                            }
-                            arena.getBall().move();
-                        }
-                    }
+            try{
+                sleep(1000);
+                while(!stopThread){
+                    sleep(50);
+                    draw();
+                    arena.hitsPaddle();
+
+                    if(!arena.getBall().getDestroyedBrick())
+                        arena.hitsBrick();
+
+                    screen.clear();
+                    if(arena.gameLost()){gameEnded(false);}
+                    if(arena.gameWon()){gameEnded(true);}
+                    arena.getBall().move();
                 }
+            }
             catch (IOException | InterruptedException e) {
                     e.printStackTrace();
             }
-
-            gameEnded(false);
         }
     }
 
-    public void run() {
-            try {
-                BallThread BallThread = new BallThread();
-                BallThread.start();
-                while (!endGame) {
-                    draw();
-                    com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-                    processKey(key);
-                    if (key.getKeyType() == KeyType.Character && toLowerCase(key.getCharacter()) == ('q')) {
-                        stopThread = true;
-                        screen.close();
-                        BallThread.interrupt();
-                        return;
-                    }
-                    if (key.getKeyType() == KeyType.EOF)
-                        break;
-
+    public void run(){
+        try {
+            BallThread BallThread = new BallThread();
+            BallThread.start();
+            while(!endGame) {
+                draw();
+                com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
+                processKey(key);
+                if (key.getKeyType() == KeyType.Character && toLowerCase(key.getCharacter()) == ('q')){
+                    stopThread = true;
+                    screen.close();
+                    BallThread.interrupt();
+                    return;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                if (key.getKeyType() == KeyType.EOF)
+                    break;
+
             }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
+    }*/
+
+    public void start() throws IOException {
+        int frameTime = 1000 / this.fps;
+
+        gui.addKeyBoardListener(keyBoardObserver);
+        this.gameState.start();
+
+        while (gameState != null){
+            long startTime = System.currentTimeMillis();
+
+            gameState.step(this, startTime);
+
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            long sleepTime = frameTime - elapsedTime;
+
+            if (sleepTime > 0) try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+
+            }
+        }
+
+        gui.close();
     }
 
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+        if (gameState != null)
+            this.gameState.start();
     }
 
+    public KeyBoardObserver getKeyBoardObserver() {
+        return keyBoardObserver;
+    }
+}

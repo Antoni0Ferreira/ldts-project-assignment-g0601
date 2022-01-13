@@ -324,7 +324,7 @@
 </span>
 </span>
 </td>
-<td class=''><pre><span  class=''>    private final Arena arena;</span></pre></td></tr>
+<td class=''><pre><span  class=''>    private final Arena otherArena;</span></pre></td></tr>
 
 
 <tr>
@@ -603,7 +603,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class=''>        arena = new Arena();</span></pre></td></tr>
+<td class='uncovered'><pre><span  class=''>        otherArena = new Arena();</span></pre></td></tr>
 
 
 <tr>
@@ -678,7 +678,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>    public Game(Arena arena){</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>    public Game(Arena otherArena){</span></pre></td></tr>
 
 
 <tr>
@@ -693,7 +693,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class=''>        this.arena = arena;</span></pre></td></tr>
+<td class='covered'><pre><span  class=''>        this.otherArena = otherArena;</span></pre></td></tr>
 
 
 <tr>
@@ -789,7 +789,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>        arena.draw(screen.newTextGraphics());</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>        otherArena.draw(screen.newTextGraphics());</span></pre></td></tr>
 
 
 <tr>
@@ -906,7 +906,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='killed'>            arena.movePaddle(arena.moveRight());</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>            otherArena.movePaddle(otherArena.moveRight());</span></pre></td></tr>
 
 
 <tr>
@@ -957,7 +957,7 @@
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='killed'>            arena.movePaddle(arena.moveLeft());</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>            otherArena.movePaddle(otherArena.moveLeft());</span></pre></td></tr>
 
 
 <tr>
@@ -1082,7 +1082,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>            if(gameWon) arena.printWon(screen.newTextGraphics());</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>            if(gameWon) otherArena.printWon(screen.newTextGraphics());</span></pre></td></tr>
 
 
 <tr>
@@ -1100,7 +1100,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>            else arena.printLost(screen.newTextGraphics());</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>            else otherArena.printLost(screen.newTextGraphics());</span></pre></td></tr>
 
 
 <tr>
@@ -1459,7 +1459,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                    arena.hitsPaddle();</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>                    otherArena.hitsPaddle();</span></pre></td></tr>
 
 
 <tr>
@@ -1492,7 +1492,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                    if(!arena.getBall().getDestroyedBrick())</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>                    if(!otherArena.getBall().getDestroyedBrick())</span></pre></td></tr>
 
 
 <tr>
@@ -1510,7 +1510,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                        arena.hitsBrick();</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>                        otherArena.hitsBrick();</span></pre></td></tr>
 
 
 <tr>
@@ -1563,7 +1563,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                    if(arena.gameLost()){gameEnded(false);}</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>                    if(otherArena.gameLost()){gameEnded(false);}</span></pre></td></tr>
 
 
 <tr>
@@ -1583,7 +1583,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                    if(arena.gameWon()){gameEnded(true);}</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>                    if(otherArena.gameWon()){gameEnded(true);}</span></pre></td></tr>
 
 
 <tr>
@@ -1601,7 +1601,7 @@
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>                    arena.getBall().move();</span></pre></td></tr>
+<td class='uncovered'><pre><span  class='survived'>                    otherArena.getBall().move();</span></pre></td></tr>
 
 
 <tr>
@@ -2570,7 +2570,7 @@
 
 <h2>Tests examined</h2>
 <ul>
-<li>com.ldts.breakout.ArenaTest.[engine:spock]/[spec:com.ldts.breakout.ArenaTest]/[feature:$spock_feature_0_0] (16 ms)</li><li>com.ldts.breakout.GameTest.[engine:spock]/[spec:com.ldts.breakout.GameTest]/[feature:$spock_feature_0_0] (7 ms)</li><li>com.ldts.breakout.GameTest.[engine:spock]/[spec:com.ldts.breakout.GameTest]/[feature:$spock_feature_0_1] (7 ms)</li><li>com.ldts.breakout.GameTest.[engine:spock]/[spec:com.ldts.breakout.GameTest]/[feature:$spock_feature_0_2] (10 ms)</li>
+<li>com.ldts.breakout.OtherArenaTest.[engine:spock]/[spec:com.ldts.breakout.OtherArenaTest]/[feature:$spock_feature_0_0] (16 ms)</li><li>com.ldts.breakout.GameTest.[engine:spock]/[spec:com.ldts.breakout.GameTest]/[feature:$spock_feature_0_0] (7 ms)</li><li>com.ldts.breakout.GameTest.[engine:spock]/[spec:com.ldts.breakout.GameTest]/[feature:$spock_feature_0_1] (7 ms)</li><li>com.ldts.breakout.GameTest.[engine:spock]/[spec:com.ldts.breakout.GameTest]/[feature:$spock_feature_0_2] (10 ms)</li>
 </ul>
 
 <br/>

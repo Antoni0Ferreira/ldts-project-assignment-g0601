@@ -1,8 +1,7 @@
 package com.ldts.breakout
 
-import com.ldts.breakout.Ball
-import com.ldts.breakout.Constants
-import com.ldts.breakout.Position
+import com.ldts.breakout.model.Ball
+import com.ldts.breakout.model.Position
 
 class BallTest extends spock.lang.Specification{
 
@@ -191,22 +190,5 @@ class BallTest extends spock.lang.Specification{
         then:
         ballHitTopBorder == false
         wasBrickDestroyed == true
-    }
-
-    def "testing lives #1"(){
-        given:
-        def ball = new Ball(new Position(10, 34), 1, 1)
-        def arena = new Arena(ball)
-
-        when:
-        ball.move()
-        ball.move()
-        if(arena.gameLost()){
-            arena.loseLive()
-        }
-
-        then:
-        arena.getLives() == 2
-
     }
 }
