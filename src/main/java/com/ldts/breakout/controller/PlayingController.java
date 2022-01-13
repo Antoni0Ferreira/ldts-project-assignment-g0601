@@ -1,11 +1,13 @@
 package com.ldts.breakout.controller;
 
+import com.ldts.breakout.Constants;
 import com.ldts.breakout.Game;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.model.arena.Arena;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.state.KeyBoardListener;
+import com.ldts.breakout.viewer.state.EndGameViewer;
 import com.ldts.breakout.viewer.state.PlayingViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
 
@@ -34,6 +36,14 @@ public class PlayingController extends GameController implements KeyBoardListene
     public void step(Game game, long time) throws IOException {
         arenaController.step(game,time);
         playingViewer.draw();
+        if(arenaController.getModel().getPaddle().getLives() == 0){
+            EndGameViewer endGameViewer = new EndGameViewer(gui,null,false);
+            endGameViewer.draw();
+        }
+        else if(arenaController.getModel().getPaddle().getPoints() == Constants.MAX_POINTS){
+            EndGameViewer endGameViewer = new EndGameViewer(gui,null,true);
+            endGameViewer.draw();
+        }
 
     }
     

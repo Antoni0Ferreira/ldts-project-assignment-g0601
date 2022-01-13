@@ -1,5 +1,6 @@
 package com.ldts.breakout.controller;
 
+import com.ldts.breakout.Constants;
 import com.ldts.breakout.Game;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Brick;
@@ -30,6 +31,9 @@ public class ArenaController extends GameController {
     public PaddleController getPaddleController(){return paddleController;}
 
     public void doAction(GUI.ACTION action){
+        if(action == GUI.ACTION.QUIT){
+            gameState.changeState(null);
+        }
         Position nextPosition = paddleController.doAction(action);
         paddleController.movePaddle(nextPosition);
     }
@@ -54,11 +58,17 @@ public class ArenaController extends GameController {
                 ballController.hitBrick();
                 brick.setDestroyed(true);
                 paddleController.addPoints(brick.getPoints());
+                brickList.remove(brick);
                 return true;
             }
         }
         return false;
     }
+
+    public void lostLife(){
+        ballController.resetBall();
+    }
+    
 
 
 }

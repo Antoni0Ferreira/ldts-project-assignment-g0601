@@ -46,7 +46,7 @@ public class MenuController implements KeyBoardListener {
 
     @Override
     public void keyPressed(GUI.ACTION action){
-        if (action == GUI.ACTION.QUIT || gameState.getButtons().get(getActiveButton()).getPosition().getY() == 25){
+        if (action == GUI.ACTION.QUIT || (gameState.getButtons().get(getActiveButton()).getPosition().getY() == 25 && action == GUI.ACTION.CHOOSE)){
             gameState.changeState(null);
             return;
         }
@@ -72,6 +72,5 @@ public class MenuController implements KeyBoardListener {
             if(index != -1)
                 gameState.getButtons().get(index).getCommand().execute();
         }
-
     }
 }
