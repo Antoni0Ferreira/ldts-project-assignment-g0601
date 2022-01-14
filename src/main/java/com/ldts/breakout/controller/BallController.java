@@ -96,7 +96,7 @@ public class BallController extends GameController{
                 e.printStackTrace();
             }
         }*/
-        if(this.time > 7)
+        if(this.time > 15)
             move();
 /*        if (this.ball.getLostLife()) {
             try {

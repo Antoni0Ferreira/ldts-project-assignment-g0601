@@ -38,9 +38,6 @@ public class PlayingController extends GameController implements KeyBoardListene
         arenaController.step(game,time);
         playingViewer.draw();
 
-
-
-
         if(getModel().getPaddle().getLives() == 0){
             changeState( new EndGameState(this.gameState.getGame(),gui,false));
         }

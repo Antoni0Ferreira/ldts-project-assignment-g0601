@@ -49,7 +49,4 @@ public class ArenaViewer {
             if(!element.isDestroyed())
                 drawElement(element,viewer);
     }
-    public GUI getGui(){
-        return gui;
-    }
 }
