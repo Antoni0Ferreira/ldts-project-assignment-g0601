@@ -11,19 +11,13 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.ldts.breakout.Constants;
-import com.ldts.breakout.model.Menu;
-import com.ldts.breakout.model.MenuOption;
 import com.ldts.breakout.model.Position;
-import org.w3c.dom.Text;
-import java.util.concurrent.TimeUnit;
+
 import static com.googlecode.lanterna.Symbols.HEART;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-
-import static com.googlecode.lanterna.Symbols.FACE_BLACK;
-import static com.googlecode.lanterna.Symbols.SOLID_SQUARE;
 
 public class LanternaGUI implements GUI {
     private final TerminalScreen screen;

@@ -21,7 +21,7 @@ public class PlayingController extends GameController implements KeyBoardListene
     private ArenaController arenaController;
     private final GUI gui;
     private final StateViewer playingViewer;
-    private boolean inicio = true;
+    private boolean initial = true;
 
     public PlayingController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -35,6 +35,9 @@ public class PlayingController extends GameController implements KeyBoardListene
 
     @Override
     public void step(Game game, long time) throws IOException {
+        if(initial){
+            arenaController.getBallController().startBallTimer();
+        }
         arenaController.step(game,time);
         playingViewer.draw();
 
@@ -44,6 +47,7 @@ public class PlayingController extends GameController implements KeyBoardListene
         else if(getModel().getPaddle().getPoints() == Constants.MAX_POINTS){
             changeState( new EndGameState(this.gameState.getGame(),gui,true));
         }
+        this.initial = false;
     }
     
     @Override

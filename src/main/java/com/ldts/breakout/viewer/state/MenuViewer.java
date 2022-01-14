@@ -1,13 +1,8 @@
 package com.ldts.breakout.viewer.state;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
 import com.ldts.breakout.Constants;
 import com.ldts.breakout.gui.GUI;
-import com.ldts.breakout.model.Menu;
-import com.ldts.breakout.model.MenuOption;
 import com.ldts.breakout.model.Position;
-import com.ldts.breakout.viewer.state.StateViewer;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.viewer.ButtonViewer;
 
@@ -26,6 +21,7 @@ public class MenuViewer extends StateViewer {
         drawBackground();
         drawButtons(buttons, new ButtonViewer());
         gui.drawTitle(new Position(Constants.INIT_BALL_X - 12, getYActiveButton()), "&'", "#FF0000");
+        gui.drawTitle(new Position(Constants.INIT_BALL_X - 5, 13), "MAIN MENU:", "#FF0000");
         gui.refresh();
     }
 }

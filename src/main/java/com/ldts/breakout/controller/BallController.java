@@ -7,6 +7,9 @@ import com.ldts.breakout.model.Ball;
 import com.ldts.breakout.Constants;
 import com.ldts.breakout.model.Position;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
@@ -16,13 +19,12 @@ import java.awt.*;
 public class BallController extends GameController{
     private  ArenaController arenaController;
     private Ball ball;
-    private long time;
+    private long start;
 
     public BallController(Arena arena, ArenaController arenaController, Ball ball){
         super(arena);
         this.ball = ball;
         this.arenaController = arenaController;
-        this.time = 0;
     }
 /*
     public class BallThread extends Thread{
@@ -51,24 +53,34 @@ public class BallController extends GameController{
         }
     }*/
 
-    public void move(){
-        if(ball.getPosition().getX() <= Constants.BORDER_LEFT_X) {
-            ball.setDirX(-ball.getDirX());
-        }
-        if(ball.getPosition().getX() >= Constants.BORDER_RIGHT_X)
-            ball.setDirX(-ball.getDirX());
+    public void startBallTimer(){
+        this.start = System.currentTimeMillis();
+    }
 
-        if(ball.getPosition().getY() <= Constants.BORDER_TOP_Y){
-            ball.setDirY(-ball.getDirY());
-            ball.setDestroyedBrick(false);
-        }
-        if(ball.getPosition().getY() >= Constants.BORDER_BOTTOM_Y){
-            ball.setDirY(-ball.getDirY());
-            ball.setDestroyedBrick(false);
-        }
+    public void move() {
+        long end = System.currentTimeMillis();
+        long elapsedTime = end - start;
+        if (elapsedTime > 1000) {
+            if (ball.getPosition().getX() <= Constants.BORDER_LEFT_X) {
+                ball.setDirX(-ball.getDirX());
+            }
+            if (ball.getPosition().getX() >= Constants.BORDER_RIGHT_X)
+                ball.setDirX(-ball.getDirX());
 
-        ball.getPosition().setX(ball.getPosition().getX()+ball.getDirX());
-        ball.getPosition().setY(ball.getPosition().getY()+ ball.getDirY());}
+            if (ball.getPosition().getY() <= Constants.BORDER_TOP_Y) {
+                ball.setDirY(-ball.getDirY());
+                ball.setDestroyedBrick(false);
+            }
+            if (ball.getPosition().getY() >= Constants.BORDER_BOTTOM_Y) {
+                ball.setDirY(-ball.getDirY());
+                ball.setDestroyedBrick(false);
+            }
+
+
+        ball.getPosition().setX(ball.getPosition().getX() + ball.getDirX());
+        ball.getPosition().setY(ball.getPosition().getY() + ball.getDirY());}
+    }
+
 
     public Rectangle getRectBall() {
         return new Rectangle(ball.getPosition().getX(),ball.getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);
@@ -96,7 +108,6 @@ public class BallController extends GameController{
                 e.printStackTrace();
             }
         }*/
-        if(this.time > 15)
             move();
 /*        if (this.ball.getLostLife()) {
             try {
@@ -112,13 +123,12 @@ public class BallController extends GameController{
             }
         }*/
         this.ball.setLostLife(false);
-        this.time++;
     }
 
     public void resetBall(){
         ball.setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));
         ball.setDestroyedBrick(false);
-        this.time = 0;
+        start= System.currentTimeMillis();
     }
 }
 

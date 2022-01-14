@@ -24,6 +24,7 @@ public class ArenaController extends GameController {
     private BallController ballController;
     private PaddleController paddleController;
     private List<Brick> brickList;
+    private boolean gameStart;
 
     public ArenaController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -35,6 +36,8 @@ public class ArenaController extends GameController {
     }
 
     public PaddleController getPaddleController(){return paddleController;}
+
+    public BallController getBallController(){return ballController;}
 
     public void doAction(GUI.ACTION action){
         if(action == GUI.ACTION.QUIT){

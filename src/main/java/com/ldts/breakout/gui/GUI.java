@@ -1,9 +1,6 @@
 package com.ldts.breakout.gui;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.ldts.breakout.model.Menu;
-import com.ldts.breakout.model.MenuOption;
 import com.ldts.breakout.model.Position;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
