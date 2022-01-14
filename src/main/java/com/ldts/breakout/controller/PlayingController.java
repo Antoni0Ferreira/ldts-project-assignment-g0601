@@ -5,14 +5,15 @@ import com.ldts.breakout.Game;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.model.arena.Arena;
-import com.ldts.breakout.state.GameState;
-import com.ldts.breakout.state.KeyBoardListener;
+import com.ldts.breakout.state.*;
 import com.ldts.breakout.viewer.state.EndGameViewer;
 import com.ldts.breakout.viewer.state.PlayingViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
+import com.ldts.breakout.state.PlayingState;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 public class PlayingController extends GameController implements KeyBoardListener {
@@ -20,7 +21,7 @@ public class PlayingController extends GameController implements KeyBoardListene
     private ArenaController arenaController;
     private final GUI gui;
     private final StateViewer playingViewer;
-    private long endTime;
+    private boolean inicio = true;
 
     public PlayingController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -36,15 +37,31 @@ public class PlayingController extends GameController implements KeyBoardListene
     public void step(Game game, long time) throws IOException {
         arenaController.step(game,time);
         playingViewer.draw();
-        if(arenaController.getModel().getPaddle().getLives() == 0){
-            EndGameViewer endGameViewer = new EndGameViewer(gui,null,false);
-            endGameViewer.draw();
+/*        if (this.getModel().getBall().getLostLife() && this.getModel().getPaddle().getLives() > 0) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
+        //this.getModel().getBall().setLostLife(false);
+/*        if (inicio){
+            try {
+                TimeUnit.MILLISECONDS.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        else if(arenaController.getModel().getPaddle().getPoints() == Constants.MAX_POINTS){
-            EndGameViewer endGameViewer = new EndGameViewer(gui,null,true);
-            endGameViewer.draw();
-        }
+        this.inicio = false;*/
 
+
+
+        if(getModel().getPaddle().getLives() == 0){
+            changeState( new EndGameState(this.gameState.getGame(),gui,false));
+        }
+        else if(getModel().getPaddle().getPoints() == Constants.MAX_POINTS){
+            changeState( new EndGameState(this.gameState.getGame(),gui,true));
+        }
     }
     
     @Override
@@ -66,5 +83,7 @@ public class PlayingController extends GameController implements KeyBoardListene
         this.arenaController = new ArenaController(gameState,gui,arena);
         this.setModel(arena);
     }
+
+
 
 }

@@ -6,11 +6,15 @@ import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Brick;
 import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.arena.Arena;
+import com.ldts.breakout.state.EndGameState;
 import com.ldts.breakout.state.GameState;
+import com.ldts.breakout.state.MenuState;
 import com.ldts.breakout.viewer.ArenaViewer;
+import com.ldts.breakout.viewer.state.EndGameViewer;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ArenaController extends GameController {
     private final GameState gameState;
@@ -41,6 +45,7 @@ public class ArenaController extends GameController {
     @Override
     public void step(Game game, long time) throws IOException {
         ballController.step(game, time);
+        lostLife();
         arenaViewer.draw();
     }
 
@@ -51,6 +56,7 @@ public class ArenaController extends GameController {
         }
         return false;
     }
+
 
     public boolean hitsBrick(){
         for(Brick brick: brickList){
@@ -64,13 +70,15 @@ public class ArenaController extends GameController {
         }
         return false;
     }
-
     public void lostLife(){
-        if (ballController.getModel().getBall().getPosition().getY() > Constants.INIT_PADDLE_Y)
-            ballController.resetBall();
+        if (ballController.getModel().getBall().getPosition().getY() > Constants.INIT_PADDLE_Y) {
             paddleController.lostLife();
+            ballController.resetBall();
+            ballController.getModel().getBall().setLostLife(true);
+        }
     }
-    
 
-
+    public ArenaViewer getArenaViewer() {
+        return arenaViewer;
+    }
 }

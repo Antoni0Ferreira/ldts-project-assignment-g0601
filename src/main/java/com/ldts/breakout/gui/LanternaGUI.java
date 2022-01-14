@@ -15,6 +15,7 @@ import com.ldts.breakout.model.Menu;
 import com.ldts.breakout.model.MenuOption;
 import com.ldts.breakout.model.Position;
 import org.w3c.dom.Text;
+import java.util.concurrent.TimeUnit;
 import static com.googlecode.lanterna.Symbols.HEART;
 
 import java.awt.*;
@@ -128,6 +129,13 @@ public class LanternaGUI implements GUI {
     public void drawBall(Position position){
         TextGraphics textGraphics = createTextGraphics();
         drawText(textGraphics,position,"@","#FFFFFF");
+/*        if (lostLife){
+            try {
+                TimeUnit.MILLISECONDS.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
 /*        textGraphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.setCharacter(new TerminalPosition(position.getX(), position.getY()),FACE_BLACK);*/

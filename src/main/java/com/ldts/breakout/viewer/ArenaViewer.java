@@ -17,6 +17,10 @@ public class ArenaViewer {
         this.arena = arena;
     }
 
+    public GUI getGui() {
+        return gui;
+    }
+
     public void draw() throws IOException{
         gui.clear();
         drawBackground();

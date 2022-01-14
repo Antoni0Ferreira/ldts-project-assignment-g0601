@@ -24,9 +24,8 @@ public class PlayingState extends GameState {
     }
 
     @Override
-    public void start(){
-        game.getKeyBoardObserver().setListener(playingController);
-    }
+    public void start(){ game.getKeyBoardObserver().setListener(playingController);}
+
 
     @Override
     public void step(Game game, long time) throws IOException{
