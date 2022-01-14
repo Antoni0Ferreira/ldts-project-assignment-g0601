@@ -9,6 +9,7 @@ import com.ldts.breakout.model.arena.Arena;
 import com.ldts.breakout.state.EndGameState;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.state.MenuState;
+import com.ldts.breakout.state.PauseState;
 import com.ldts.breakout.viewer.ArenaViewer;
 import com.ldts.breakout.viewer.state.EndGameViewer;
 
@@ -40,9 +41,7 @@ public class ArenaController extends GameController {
     public BallController getBallController(){return ballController;}
 
     public void doAction(GUI.ACTION action){
-        if(action == GUI.ACTION.QUIT){
-            gameState.changeState(null);
-        }
+
         Position nextPosition = paddleController.doAction(action);
         paddleController.movePaddle(nextPosition);
     }

@@ -4,6 +4,7 @@ import com.ldts.breakout.state.KeyBoardListener;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class KeyBoardObserver extends KeyAdapter {
     private KeyBoardListener listener;
@@ -13,12 +14,48 @@ public class KeyBoardObserver extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent event){
         switch(event.getKeyCode()){
-            case KeyEvent.VK_LEFT -> listener.keyPressed(GUI.ACTION.LEFT);
-            case KeyEvent.VK_RIGHT -> listener.keyPressed(GUI.ACTION.RIGHT);
-            case KeyEvent.VK_UP -> listener.keyPressed(GUI.ACTION.UP);
-            case KeyEvent.VK_DOWN -> listener.keyPressed(GUI.ACTION.DOWN);
-            case KeyEvent.VK_Q -> listener.keyPressed(GUI.ACTION.QUIT);
-            case KeyEvent.VK_ENTER -> listener.keyPressed(GUI.ACTION.CHOOSE);
+            case KeyEvent.VK_LEFT -> {
+                try {
+                    listener.keyPressed(GUI.ACTION.LEFT);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case KeyEvent.VK_RIGHT -> {
+                try {
+                    listener.keyPressed(GUI.ACTION.RIGHT);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case KeyEvent.VK_UP -> {
+                try {
+                    listener.keyPressed(GUI.ACTION.UP);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case KeyEvent.VK_DOWN -> {
+                try {
+                    listener.keyPressed(GUI.ACTION.DOWN);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case KeyEvent.VK_Q -> {
+                try {
+                    listener.keyPressed(GUI.ACTION.QUIT);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case KeyEvent.VK_ENTER -> {
+                try {
+                    listener.keyPressed(GUI.ACTION.CHOOSE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

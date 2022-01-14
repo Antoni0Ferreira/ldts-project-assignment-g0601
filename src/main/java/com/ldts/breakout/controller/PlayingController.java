@@ -51,7 +51,14 @@ public class PlayingController extends GameController implements KeyBoardListene
     }
     
     @Override
-    public void keyPressed(GUI.ACTION action){
+    public void keyPressed(GUI.ACTION action)  {
+        if(action == GUI.ACTION.QUIT){
+            try {
+                changeState(new PauseState(gameState.getGame(), this.gui, this.gameState));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         arenaController.doAction(action);
     }
 

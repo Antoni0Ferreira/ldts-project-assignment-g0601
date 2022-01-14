@@ -28,8 +28,6 @@ public interface GUI {
     void drawBall(Position position);
 
     void drawPaddle(Position position);
-
-    void drawPoints(int numPoints, Position position);
     
     void drawInfo(int points, int lives);
 
@@ -40,9 +38,6 @@ public interface GUI {
     void drawButton(Position bPos, Position tPos, String text, String textColor);
     
     void drawTitle(Position position, String text, String color);
-
-    void drawMenuOption(char option, Position position);
-
 
 
 }
