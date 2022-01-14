@@ -17,7 +17,7 @@ public class PauseState extends GameState {
     public PauseState(Game game, GUI gui, GameState previousState) throws IOException {
         super(game, Arrays.asList(
                 new Button(new Position(Constants.INIT_BALL_X - 3, 17),"RESUME", new MenuButtonCommand(previousState), "#FFFFFF"),
-                new Button(new Position(Constants.INIT_BALL_X - 2, 21), "EXIT", new MenuButtonCommand(new MenuState(game,gui)), "#FFFFFF")
+                new Button(new Position(Constants.INIT_BALL_X - 2, 20), "EXIT", new MenuButtonCommand(new MenuState(game,gui)), "#FFFFFF")
         ));
         pauseController = new PauseController(this, gui);
         getButtons().get(0).activate();
