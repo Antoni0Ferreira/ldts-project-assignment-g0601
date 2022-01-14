@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Thread.sleep;
+
 public class ArenaController extends GameController {
     private final GameState gameState;
     private final ArenaViewer arenaViewer;
@@ -47,6 +49,17 @@ public class ArenaController extends GameController {
         ballController.step(game, time);
         lostLife();
         arenaViewer.draw();
+        if(paddleController.getPaddle().getLives() == 0){
+            EndGameViewer endGameViewer = new EndGameViewer(arenaViewer.getGui(),null,false);
+            endGameViewer.draw();
+            gameState.changeState(new MenuState(this.gameState.getGame(), arenaViewer.getGui()));
+        }
+        else if(paddleController.getPaddle().getPoints() == Constants.MAX_POINTS){
+            EndGameViewer endGameViewer = new EndGameViewer(arenaViewer.getGui(),null,true);
+            endGameViewer.draw();
+            gameState.changeState(new MenuState(this.gameState.getGame(), arenaViewer.getGui()));
+        }
+
     }
 
     public boolean hitsPaddle(){

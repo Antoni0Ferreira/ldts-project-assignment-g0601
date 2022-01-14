@@ -37,22 +37,7 @@ public class PlayingController extends GameController implements KeyBoardListene
     public void step(Game game, long time) throws IOException {
         arenaController.step(game,time);
         playingViewer.draw();
-/*        if (this.getModel().getBall().getLostLife() && this.getModel().getPaddle().getLives() > 0) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
-        //this.getModel().getBall().setLostLife(false);
-/*        if (inicio){
-            try {
-                TimeUnit.MILLISECONDS.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        this.inicio = false;*/
+
 
 
 
