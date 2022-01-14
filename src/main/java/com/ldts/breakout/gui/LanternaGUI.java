@@ -56,7 +56,7 @@ public class LanternaGUI implements GUI {
         defaultTerminalFactory.setForceAWTOverSwing(true);
         defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         Terminal terminal = defaultTerminalFactory.createTerminal();
-
+        ((AWTTerminalFrame)terminal).setTitle("Breakout");
         return terminal;
     }
 
@@ -150,14 +150,6 @@ public class LanternaGUI implements GUI {
                 new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),SOLID_SQUARE);*/
     }
 
-    @Override
-    public void drawPoints(int numPoints, Position position){
-        //TextGraphics textGraphics = createTextGraphics();
-        //drawText(textGraphics,position,String.valueOf(numPoints),"#FF00FF");
-/*        textGraphics.setForegroundColor(TextColor.Factory.fromString("#FF00FF"));
-        textGraphics.enableModifiers(SGR.BOLD);
-        textGraphics.putString(new TerminalPosition(position.getX(), position.getY()), String.valueOf(numPoints));*/
-    }
 
     @Override
     public void drawWall(Position position){
@@ -194,27 +186,8 @@ public class LanternaGUI implements GUI {
                 new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),SOLID_SQUARE);*/
     }
 
-    @Override
-    public void drawMenuOption(char option, Position position){
-        TextGraphics textGraphics = createTextGraphics();
-        switch (option){
-            case 's':{
-                textGraphics.setForegroundColor(TextColor.Factory.fromString("#CDFF00"));
-                textGraphics.putString(new TerminalPosition(position.getX(),position.getY()),"START");
-                break;
-            }
-            case 'i':{
-                textGraphics.setForegroundColor(TextColor.Factory.fromString("#FFC100"));
-                textGraphics.putString(new TerminalPosition(position.getX(),position.getY()),"INSTRUCTIONS");
-                break;
-            }
-            case 'e':{
-                textGraphics.setForegroundColor(TextColor.Factory.fromString("#FF0000"));
-                textGraphics.putString(new TerminalPosition(position.getX(),position.getY()),"EXIT");
-                break;
-            }
-        }
-    }
+
+
 
 /*    @Override
     public void drawString(String color, int row, String s){

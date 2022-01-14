@@ -24,13 +24,13 @@ public class ArenaLoader extends ArenaBuilder{
     @Override
     protected List<Wall> createWalls(){
         ArrayList<Wall> walls = new ArrayList <>();
-        for (int c = 0; c < Constants.WIDTH; c++) {
+        for (int c = 0; c < Constants.WIDTH+1; c++) {
             walls.add(new Wall(new Position(c,0)));
-            walls.add(new Wall(new Position(c, Constants.HEIGHT - 1)));
+            walls.add(new Wall(new Position(c, Constants.HEIGHT-1)));
         }
-        for (int r = 1; r < Constants.HEIGHT - 1; r++) {
+        for (int r = 0; r < Constants.HEIGHT+1 ; r++) {
             walls.add(new Wall(new Position(0, r)));
-            walls.add(new Wall(new Position(Constants.WIDTH - 1, r)));
+            walls.add(new Wall(new Position(Constants.WIDTH-1, r)));
         }
         return walls;
     }
