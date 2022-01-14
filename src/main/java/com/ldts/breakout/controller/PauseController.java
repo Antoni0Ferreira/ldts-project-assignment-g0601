@@ -42,6 +42,10 @@ public class PauseController implements KeyBoardListener {
                 gameState.getButtons().get(index).deactivate();
                 gameState.getButtons().get(index - 1).activate();
             }
+            else{
+                gameState.getButtons().get(index).deactivate();
+                gameState.getButtons().get(gameState.getButtons().size()-1).activate();
+            }
         }
 
         if(action == GUI.ACTION.DOWN){
@@ -49,6 +53,10 @@ public class PauseController implements KeyBoardListener {
             if(index < gameState.getButtons().size() -1){
                 gameState.getButtons().get(index).deactivate();
                 gameState.getButtons().get(index + 1).activate();
+            }
+            else{
+                gameState.getButtons().get(index).deactivate();
+                gameState.getButtons().get(0).activate();
             }
         }
 

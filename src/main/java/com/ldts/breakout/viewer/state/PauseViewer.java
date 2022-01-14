@@ -25,5 +25,4 @@ public class PauseViewer extends StateViewer {
         gui.refresh();
     }
 
-
 }
