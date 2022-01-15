@@ -18,6 +18,7 @@ import org.apache.tools.ant.taskdefs.launcher.MacCommandLauncher;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static java.lang.Character.toLowerCase;
 import static java.lang.String.valueOf;
@@ -31,6 +32,8 @@ public class Game {
     private KeyBoardObserver keyBoardObserver;
     private GUI gui;
     private int fps;
+
+    private static Game singleton = null;
 
     public Game(int fps) throws IOException, FontFormatException {
         gui = new LanternaGUI();
@@ -179,4 +182,12 @@ public class Game {
     public KeyBoardObserver getKeyBoardObserver() {
         return keyBoardObserver;
     }
+
+    public static Game getInstance() throws IOException, URISyntaxException, FontFormatException {
+        if (singleton == null) {
+            singleton = new Game(60);
+        }
+        return singleton;
+    }
+
 }

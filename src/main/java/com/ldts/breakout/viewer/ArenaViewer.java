@@ -17,12 +17,15 @@ public class ArenaViewer {
         this.arena = arena;
     }
 
+    public GUI getGui() {
+        return gui;
+    }
+
     public void draw() throws IOException{
         gui.clear();
         drawBackground();
         drawElement(this.arena.getBall(),new BallViewer());
         drawElement(this.arena.getPaddle(),new PaddleViewer());
-        drawElement(this.arena.getPoints(), new PointsViewer());
         drawElements(this.arena.getWalls(), new WallViewer());
         drawBricks(this.arena.getBricks(), new BrickViewer());
 
@@ -44,8 +47,5 @@ public class ArenaViewer {
         for(Brick element: elements)
             if(!element.isDestroyed())
                 drawElement(element,viewer);
-    }
-    public GUI getGui(){
-        return gui;
     }
 }

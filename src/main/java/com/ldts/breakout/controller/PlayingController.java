@@ -5,15 +5,16 @@ import com.ldts.breakout.Game;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.model.arena.Arena;
-import com.ldts.breakout.state.GameState;
-import com.ldts.breakout.state.KeyBoardListener;
+import com.ldts.breakout.state.*;
 import com.ldts.breakout.viewer.state.EndGameViewer;
 import com.ldts.breakout.viewer.state.PlayingViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
+import com.ldts.breakout.state.PlayingState;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 public class PlayingController extends GameController implements KeyBoardListener {
@@ -21,8 +22,7 @@ public class PlayingController extends GameController implements KeyBoardListene
     private ArenaController arenaController;
     private final GUI gui;
     private final StateViewer playingViewer;
-    private long endTime;
-    private boolean inicio = true;
+    private boolean initial = true;
 
     public PlayingController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -36,22 +36,32 @@ public class PlayingController extends GameController implements KeyBoardListene
 
     @Override
     public void step(Game game, long time) throws IOException {
-        if(inicio){
+        if(initial){
             arenaController.getBallController().startBallTimer();
         }
         arenaController.step(game,time);
-        try {
-            playingViewer.draw();
-        } catch (FontFormatException e) {
-            e.printStackTrace();
+        playingViewer.draw();
+
+
+
+        if(getModel().getPaddle().getLives() == 0){
+            changeState( new EndGameState(this.gameState.getGame(),gui,false));
         }
-        inicio = false;
-
-
+        else if(getModel().getPaddle().getPoints() == Constants.MAX_POINTS){
+            changeState( new EndGameState(this.gameState.getGame(),gui,true));
+        }
+        this.initial = false;
     }
     
     @Override
-    public void keyPressed(GUI.ACTION action){
+    public void keyPressed(GUI.ACTION action)  {
+        if(action == GUI.ACTION.QUIT){
+            try {
+                changeState(new PauseState(gameState.getGame(), this.gui, this.gameState));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         arenaController.doAction(action);
     }
 
@@ -69,5 +79,7 @@ public class PlayingController extends GameController implements KeyBoardListene
         this.arenaController = new ArenaController(gameState,gui,arena);
         this.setModel(arena);
     }
+
+
 
 }

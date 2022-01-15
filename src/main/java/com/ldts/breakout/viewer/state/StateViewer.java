@@ -20,7 +20,7 @@ public abstract class StateViewer {
         this.buttons = buttons;
     }
 
-    public abstract void draw() throws IOException, FontFormatException;
+    public abstract void draw() throws IOException;
 
     protected void drawButtons(List<Button> buttons, ElementViewer<Button> viewer){
         for (int i = buttons.size()-1; i >= 0; i--) {

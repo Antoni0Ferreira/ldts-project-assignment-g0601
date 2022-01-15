@@ -6,13 +6,16 @@ import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Brick;
 import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.arena.Arena;
+import com.ldts.breakout.state.EndGameState;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.state.MenuState;
+import com.ldts.breakout.state.PauseState;
 import com.ldts.breakout.viewer.ArenaViewer;
 import com.ldts.breakout.viewer.state.EndGameViewer;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -22,6 +25,7 @@ public class ArenaController extends GameController {
     private BallController ballController;
     private PaddleController paddleController;
     private List<Brick> brickList;
+    private boolean gameStart;
 
     public ArenaController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -34,10 +38,10 @@ public class ArenaController extends GameController {
 
     public PaddleController getPaddleController(){return paddleController;}
 
+    public BallController getBallController(){return ballController;}
+
     public void doAction(GUI.ACTION action){
-        if(action == GUI.ACTION.QUIT){
-            gameState.changeState(null);
-        }
+
         Position nextPosition = paddleController.doAction(action);
         paddleController.movePaddle(nextPosition);
     }
@@ -68,6 +72,7 @@ public class ArenaController extends GameController {
         return false;
     }
 
+
     public boolean hitsBrick(){
         for(Brick brick: brickList){
             if(ballController.getRectBall().intersects(brick.getRect()) && !brick.isDestroyed()){
@@ -80,18 +85,15 @@ public class ArenaController extends GameController {
         }
         return false;
     }
-
     public void lostLife(){
-        if(ballController.getModel().getBall().getPosition().getY() > paddleController.getPaddle().getPosition().getY()){
-            paddleController.lifeLost();
+        if (ballController.getModel().getBall().getPosition().getY() > Constants.INIT_PADDLE_Y) {
+            paddleController.lostLife();
             ballController.resetBall();
+            ballController.getModel().getBall().setLostLife(true);
         }
     }
 
-    public BallController getBallController(){
-        return ballController;
-    }
+    public ArenaViewer getArenaViewer() {
+        return arenaViewer;
+    }}
 
-
-
-}

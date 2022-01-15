@@ -1,6 +1,6 @@
 package com.ldts.breakout.model;
 import com.ldts.breakout.Constants;
-
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 
 import static com.googlecode.lanterna.Symbols.FACE_BLACK;
@@ -8,6 +8,7 @@ import static com.googlecode.lanterna.Symbols.FACE_BLACK;
 public class Ball extends Element {
     private int dirX, dirY;
     private boolean destroyedBrick = false;
+    private boolean lostLife = true;
 
     public Ball() {
         super(Constants.INIT_BALL_X,Constants.INIT_BALL_Y);
@@ -21,6 +22,7 @@ public class Ball extends Element {
     }
 
     public void move(){
+
         if(getPosition().getX() <= Constants.BORDER_LEFT_X) {
             dirX = -dirX;
         }
@@ -64,4 +66,6 @@ public class Ball extends Element {
     }
     public void setDestroyedBrick(boolean destroyedBrick) {this.destroyedBrick = destroyedBrick;}
 
+    public boolean getLostLife() {return lostLife;}
+    public void setLostLife(boolean lostLife) {this.lostLife = lostLife;}
 }

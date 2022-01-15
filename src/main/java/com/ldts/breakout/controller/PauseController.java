@@ -1,40 +1,26 @@
 package com.ldts.breakout.controller;
 
-import com.ldts.breakout.model.Button;
-import com.ldts.breakout.model.command.MenuButtonCommand;
+import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.state.KeyBoardListener;
-import com.ldts.breakout.viewer.state.MenuViewer;
+import com.ldts.breakout.viewer.state.PauseViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
-import com.ldts.breakout.gui.GUI;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
-public class MenuController implements KeyBoardListener {
+public class PauseController implements KeyBoardListener {
     private final GameState gameState;
-    private final StateViewer menuViewer;
+    private final StateViewer pauseViewer;
 
-    public MenuController(GameState gameState, GUI gui){
+    public PauseController(GameState gameState, GUI gui){
         this.gameState = gameState;
-        this.menuViewer = new MenuViewer(gui,gameState.getButtons());
+        this.pauseViewer = new PauseViewer(gui, gameState.getButtons());
     }
 
-    public void step() throws IOException {
-        try {
-            menuViewer.draw();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void changeState(Button button){
-        MenuButtonCommand buttonCommand = (MenuButtonCommand) button.getCommand();
-        if(buttonCommand.getNextState() == null){
-            gameState.changeState(null);
-            return;
-        }
-        buttonCommand.execute();
+    public void step() throws IOException{
+        pauseViewer.draw();
     }
 
     private int getActiveButton(){
@@ -44,11 +30,11 @@ public class MenuController implements KeyBoardListener {
         return -1;
     }
 
+
     @Override
-    public void keyPressed(GUI.ACTION action){
-        if (action == GUI.ACTION.QUIT || (gameState.getButtons().get(getActiveButton()).getPosition().getY() == 25 && action == GUI.ACTION.CHOOSE)){
+    public void keyPressed(GUI.ACTION action) {
+        if(action == GUI.ACTION.QUIT || (gameState.getButtons().get(getActiveButton()).getPosition().getY() == 20 && action == GUI.ACTION.CHOOSE)){
             gameState.changeState(null);
-            return;
         }
 
         if(action == GUI.ACTION.UP){

@@ -7,6 +7,13 @@ import com.ldts.breakout.model.Ball;
 import com.ldts.breakout.Constants;
 import com.ldts.breakout.model.Position;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
 import java.awt.*;
 import java.sql.Time;
 
@@ -15,8 +22,7 @@ import static java.lang.Thread.sleep;
 public class BallController extends GameController{
     private  ArenaController arenaController;
     private Ball ball;
-
-    long start;
+    private long start;
 
 
 
@@ -81,6 +87,7 @@ public class BallController extends GameController{
             ball.getPosition().setY(ball.getPosition().getY()+ ball.getDirY());}}
 
 
+
     public Rectangle getRectBall() {
         return new Rectangle(ball.getPosition().getX(),ball.getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);
     }
@@ -101,13 +108,35 @@ public class BallController extends GameController{
         arenaController.hitsPaddle();
         if(!ball.getDestroyedBrick())
             arenaController.hitsBrick();
-        move();
+ /*       if (this.ball.getLostLife()) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
+            move();
+/*        if (this.ball.getLostLife()) {
+            try {
+                long finish = System.currentTimeMillis() + 2000;
+                TimeUnit.MILLISECONDS.sleep(2000);
+                while (System.currentTimeMillis() < finish) {
+                    arenaController.getArenaViewer().draw();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
+        this.ball.setLostLife(false);
     }
 
     public void resetBall(){
         ball.setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));
         ball.setDestroyedBrick(false);
         start = System.currentTimeMillis();
+
     }
 }
 

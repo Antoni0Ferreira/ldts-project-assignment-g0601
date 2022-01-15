@@ -1,33 +1,27 @@
 package com.ldts.breakout.controller;
 
 import com.ldts.breakout.gui.GUI;
-import com.ldts.breakout.gui.KeyBoardObserver;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.state.KeyBoardListener;
-import com.ldts.breakout.viewer.state.InstructionsViewer;
-import com.ldts.breakout.viewer.state.StateViewer;
+import com.ldts.breakout.viewer.state.EndGameViewer;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class InstructionsController implements KeyBoardListener {
+public class EndGameController implements KeyBoardListener {
     private final GameState gameState;
-    private final StateViewer instructionsViewer;
-    
-    public InstructionsController(GameState gameState, GUI gui){
+    private final EndGameViewer endGameViewer;
+    private boolean won;
+
+    public EndGameController(GameState gameState, GUI gui, boolean gameWon){
         this.gameState = gameState;
-        this.instructionsViewer = new InstructionsViewer(gui,gameState.getButtons());
+        this.won = gameWon;
+        this.endGameViewer = new EndGameViewer(gui,gameState.getButtons(),gameWon);
     }
-    
+
     public void step() throws IOException {
-        try {
-            instructionsViewer.draw();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        endGameViewer.draw();
     }
-    
+
     private int getActiveButton(){
         for(int i = 0; i < gameState.getButtons().size(); i++){
             if(gameState.getButtons().get(i).isActive()) return i;
