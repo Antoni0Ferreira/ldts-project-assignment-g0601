@@ -11,4 +11,7 @@ public interface Constants {
     int BORDER_LEFT_X = 1;
     int BORDER_BOTTOM_Y = 38;
     int BORDER_TOP_Y = 1;
+
+    int INIT_BALL_X = WIDTH / 2;
+    int INIT_BALL_Y = HEIGHT -20;
 }

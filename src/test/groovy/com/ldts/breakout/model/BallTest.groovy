@@ -21,8 +21,8 @@ class BallTest extends spock.lang.Specification{
         ball.setDirY(-1)
 
         then:
-        ball.getDirX == -1
-        ball.getDirY == -1
+        ball.getDirX() == -1
+        ball.getDirY() == -1
 
     }
 
@@ -51,8 +51,8 @@ class BallTest extends spock.lang.Specification{
         ball.hitBrick()
 
         then:
-        ball.getDirX == 1
-        ball.getDirY == -1
+        ball.getDirX() == 1
+        ball.getDirY() == -1
         ball.getDestroyedBrick() == true
 
         when:
@@ -61,17 +61,17 @@ class BallTest extends spock.lang.Specification{
         ball.hitBrick()
 
         then:
-        ball.getDirX == 1
-        ball.getDirY == 1
+        ball.getDirX() == 1
+        ball.getDirY() == 1
     }
 
     def "Teste Movimento da Bola"(){
         given:
         def ball = new Ball()
 
-        when "A Bola está no canto superior esquerdo":
+        when: "A Bola está no canto superior esquerdo"
         ball.setPosition(new Position(Constants.BORDER_LEFT_X + 1,Constants.BORDER_TOP_Y + 1))
-        move()
+        ball.move()
 
         then:
         1 == ball.getDirX()
@@ -79,16 +79,16 @@ class BallTest extends spock.lang.Specification{
 
         when:
         ball.setPosition(new Position(Constants.BORDER_LEFT_X, Constants.BORDER_TOP_Y))
-        move()
+        ball.move()
         then:
         -1 == ball.getDirX()
         -1 == ball.getDirY()
 
-        when "A bola está no canto inferior direito":
+        when: "A bola está no canto inferior direito"
         ball.setDirX(1)
         ball.setDirY(1)
-        ball.setPosition(new Position(Constants.BORDER_RIGHT_X + 1,Constants.BORDER_BOTTOM_Y + 1))
-        move()
+        ball.setPosition(new Position(Constants.BORDER_RIGHT_X - 1,Constants.BORDER_BOTTOM_Y - 1))
+        ball.move()
 
         then:
         1 == ball.getDirX()
@@ -96,7 +96,7 @@ class BallTest extends spock.lang.Specification{
 
         when:
         ball.setPosition(new Position(Constants.BORDER_RIGHT_X,Constants.BORDER_BOTTOM_Y))
-        move()
+        ball.move()
 
         then:
         -1 == ball.getDirX()
