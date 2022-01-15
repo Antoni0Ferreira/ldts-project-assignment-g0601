@@ -1,4 +1,4 @@
-package com.ldts.breakout.model;
+package com.ldts.breakout;
 
 public class Position {
     private int x;
@@ -8,7 +8,7 @@ public class Position {
         this.x = x;
         this.y = y;
     }
-    
+
     public int getX() {
         return x;
     }
