@@ -1,15 +1,6 @@
 package com.ldts.breakout.model;
 
-import com.googlecode.lanterna.*;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.ldts.breakout.Constants;
-import com.ldts.breakout.model.Element;
-import com.ldts.breakout.model.Position;
-
-import java.awt.*;
-
-import static com.googlecode.lanterna.Symbols.SOLID_SQUARE;
-
 
 public class Brick extends Element {
 
@@ -27,23 +18,19 @@ public class Brick extends Element {
         }
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return destroyed;
     }
-    public void setDestroyed(boolean destroyed){
+
+    public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
 
-    public int getPoints(){
+    public int getPoints() {
         return points;
     }
-    //Only for tests
-    public void setPoints(int points){
+
+    public void setPoints(int points) {
         this.points = points;
-    }
-
-
-    public Rectangle getRect() {
-        return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
     }
 }
