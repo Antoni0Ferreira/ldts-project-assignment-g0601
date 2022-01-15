@@ -9,6 +9,7 @@ import com.ldts.breakout.viewer.state.MenuViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
 import com.ldts.breakout.gui.GUI;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MenuController implements KeyBoardListener {
@@ -23,7 +24,7 @@ public class MenuController implements KeyBoardListener {
     public void step() throws IOException {
         try {
             menuViewer.draw();
-        } catch (IOException e) {
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }
@@ -57,6 +58,10 @@ public class MenuController implements KeyBoardListener {
                 gameState.getButtons().get(index).deactivate();
                 gameState.getButtons().get(index - 1).activate();
             }
+            else{
+                gameState.getButtons().get(index).deactivate();
+                gameState.getButtons().get(gameState.getButtons().size()-1).activate();
+            }
         }
 
         if(action == GUI.ACTION.DOWN){
@@ -64,6 +69,10 @@ public class MenuController implements KeyBoardListener {
             if(index < gameState.getButtons().size() -1){
                 gameState.getButtons().get(index).deactivate();
                 gameState.getButtons().get(index + 1).activate();
+            }
+            else{
+                gameState.getButtons().get(index).deactivate();
+                gameState.getButtons().get(0).activate();
             }
         }
 

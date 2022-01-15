@@ -41,6 +41,7 @@ public class InstructionsViewer extends StateViewer{
         drawText(new Position(1,28),"5.", "#FF8700");
         drawText(new Position(4,28),"The game ends when all the bricks are destroyed", "#FFFFFF");
         drawText(new Position(1,30),"or when you lose all of your 3 lives", "#FFFFFF");
+
         gui.refresh();
     }
 

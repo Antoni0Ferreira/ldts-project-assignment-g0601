@@ -11,6 +11,7 @@ import com.ldts.breakout.viewer.state.StateViewer;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.viewer.ButtonViewer;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,11 +22,12 @@ public class MenuViewer extends StateViewer {
     }
 
     @Override
-    public void draw() throws IOException {
+    public void draw() throws IOException, FontFormatException {
         gui.clear();
         drawBackground();
         drawButtons(buttons, new ButtonViewer());
         gui.drawTitle(new Position(Constants.INIT_BALL_X - 12, getYActiveButton()), "&'", "#FF0000");
+        gui.drawTitle(new Position(15, 4), "BREAKOUT", "#FFFFFF");
         gui.refresh();
     }
 }

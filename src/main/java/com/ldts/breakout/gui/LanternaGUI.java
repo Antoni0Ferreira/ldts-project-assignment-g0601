@@ -5,6 +5,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.graphics.TextImage;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -60,7 +61,7 @@ public class LanternaGUI implements GUI {
     }
 
     public AWTTerminalFontConfiguration loadFont() throws FontFormatException,IOException{
-        File fontFile = new File("..\\BreakoutGame\\resources\\PressStart2P.ttf");
+        File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -269,4 +270,6 @@ public class LanternaGUI implements GUI {
         drawText(textGraphics, new Position(3, 37), Integer.toString(points), "#FF00FF");
         drawText(textGraphics, new Position(53, 37), Integer.toString(lives) + HEART, "#FF0000");
     }
+
+
 }

@@ -1,10 +1,12 @@
 package com.ldts.breakout.gui;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.ldts.breakout.model.Menu;
 import com.ldts.breakout.model.MenuOption;
 import com.ldts.breakout.model.Position;
 import org.w3c.dom.Text;
 
+import java.awt.*;
 import java.io.IOException;
 
 public interface GUI {
@@ -45,6 +47,7 @@ public interface GUI {
     void drawTitle(Position position, String text, String color);
 
     void drawMenuOption(char option, Position position);
+
 
 
 

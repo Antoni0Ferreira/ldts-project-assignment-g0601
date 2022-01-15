@@ -4,6 +4,8 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.viewer.ElementViewer;
+
+import java.awt.*;
 import java.util.List;
 import java.io.IOException;
 
@@ -18,7 +20,7 @@ public abstract class StateViewer {
         this.buttons = buttons;
     }
 
-    public abstract void draw() throws IOException;
+    public abstract void draw() throws IOException, FontFormatException;
 
     protected void drawButtons(List<Button> buttons, ElementViewer<Button> viewer){
         for (int i = buttons.size()-1; i >= 0; i--) {

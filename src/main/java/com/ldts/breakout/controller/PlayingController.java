@@ -11,6 +11,7 @@ import com.ldts.breakout.viewer.state.EndGameViewer;
 import com.ldts.breakout.viewer.state.PlayingViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class PlayingController extends GameController implements KeyBoardListene
     private final GUI gui;
     private final StateViewer playingViewer;
     private long endTime;
+    private boolean inicio = true;
 
     public PlayingController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -34,8 +36,16 @@ public class PlayingController extends GameController implements KeyBoardListene
 
     @Override
     public void step(Game game, long time) throws IOException {
+        if(inicio){
+            arenaController.getBallController().startBallTimer();
+        }
         arenaController.step(game,time);
-        playingViewer.draw();
+        try {
+            playingViewer.draw();
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        }
+        inicio = false;
 
 
     }

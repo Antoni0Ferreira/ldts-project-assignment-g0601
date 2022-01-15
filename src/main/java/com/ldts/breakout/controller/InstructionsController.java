@@ -7,6 +7,7 @@ import com.ldts.breakout.state.KeyBoardListener;
 import com.ldts.breakout.viewer.state.InstructionsViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class InstructionsController implements KeyBoardListener {
     public void step() throws IOException {
         try {
             instructionsViewer.draw();
-        } catch (IOException e) {
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }

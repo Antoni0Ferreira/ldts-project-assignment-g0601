@@ -88,6 +88,10 @@ public class ArenaController extends GameController {
         }
     }
 
+    public BallController getBallController(){
+        return ballController;
+    }
+
 
 
 }
