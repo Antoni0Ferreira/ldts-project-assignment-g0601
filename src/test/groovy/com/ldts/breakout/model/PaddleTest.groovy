@@ -28,7 +28,7 @@ class PaddleTest extends spock.lang.Specification{
 
     def "Teste aos pontos do Paddle "(){
         given:
-        def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X,Constants.INIT_PADDLE_Y))
+        def paddle = new Paddle()
 
         when:
         def newPoints = 0;
@@ -47,7 +47,7 @@ class PaddleTest extends spock.lang.Specification{
 
     def "Teste às vidas do Paddle"(){
         given:
-        def paddle = new Paddle(new Position(Constants.INIT_PADDLE_X,Constants.INIT_PADDLE_Y))
+        def paddle = new Paddle()
 
         when:
         def newLives = 3;
@@ -65,5 +65,5 @@ class PaddleTest extends spock.lang.Specification{
         1 == paddle.getLives()
         0 <= paddle.getLives()
     }
-    
+
 }
