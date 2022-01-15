@@ -6,4 +6,9 @@ public interface Constants {
 
     int INIT_PADDLE_X = (WIDTH / 2) - 3;
     int INIT_PADDLE_Y = HEIGHT - 5;
+
+    int BORDER_RIGHT_X = 55;
+    int BORDER_LEFT_X = 1;
+    int BORDER_BOTTOM_Y = 38;
+    int BORDER_TOP_Y = 1;
 }
