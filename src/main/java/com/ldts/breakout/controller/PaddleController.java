@@ -13,6 +13,7 @@ public class PaddleController {
     public Position moveLeft() {return new Position(paddle.getPosition().getX() - 1, paddle.getPosition().getY());}
     public Position moveRight() {return new Position(paddle.getPosition().getX() + 1, paddle.getPosition().getY());}
 
+
     private boolean canPaddleMove(Position position){
         if (position.getX() > Constants.WIDTH - Constants.PADDLE_WIDTH - 1) return false;
         return position.getX() > 0;
@@ -26,6 +27,7 @@ public class PaddleController {
     public Position doAction(GUI.ACTION action){
         if(action == GUI.ACTION.LEFT) return moveLeft();
         if(action == GUI.ACTION.RIGHT) return moveRight();
+        if(action == GUI.ACTION.QUIT) return paddle.getPosition();
         return null;
     }
 
