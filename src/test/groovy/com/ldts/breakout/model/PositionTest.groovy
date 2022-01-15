@@ -1,7 +1,5 @@
 package com.ldts.breakout.model
 
-import com.ldts.breakout.Position
-
 class PositionTest extends spock.lang.Specification{
 
     def "Teste ao Construtor do Position"(){

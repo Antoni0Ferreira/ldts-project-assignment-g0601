@@ -1,4 +1,4 @@
-package com.ldts.breakout;
+package com.ldts.breakout.model;
 
 public class Position {
     private int x;
