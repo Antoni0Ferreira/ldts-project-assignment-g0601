@@ -1,13 +1,6 @@
-
 package com.ldts.breakout.model;
 
-import com.googlecode.lanterna.*;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.ldts.breakout.Constants;
-
-import java.awt.*;
-
-import static com.googlecode.lanterna.Symbols.SOLID_SQUARE;
 
 public class Paddle extends Element {
     private int points,lives;

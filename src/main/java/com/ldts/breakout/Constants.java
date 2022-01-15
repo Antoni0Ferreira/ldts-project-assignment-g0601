@@ -14,4 +14,10 @@ public interface Constants {
 
     int INIT_BALL_X = WIDTH / 2;
     int INIT_BALL_Y = HEIGHT -20;
+
+    int RED_BRICK = 50;
+    int DARK_ORANGE_BRICK = 20;
+    int LIGHT_ORANGE_BRICK = 10;
+    int YELLOW_BRICK = 5;
+    int BLUE_BRICK = 1;
 }

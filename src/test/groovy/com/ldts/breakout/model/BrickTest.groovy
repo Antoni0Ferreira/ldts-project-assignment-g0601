@@ -8,14 +8,14 @@ class BrickTest extends spock.lang.Specification{
         def brick = new Brick(new Position(1,1))
 
         when:
-        def isBrickDestroyed = brick.isDestroyed
+        def isBrickDestroyed = brick.isDestroyed()
 
         then:
         isBrickDestroyed == false
 
         when:
         brick.setDestroyed(true)
-        isBrickDestroyed =brick.isDestroyed
+        isBrickDestroyed =brick.isDestroyed()
 
         then:
         isBrickDestroyed == true
@@ -38,11 +38,11 @@ class BrickTest extends spock.lang.Specification{
         def points5 = brick5.getPoints()
 
         then:
-        points1 == 1
-        points2 == 5
+        points1 == 50
+        points2 == 20
         points3 == 10
-        points4 == 20
-        points5 == 50
+        points4 == 5
+        points5 == 1
     }
 
 

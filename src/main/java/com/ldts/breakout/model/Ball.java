@@ -1,9 +1,6 @@
 package com.ldts.breakout.model;
-import com.ldts.breakout.Constants;
-import java.util.concurrent.TimeUnit;
-import java.awt.*;
 
-import static com.googlecode.lanterna.Symbols.FACE_BLACK;
+import com.ldts.breakout.Constants;
 
 public class Ball extends Element {
     private int dirX, dirY;

@@ -1,7 +1,6 @@
 package com.ldts.breakout.model
 
 import com.ldts.breakout.Constants
-import org.mockito.Mockito
 
 class BallTest extends spock.lang.Specification{
     def "Teste Direção da Bola"(){
