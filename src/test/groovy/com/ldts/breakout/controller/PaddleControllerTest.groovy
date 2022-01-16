@@ -10,8 +10,8 @@ class PaddleControllerTest extends spock.lang.Specification{
 
     def "Teste ao movimento do paddle"(){
         given:
-        def paddleController = new PaddleController()
         def paddle = Mockito.mock(Paddle.class)
+        def paddleController = new PaddleController(paddle)
         Mockito.when(paddle.getPosition()).thenReturn(new Position(Constants.INIT_PADDLE_X,Constants.INIT_PADDLE_Y))
 
         when:
@@ -33,42 +33,43 @@ class PaddleControllerTest extends spock.lang.Specification{
 
     def "Teste movimentador do paddle"(){
         given:
-        def paddleController = new PaddleController()
         def positionLeft = new Position(0, Constants.INIT_PADDLE_Y)
         def positionRight = new Position(50, Constants.INIT_PADDLE_Y)
         def positionValid = new Position(10, Constants.INIT_PADDLE_Y)
         def paddle = Mockito.mock(Paddle.class)
+        def paddleController = new PaddleController(paddle)
         Mockito.doCallRealMethod().when(paddle).setPosition(Mockito.any())
+        Mockito.doCallRealMethod().when(paddle).getPosition()
 
         when:
-        paddleController.movePaddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_X))
+        paddleController.movePaddle(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y))
         paddleController.movePaddle(positionLeft)
 
         then:
-        paddle.getPosition().getX() == Constants.INIT_PADDLE_X
-        paddle.getPosition().getY() == Constants.INIT_PADDLE_Y
+        paddleController.getPaddle().getPosition().getX() == Constants.INIT_PADDLE_X
+        paddleController.getPaddle().getPosition().getY() == Constants.INIT_PADDLE_Y
 
         when:
         paddleController.movePaddle(positionRight)
 
         then:
-        paddle.getPosition().getX() == Constants.INIT_PADDLE_X
-        paddle.getPosition().getY() == Constants.INIT_PADDLE_Y
+        paddleController.getPaddle().getPosition().getX() == Constants.INIT_PADDLE_X
+        paddleController.getPaddle().getPosition().getY() == Constants.INIT_PADDLE_Y
 
         when:
         paddleController.movePaddle(positionValid)
 
         then:
-        paddle.getPosition().getX() == 10
-        paddle.getPosition().getY() == Constants.INIT_PADDLE_Y
+        paddleController.getPaddle().getPosition().getX() == 10
+        paddleController.getPaddle().getPosition().getY() == Constants.INIT_PADDLE_Y
 
     }
 
 
     def "Teste à Verificação do Movimento do Paddle"(){
         given:
-        def paddleController = new PaddleController()
         def paddle = Mockito.mock(Paddle.class)
+        def paddleController = new PaddleController(paddle)
         Mockito.doCallRealMethod().when(paddle).setPosition(Mockito.any())
         Mockito.doCallRealMethod().when(paddle).getPosition()
 
@@ -115,13 +116,13 @@ class PaddleControllerTest extends spock.lang.Specification{
         canPaddleMove = paddleController.canPaddleMove(newPosition)
 
         then:
-        canPaddleMove == false
+        canPaddleMove == true
     }
 
     def "Teste ao doAction"(){
         given:
-        def paddleController = new PaddleController()
         def paddle = Mockito.mock(Paddle.class)
+        def paddleController = new PaddleController(paddle)
         Mockito.doCallRealMethod().when(paddle).setPosition(Mockito.any())
         Mockito.doCallRealMethod().when(paddle).getPosition()
 
@@ -135,38 +136,43 @@ class PaddleControllerTest extends spock.lang.Specification{
 
         when:
         action = GUI.ACTION.RIGHT
-        newPosition == paddleController.doAction(action)
+        newPosition = paddleController.doAction(action)
 
         then:
-        newPosition == new Position(2,2)
+        newPosition == new Position(3,2)
     }
 
     def "Teste do lost life"(){
         given:
-        def paddleController = new PaddleController()
         def paddle = Mockito.mock(Paddle.class)
-        Mockito.doCallRealMethod().when(paddle).setLives(Mockito.any())
+        Mockito.doCallRealMethod().when(paddle).setLives(Mockito.anyInt())
+        Mockito.doCallRealMethod().when(paddle).updateLives()
+        Mockito.doCallRealMethod().when(paddle).getLives()
+        paddle.setLives(3)
+        def paddleController = new PaddleController(paddle)
 
         when:
-        paddle.setLives(3)
         paddleController.lostLife()
 
         then:
-        paddle.getLives() == 2
+        paddleController.getPaddle().getLives() == 2
     }
 
     def "Teste do add Points"(){
         given:
-        def paddleController = new PaddleController()
         def paddle = Mockito.mock(Paddle.class)
-        Mockito.doCallRealMethod().when(paddle).setPoints(Mockito.any())
+        Mockito.doCallRealMethod().when(paddle).setPoints(Mockito.anyInt())
+        Mockito.doCallRealMethod().when(paddle).updatePoints(Mockito.anyInt())
+        Mockito.doCallRealMethod().when(paddle).getPoints()
+        paddle.setPoints(0)
+        def paddleController = new PaddleController(paddle)
 
         when:
-        paddle.setPoints(0)
+
         paddleController.addPoints(50)
 
         then:
-        paddle.getPoints() == 50
+        paddleController.getPaddle().getPoints() == 50
 
     }
 }

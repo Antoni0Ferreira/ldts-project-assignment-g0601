@@ -15,7 +15,7 @@ public class Paddle extends Element {
     public void updatePoints(int value) {points += value;}
 
     public int getLives() {return lives;}
-    public void updateLives(){lives -= 1;}
+    public void updateLives(){this.lives -= 1;}
     public void setLives(int lives){ this.lives = lives;}
     public void setPoints(int points){this.points = points;}
 }
