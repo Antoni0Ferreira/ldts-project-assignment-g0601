@@ -1,6 +1,7 @@
 package com.ldts.breakout.arena;
 
 import com.ldts.breakout.*;
+import com.ldts.breakout.model.*;
 
 import java.util.ArrayList;
 import java.util.List;

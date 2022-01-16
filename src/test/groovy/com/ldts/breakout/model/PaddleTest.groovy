@@ -1,7 +1,5 @@
 package com.ldts.breakout.model
 
-import com.ldts.breakout.Paddle
-
 class PaddleTest extends spock.lang.Specification{
 
     def "Teste aos pontos do Paddle "(){

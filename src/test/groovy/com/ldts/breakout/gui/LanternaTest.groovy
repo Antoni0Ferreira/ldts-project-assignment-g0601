@@ -7,7 +7,7 @@ import com.googlecode.lanterna.TextColor
 import com.googlecode.lanterna.graphics.TextGraphics
 import com.googlecode.lanterna.screen.TerminalScreen
 import com.ldts.breakout.Constants
-import com.ldts.breakout.Position
+import com.ldts.breakout.model.Position
 import org.mockito.Mockito
 
 import static com.googlecode.lanterna.Symbols.HEART

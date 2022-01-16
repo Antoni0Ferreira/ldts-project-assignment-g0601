@@ -1,4 +1,6 @@
-package com.ldts.breakout;
+package com.ldts.breakout.model;
+
+import com.ldts.breakout.Constants;
 
 public class Paddle extends Element {
     private int points,lives;

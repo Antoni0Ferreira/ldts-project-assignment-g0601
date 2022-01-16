@@ -1,8 +1,5 @@
 package com.ldts.breakout.model
 
-import com.ldts.breakout.Position
-import com.ldts.breakout.Wall
-
 class WallTest extends spock.lang.Specification {
 
     def "Teste das posições das walls"(){

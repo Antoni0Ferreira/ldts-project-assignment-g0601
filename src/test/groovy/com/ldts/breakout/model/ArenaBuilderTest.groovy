@@ -1,8 +1,6 @@
 package com.ldts.breakout.model
 
 import com.ldts.breakout.Constants
-import com.ldts.breakout.Ball
-import com.ldts.breakout.Paddle
 import com.ldts.breakout.arena.ArenaBuilder
 import org.mockito.Mockito
 

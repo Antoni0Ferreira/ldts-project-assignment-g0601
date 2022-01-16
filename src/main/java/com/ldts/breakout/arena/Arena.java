@@ -1,9 +1,9 @@
 package com.ldts.breakout.arena;
 
-import com.ldts.breakout.Ball;
-import com.ldts.breakout.Brick;
-import com.ldts.breakout.Paddle;
-import com.ldts.breakout.Wall;
+import com.ldts.breakout.model.Ball;
+import com.ldts.breakout.model.Brick;
+import com.ldts.breakout.model.Paddle;
+import com.ldts.breakout.model.Wall;
 
 import java.util.List;
 

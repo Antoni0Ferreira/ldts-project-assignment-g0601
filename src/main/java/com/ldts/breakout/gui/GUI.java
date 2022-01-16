@@ -1,7 +1,7 @@
 package com.ldts.breakout.gui;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.ldts.breakout.Position;
+import com.ldts.breakout.model.Position;
 
 import java.io.IOException;
 

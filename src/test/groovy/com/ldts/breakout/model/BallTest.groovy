@@ -1,8 +1,6 @@
 package com.ldts.breakout.model
 
 import com.ldts.breakout.Constants
-import com.ldts.breakout.Ball
-import com.ldts.breakout.Position
 
 class BallTest extends spock.lang.Specification{
     def "Teste Direção da Bola"(){
