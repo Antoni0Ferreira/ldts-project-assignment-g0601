@@ -37,7 +37,7 @@ class PlayingStateTest extends spock.lang.Specification{
 
         then:
 
-        
+
 
     }
 }
