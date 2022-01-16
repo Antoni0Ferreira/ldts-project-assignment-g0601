@@ -1,4 +1,4 @@
-package com.ldts.breakout.arena;
+package com.ldts.breakout.model.arena;
 
 import com.ldts.breakout.*;
 import com.ldts.breakout.model.*;

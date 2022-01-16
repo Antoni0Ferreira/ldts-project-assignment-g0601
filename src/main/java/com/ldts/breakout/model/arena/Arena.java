@@ -1,14 +1,10 @@
-package com.ldts.breakout.arena;
+package com.ldts.breakout.model.arena;
 
-import com.ldts.breakout.model.Ball;
-import com.ldts.breakout.model.Brick;
-import com.ldts.breakout.model.Paddle;
-import com.ldts.breakout.model.Wall;
-
+import com.ldts.breakout.model.*;
 import java.util.List;
 
-public class Arena {
 
+public class Arena{
     private Ball ball;
     private Paddle paddle;
     private List<Wall> walls;
