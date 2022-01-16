@@ -1,40 +1,37 @@
 package com.ldts.breakout.state
 import com.ldts.breakout.Game
 import com.ldts.breakout.model.Button
-import org.mockito.Mockito;
+import org.mockito.Mockito
 
 class GameStateTest extends spock.lang.Specification {
     def "Teste de mudança de state"(){
         given:
         def game = new Game()
-        def gameState = PlayingState(game)
-        def buttons = Arrays.asList(new Button(null,"",null,""))
+        def buttons = Arrays.asList()
+        def playingState = new PlayingState(game, buttons as List<Button>)
 
-        GameState newState = new GameState(game,buttons) {
-            @Override
-            void start() {
+        def menuState = new MenuState(game, buttons as List<Button>)
+        def gameState = Mockito.mock(GameState.class)
 
-            }
-
-            @Override
-            void step(Game otherGame, long time) throws IOException {}
-        }
-
+        Mockito.doCallRealMethod().when(gameState).changeState(Mockito.any())
+        Mockito.doCallRealMethod().when(gameState).setGame(Mockito.any())
         Mockito.when(gameState.getGame()).thenReturn(game)
-        //Mockito.doCallRealMethod().when(gameState).changeState(newState)
+        Mockito.when(gameState.getButtons()).thenReturn(buttons)
 
         when:
-        gameState.changeState(newState)
+        gameState.setGame(game)
+        gameState.changeState(menuState)
 
         then:
-        Mockito.verify(game,Mockito.times(1)).setGameState(newState)
+        game.getGameState() == menuState
 
+        when:
+        gameState.changeState(playingState)
 
+        then:
+        game.getGameState() == playingState
     }
 
-    def "Teste de step"() {
-
-    }
 
     def "Teste de getGame" (){
 
