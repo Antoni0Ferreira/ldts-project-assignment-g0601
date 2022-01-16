@@ -14,13 +14,17 @@ public abstract class GameState {
         this.game = game;
         this.buttons = buttons;
     }
+
+    protected GameState() {
+    }
+
     public void changeState(GameState gameState){this.game.setGameState(gameState);}
 
     public Game getGame(){return game;}
 
     public List<Button> getButtons(){return buttons;}
 
-    public abstract void start();
+    //public abstract void start();
 
-    public abstract void step(Game game, long time) throws IOException;
+    //public abstract void step(Game game, long time) throws IOException;
 }
