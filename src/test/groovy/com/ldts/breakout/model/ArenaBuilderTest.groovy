@@ -21,15 +21,15 @@ class ArenaBuilderTest extends spock.lang.Specification{
         when:
         def array = arena.createWalls()
         then:
-        array.size() == Constants.HEIGHT * 2 + (Constants.WIDTH - 2) * 2
+        array.size() == (Constants.HEIGHT) * 2 + (Constants.WIDTH ) * 2
     }
 
     def "Teste da criação da Bola e do Paddle"(){
         given:
         def arenaBuilder = Mockito.mock(ArenaBuilder.class)
 
-        Mockito.doCallRealMethod().when(arenaBuilder).createBall(Mockito.any())
-        Mockito.doCallRealMethod().when(arenaBuilder).createPaddle(Mockito.any())
+        Mockito.doCallRealMethod().when(arenaBuilder).createBall()
+        Mockito.doCallRealMethod().when(arenaBuilder).createPaddle()
 
         when:
         def ball = new Ball();
