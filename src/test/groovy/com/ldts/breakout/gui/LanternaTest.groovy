@@ -1,12 +1,15 @@
 package com.ldts.breakout.gui
 
 import com.googlecode.lanterna.SGR
+import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.TextColor
 import com.googlecode.lanterna.graphics.TextGraphics
 import com.ldts.breakout.Constants
 import com.ldts.breakout.Position
 import org.mockito.Mockito
+
+import static com.googlecode.lanterna.Symbols.HEART
 
 class LanternaTest extends spock.lang.Specification{
 
@@ -113,13 +116,18 @@ class LanternaTest extends spock.lang.Specification{
         def color3 = "#FFC100"
         def color4 = "#CDFF00"
         def color5 = "#008FFF"
+        def points1 = 1
+        def points2 = 5
+        def points3 = 10
+        def points4 = 20
+        def points5 = 50
 
         when:
-        gui.drawBrick(position1)
-        gui.drawBrick(position2)
-        gui.drawBrick(position3)
-        gui.drawBrick(position4)
-        gui.drawBrick(position5)
+        gui.drawBrick(points1,position1)
+        gui.drawBrick(points1,position2)
+        gui.drawBrick(points3,position3)
+        gui.drawBrick(points4, position4)
+        gui.drawBrick(points5,position5)
 
         then:
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color1))
@@ -132,7 +140,70 @@ class LanternaTest extends spock.lang.Specification{
         Mockito.verify(textGraphics,Mockito.times(1)).drawRectangle(position4, new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),'-')
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color5))
         Mockito.verify(textGraphics,Mockito.times(1)).drawRectangle(position5, new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),'-')
+    }
+
+    def "Teste desenho do Background"(){
+        given:
+        def color = "#000000"
+        def postion= new Position(0,0)
+
+        when:
+        gui.drawBackground()
+
+        then:
+        Mockito.verify(textGraphics,Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString(color))
+        Mockito.verify(textGraphics,Mockito.times(1)).fillRectangle(postion, new TerminalSize(Constants.WIDTH,Constants.HEIGHT),' ')
+    }
+
+    def "Teste desenho do Rectangle"(){
+        given:
+        def color = "#000000"
+        def position = new Position(1,1)
+        def character = '.'
+        when:
+        gui.drawRectangle(textGraphics, position, character, color, 1,1)
+        then:
+        Mockito.verify(textGraphics,Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color))
+        Mockito.verify(textGraphics,Mockito.times(1)).drawRectangle(new TerminalPosition(position.getX(), position.getY()),
+                new TerminalSize(Constants.WIDTH, Constants.HEIGHT),character)
+    }
+
+    def "Teste desenho da Info"(){
+        given:
+        def color1 = "#FF00FF"
+        def color2 = "#FF0000"
+        def position1 = new Position(3, 37)
+        def position2 = new Position(53, 37)
+        def points = 1
+        def lives = 3
+
+        when:
+        gui.drawInfo(points,lives)
+
+        then:
+        Mockito.verify(textGraphics,Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color1))
+        Mockito.verify(textGraphics, Mockito.times(1)).enableModifiers(SGR.BOLD)
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position1.getX(),position1.getY(),Integer.toString(points))
+
+        Mockito.verify(textGraphics,Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color2))
+        Mockito.verify(textGraphics, Mockito.times(1)).enableModifiers(SGR.BOLD)
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position1.getX(),position1.getY(),Integer.toString(lives) + HEART)
+    }
+
+    def "Teste desenho do Title"(){
+        given:
+        def position = new Position(1,1)
+        def text = "a"
+        def color = "#000000"
+
+        when:
+        gui.drawTitle(position, text, color)
         
+        then:
+        Mockito.verify(textGraphics,Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color))
+        Mockito.verify(textGraphics, Mockito.times(1)).enableModifiers(SGR.BOLD)
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(),position.getY(),text)
+
     }
 
 }
