@@ -1,7 +1,7 @@
 package com.ldts.breakout.model
 
 import com.ldts.breakout.Constants
-import com.ldts.breakout.arena.ArenaBuilder
+import com.ldts.breakout.model.arena.ArenaBuilder
 import org.mockito.Mockito
 
 class ArenaBuilderTest extends spock.lang.Specification{

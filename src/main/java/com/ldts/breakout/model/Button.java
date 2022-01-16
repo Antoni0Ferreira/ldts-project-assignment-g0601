@@ -18,6 +18,7 @@ public class Button extends Element {
     public Position getTextPosition() {
         return position;
     }
+
     public String getText() {return text;}
 
     public String getColor(){return color;}
