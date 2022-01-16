@@ -29,6 +29,10 @@ public class LanternaGUI implements GUI{
         screen = createScreen(terminal);
     }
 
+    public LanternaGUI(TerminalScreen screen){
+        this.screen = screen;
+    }
+
     public TerminalScreen createScreen(Terminal terminal) throws IOException{
 
         final TerminalScreen terminalScreen;
@@ -50,7 +54,7 @@ public class LanternaGUI implements GUI{
     }
 
     public AWTTerminalFontConfiguration loadFont() throws FontFormatException,IOException{
-        File fontFile = new File("..\\BreakoutGame\\resources\\PressStart2P.ttf");
+        File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -112,19 +116,19 @@ public class LanternaGUI implements GUI{
 
     @Override
     public void drawBall(Position position){
-        TextGraphics textGraphics = createTextGraphics();
-        drawText(position,"@","#FFFFFF");
+        //TextGraphics textGraphics = createTextGraphics();
+        drawText(screen.newTextGraphics(),position,"@","#FFFFFF");
     }
 
     @Override
     public void drawPaddle(Position position){
-        TextGraphics textGraphics = createTextGraphics();
         drawRectangle(position,'-',"#FF7000",Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
     }
 
 
     @Override
     public void drawWall(Position position){
+        TextGraphics textGraphics = createTextGraphics();
         String color;
         switch (position.getY()){
             case 4 -> color = "#FF0000";
@@ -135,7 +139,7 @@ public class LanternaGUI implements GUI{
             case Constants.INIT_PADDLE_Y -> color = "#FF7000";
             default -> color = "#FFFFFF";
         }
-        drawText(position," ",color);
+        drawText(textGraphics,position," ",color);
     }
 
     @Override
@@ -153,8 +157,7 @@ public class LanternaGUI implements GUI{
     }
 
 
-    public void drawText(Position position, String text, String color){
-        TextGraphics textGraphics=screen.newTextGraphics();
+    public void drawText(TextGraphics textGraphics, Position position, String text, String color){
         if(text == " "){ //wall draw needs background color
             textGraphics.setBackgroundColor(TextColor.Factory.fromString(color));
         }
@@ -174,18 +177,20 @@ public class LanternaGUI implements GUI{
 
     @Override
     public void drawButton(Position bPos, Position tPos, String text, String textColor){
-        drawText(tPos, text, textColor);
+        TextGraphics textGraphics = createTextGraphics();
+        drawText(textGraphics,tPos, text, textColor);
     }
 
     @Override
     public void drawTitle(Position position, String text, String color) {
-        TextGraphics textGraphics = screen.newTextGraphics();
-        drawText(position, text,color);
+        TextGraphics textGraphics = createTextGraphics();
+        drawText(textGraphics,position, text,color);
     }
 
     @Override
     public void drawInfo(int points, int lives){
-        drawText(new Position(3, 37), Integer.toString(points), "#FF00FF");
-        drawText(new Position(53, 37), Integer.toString(lives) + HEART, "#FF0000");
+        TextGraphics textGraphics = createTextGraphics();
+        drawText(textGraphics,new Position(3, 37), Integer.toString(points), "#FF00FF");
+        drawText(textGraphics,new Position(53, 37), Integer.toString(lives) + HEART, "#FF0000");
     }
 }

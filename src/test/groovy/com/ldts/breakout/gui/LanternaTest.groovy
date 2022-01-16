@@ -5,6 +5,7 @@ import com.googlecode.lanterna.TerminalPosition
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.TextColor
 import com.googlecode.lanterna.graphics.TextGraphics
+import com.googlecode.lanterna.screen.TerminalScreen
 import com.ldts.breakout.Constants
 import com.ldts.breakout.Position
 import org.mockito.Mockito
@@ -13,25 +14,30 @@ import static com.googlecode.lanterna.Symbols.HEART
 
 class LanternaTest extends spock.lang.Specification{
 
-    LanternaGUI gui
-    TextGraphics textGraphics
+    private LanternaGUI gui
+    private TextGraphics textGraphics
+    private TerminalScreen screen
 
     def setup(){
         this.textGraphics = Mockito.mock(TextGraphics.class)
-        this.gui = new LanternaGUI()
+        TerminalScreen screen = Mockito.mock(TerminalScreen.class)
+        this.gui = new LanternaGUI(screen)
+        Mockito.when(screen.newTextGraphics()).thenReturn(textGraphics)
     }
 
     def "Teste desenho da Bola"(){
         given:
         def position = new Position(5,5)
         def color = "#FFFFFF"
+        def text = "@"
+
         when:
         gui.drawBall(position)
 
         then:
-        Mockito.verify(textGraphics, Mockito.times(1)).enableModifiers(SGR.BOLD)
-        Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color))
-        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(),position.getY(),"@")
+        //Mockito.verify(textGraphics, Mockito.times(1)).enableModifiers(SGR.BOLD)
+        //Mockito.verify(textGraphics, Mockito.times(1)).drawText(position, "@", color)
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(),position.getY(),text)
 
     }
 
@@ -40,7 +46,7 @@ class LanternaTest extends spock.lang.Specification{
         def position = new Position(5,5)
         def color = "#FF7000"
         when:
-        gui.drawPaddle()
+        gui.drawPaddle(position)
         then:
         Mockito.verify(textGraphics,Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color))
         Mockito.verify(textGraphics,Mockito.times(1)).drawRectangle(position, new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),'-')
@@ -198,7 +204,7 @@ class LanternaTest extends spock.lang.Specification{
 
         when:
         gui.drawTitle(position, text, color)
-        
+
         then:
         Mockito.verify(textGraphics,Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(color))
         Mockito.verify(textGraphics, Mockito.times(1)).enableModifiers(SGR.BOLD)
