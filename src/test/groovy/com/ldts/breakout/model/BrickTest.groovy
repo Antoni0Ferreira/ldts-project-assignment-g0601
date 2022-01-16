@@ -1,5 +1,8 @@
 package com.ldts.breakout.model
 
+import com.ldts.breakout.Brick
+import com.ldts.breakout.Position
+
 class BrickTest extends spock.lang.Specification{
 
 

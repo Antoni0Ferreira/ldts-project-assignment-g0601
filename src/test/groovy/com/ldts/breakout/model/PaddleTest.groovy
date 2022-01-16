@@ -1,7 +1,6 @@
 package com.ldts.breakout.model
 
-import com.ldts.breakout.Constants
-import org.mockito.Mockito
+import com.ldts.breakout.Paddle
 
 class PaddleTest extends spock.lang.Specification{
 

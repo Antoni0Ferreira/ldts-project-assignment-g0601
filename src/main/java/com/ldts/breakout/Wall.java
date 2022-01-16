@@ -1,4 +1,4 @@
-package com.ldts.breakout.model;
+package com.ldts.breakout;
 
 public class Wall extends Element {
 

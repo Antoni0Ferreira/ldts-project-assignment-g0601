@@ -1,5 +1,7 @@
 package com.ldts.breakout.model
 
+import com.ldts.breakout.Element
+import com.ldts.breakout.Position
 import org.mockito.Mockito
 
 class ElementTest extends spock.lang.Specification{

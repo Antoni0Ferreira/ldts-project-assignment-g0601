@@ -1,6 +1,4 @@
-package com.ldts.breakout.model;
-
-import com.ldts.breakout.Constants;
+package com.ldts.breakout;
 
 public class Ball extends Element {
     private int dirX, dirY;

@@ -20,4 +20,7 @@ public interface Constants {
     int LIGHT_ORANGE_BRICK = 10;
     int YELLOW_BRICK = 5;
     int BLUE_BRICK = 1;
+
+    int PADDLE_WIDTH = 7;
+    int PADDLE_HEIGHT = 1;
 }
