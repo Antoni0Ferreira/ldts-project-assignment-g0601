@@ -13,5 +13,8 @@ public class PlayingState extends GameState{
     }
 
     @Override
-    public void start(){};
+    public void start(){}
+
+    @Override
+    public void step(Game game){}
 }

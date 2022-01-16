@@ -25,5 +25,5 @@ public abstract class GameState {
 
     public abstract void start();
 
-    //public abstract void step(Game game, long time) throws IOException;
+    public abstract void step(Game game) throws IOException;
 }

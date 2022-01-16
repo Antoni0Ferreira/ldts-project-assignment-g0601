@@ -14,4 +14,7 @@ public class MenuState extends GameState{
     @Override
     public void start(){};
 
+    @Override
+    public void step(Game game){}
+
 }
