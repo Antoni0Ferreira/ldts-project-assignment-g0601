@@ -2,6 +2,7 @@ package com.ldts.breakout;
 
 
 import com.ldts.breakout.gui.GUI;
+import com.ldts.breakout.gui.LanternaGUI;
 import com.ldts.breakout.state.GameState;
 import com.ldts.breakout.state.MenuState;
 
@@ -15,9 +16,11 @@ import static java.lang.String.valueOf;
 
 public class Game {
     private GameState gameState;
+    private GUI gui;
 
-    public Game(){
-        this.gameState = new MenuState(this, Arrays.asList());
+    public Game() throws IOException,FontFormatException{
+        gui = new LanternaGUI();
+        this.gameState = new MenuState(this, gui);
     }
 
     public void setGameState(GameState gameState) {

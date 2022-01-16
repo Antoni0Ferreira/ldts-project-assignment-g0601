@@ -2,14 +2,14 @@ package com.ldts.breakout.state;
 
 import com.ldts.breakout.Game;
 import com.ldts.breakout.model.Button;
-import java.util.List;
+import com.ldts.breakout.gui.GUI;
 
 import java.util.Arrays;
 
 public class PlayingState extends GameState{
 
-    public PlayingState(Game game, List<Button> list){
-        super(game, list);
+    public PlayingState(Game game, GUI gui){
+        super(game, Arrays.asList());
     }
 
     @Override
