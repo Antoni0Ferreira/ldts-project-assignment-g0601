@@ -35,6 +35,7 @@ class MenuStateTest extends spock.lang.Specification{
         menuState.step(game)
 
         then:
+        1 == 1
 
     }
 
