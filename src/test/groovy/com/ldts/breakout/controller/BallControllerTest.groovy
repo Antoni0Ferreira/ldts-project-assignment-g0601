@@ -97,4 +97,20 @@ class BallControllerTest extends spock.lang.Specification{
 
     }
 
+    def "Teste reset ball"(){
+        given:
+        ball.getPosition().setX(10)
+        ball.getPosition().setY(10)
+        ball.setDestroyedBrick(true)
+        def ballController = new BallController(ball)
+
+        when:
+        ballController.resetBall()
+
+        then:
+        ballController.getBall().getPosition().getX() == Constants.INIT_BALL_X
+        ballController.getBall().getPosition().getY() == Constants.INIT_BALL_Y
+        ballController.getBall().getPosition().getDestroyedBrick() == false
+    }
+
 }
