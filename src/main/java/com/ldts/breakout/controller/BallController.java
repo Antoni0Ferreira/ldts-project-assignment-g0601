@@ -8,12 +8,15 @@ import com.ldts.breakout.model.arena.Arena;
 
 import java.awt.*;
 
-public class BallController {
+public class BallController extends GameController {
+    private ArenaController arenaController;
     private Ball ball;
     private long start;
 
-    public BallController(Ball ball){
+    public BallController(Arena arena, ArenaController arenaController, Ball ball){
+        super(arena);
         this.ball = ball;
+        this.arenaController = arenaController;
     }
 
     public void startBallTimer(){
@@ -69,4 +72,12 @@ public class BallController {
     }
 
     public void setBall(Ball ball){ this.ball = ball;}
+
+    @Override
+    public void step(Game game){
+        arenaController.hitsPaddle();
+        if(!ball.getDestroyedBrick())
+            arenaController.hitsBrick();
+        move();
+    }
 }

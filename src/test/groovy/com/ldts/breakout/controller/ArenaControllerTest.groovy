@@ -22,7 +22,6 @@ class ArenaControllerTest extends spock.lang.Specification{
         def arenaViewer = Mockito.mock(ArenaViewer.class)
         def gui = new LanternaGUI()
         def arena = new Arena()
-        arena.setBricks(brickList)
         Mockito.doCallRealMethod().when(gameState).changeState(Mockito.any())
         Mockito.doCallRealMethod().when(paddleController).doAction(Mockito.any(GUI.ACTION))
         Mockito.doCallRealMethod().when(paddleController).movePaddle(Mockito.any())

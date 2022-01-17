@@ -2,6 +2,8 @@ package com.ldts.breakout.model;
 
 import com.ldts.breakout.Constants;
 
+import java.awt.*;
+
 public class Brick extends Element {
 
     private boolean destroyed;
@@ -32,5 +34,9 @@ public class Brick extends Element {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public Rectangle getRect() {
+        return new Rectangle(getPosition().getX(),getPosition().getY(),Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
     }
 }

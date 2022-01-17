@@ -19,9 +19,9 @@ class MenuStateTest extends spock.lang.Specification{
         menuState.start()
 
         then:
-        Mockito.verify(keyBoardObserver,Mockito.times(1)).setListener()
+        Mockito.verify(keyBoardObserver,Mockito.times(1)).setListener(Mockito.any())
     }
-/*
+
     def "Teste Step"(){
         given:
         def game = Mockito.mock(Game.class)
@@ -36,8 +36,7 @@ class MenuStateTest extends spock.lang.Specification{
 
         then:
 
-    }*/
-
+    }
 
 
 }
