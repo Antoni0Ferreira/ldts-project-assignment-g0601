@@ -1,16 +1,19 @@
 package com.ldts.breakout.state
 import com.ldts.breakout.Game
+import com.ldts.breakout.gui.LanternaGUI
 import com.ldts.breakout.model.Button
 import org.mockito.Mockito
 
 class GameStateTest extends spock.lang.Specification {
+
     def "Teste de mudança de State"(){
         given:
         def game = new Game()
+        def gui = new LanternaGUI()
         def buttons = Arrays.asList()
-        def playingState = new PlayingState(game, buttons as List<Button>)
+        def playingState = new PlayingState(game,gui)
 
-        def menuState = new MenuState(game, buttons as List<Button>)
+        def menuState = new MenuState(game,gui)
         def gameState = Mockito.mock(GameState.class)
 
         Mockito.doCallRealMethod().when(gameState).changeState(Mockito.any())
