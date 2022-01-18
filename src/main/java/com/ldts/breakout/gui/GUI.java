@@ -16,7 +16,7 @@ public interface GUI {
     int getWidth();
     int getHeight();
 
-    void drawBackground();
+    void drawBackground(TextGraphics textGraphics);
 
     void clear() throws IOException;
 

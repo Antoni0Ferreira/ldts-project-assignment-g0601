@@ -54,7 +54,7 @@ public class LanternaGUI implements GUI{
     }
 
     public AWTTerminalFontConfiguration loadFont() throws FontFormatException,IOException{
-        File fontFile = new File("..\\BreakoutGame\\resources\\PressStart2P.ttf");
+        File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -92,8 +92,7 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawBackground(){
-        TextGraphics textGraphics = createTextGraphics();
+    public void drawBackground(TextGraphics textGraphics){
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         textGraphics.fillRectangle(new TerminalPosition(0,0),
                 new TerminalSize(Constants.WIDTH, Constants.HEIGHT), ' ');
