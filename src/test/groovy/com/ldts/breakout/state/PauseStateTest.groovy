@@ -32,10 +32,11 @@ class PauseStateTest extends spock.lang.Specification{
         def gui = Mockito.mock(LanternaGUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
         def pauseController = Mockito.mock(PauseController.class)
-        def pauseState = Mockito.mock(PauseState.class)
+        def previousState = Mockito.mock(GameState.class)
+        def pauseState = new PauseState(game,gui,previousState)
+        pauseState.setPauseController(pauseController)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-        Mockito.when(pauseState.getPauseController()).thenReturn(pauseController)
 
         when:
         pauseState.step(game)

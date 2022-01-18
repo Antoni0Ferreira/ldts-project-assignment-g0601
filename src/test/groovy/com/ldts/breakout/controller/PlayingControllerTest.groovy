@@ -6,6 +6,7 @@ import com.ldts.breakout.gui.LanternaGUI
 import com.ldts.breakout.state.GameState
 import com.ldts.breakout.state.MenuState
 import com.ldts.breakout.state.PlayingState
+import com.ldts.breakout.state.PauseState
 import org.mockito.Mockito
 
 class PlayingControllerTest extends spock.lang.Specification{

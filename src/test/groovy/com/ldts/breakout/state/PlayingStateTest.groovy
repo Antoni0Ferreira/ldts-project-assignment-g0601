@@ -31,17 +31,15 @@ class PlayingStateTest extends spock.lang.Specification{
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
         def playingController = Mockito.mock(PlayingController.class)
         def playingState = new PlayingState(game,gui)
+        playingState.setPlayingController(playingController)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-        Mockito.when(playingState.getPlayingController).thenReturn(playingController)
 
         when:
         playingState.step(game)
 
         then:
         Mockito.verify(playingController,Mockito.times(1)).step(game)
-
-
 
     }
 }
