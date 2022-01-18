@@ -6,14 +6,11 @@ import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.model.Button;
 import com.ldts.breakout.model.arena.Arena;
 import com.ldts.breakout.state.*;
-import com.ldts.breakout.viewer.state.EndGameViewer;
 import com.ldts.breakout.viewer.state.PlayingViewer;
 import com.ldts.breakout.viewer.state.StateViewer;
-import com.ldts.breakout.state.PlayingState;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 
 public class PlayingController extends GameController implements KeyBoardListener {

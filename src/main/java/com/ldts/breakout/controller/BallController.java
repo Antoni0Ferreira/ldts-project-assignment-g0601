@@ -26,32 +26,6 @@ public class BallController extends GameController{
         this.ball = ball;
         this.arenaController = arenaController;
     }
-/*
-    public class BallThread extends Thread{
-        @Override
-        public void run(){
-
-            try{
-                sleep(1000);
-                while(!stopThread){
-                    sleep(50);
-                    draw();
-                    arena.hitsPaddle();
-
-                    if(!arena.getBall().getDestroyedBrick())
-                        arena.hitsBrick();
-
-                    screen.clear();
-                    if(arena.gameLost()){gameEnded(false);}
-                    if(arena.gameWon()){gameEnded(true);}
-                    arena.getBall().move();
-                }
-            }
-            catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 
     public void startBallTimer(){
         this.start = System.currentTimeMillis();
@@ -101,27 +75,7 @@ public class BallController extends GameController{
         arenaController.hitsPaddle();
         if(!ball.getDestroyedBrick())
             arenaController.hitsBrick();
- /*       if (this.ball.getLostLife()) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
             move();
-/*        if (this.ball.getLostLife()) {
-            try {
-                long finish = System.currentTimeMillis() + 2000;
-                TimeUnit.MILLISECONDS.sleep(2000);
-                while (System.currentTimeMillis() < finish) {
-                    arenaController.getArenaViewer().draw();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
         this.ball.setLostLife(false);
     }
 
