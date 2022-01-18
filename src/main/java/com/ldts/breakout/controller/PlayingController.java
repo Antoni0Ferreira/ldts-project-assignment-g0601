@@ -40,12 +40,12 @@ public class PlayingController extends GameController implements KeyBoardListene
         arenaController.step(game);
         playingViewer.draw();
 
-        if (getModel().getPaddle().getLives() == 0) {
+/*        if (getModel().getPaddle().getLives() == 0) {
             changeState(new EndGameState(this.gameState.getGame(), gui, false));
         } else if (getModel().getPaddle().getPoints() == Constants.MAX_POINTS) {
             changeState(new EndGameState(this.gameState.getGame(), gui, true));
         }
-        this.initial = false;
+        this.initial = false;*/
     }
 
     @Override

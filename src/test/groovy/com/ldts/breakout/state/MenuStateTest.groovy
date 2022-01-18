@@ -1,5 +1,6 @@
 package com.ldts.breakout.state
 import com.ldts.breakout.Game
+import com.ldts.breakout.controller.MenuController
 import com.ldts.breakout.gui.KeyBoardObserver
 import com.ldts.breakout.gui.LanternaGUI
 import org.mockito.Mockito
@@ -26,16 +27,17 @@ class MenuStateTest extends spock.lang.Specification{
         given:
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(LanternaGUI.class)
+        def menuController = Mockito.mock(MenuController.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
         def menuState = new MenuState(game,gui)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-
+        Mockito.when(menuState.getMenuController()).thenReturn(menuController)
         when:
         menuState.step(game)
 
         then:
-        1 == 1
+        Mockito.verify(menuController,Mockito.times(1)).step()
 
 
     }

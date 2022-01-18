@@ -1,24 +1,26 @@
 package com.ldts.breakout.state
 
 import com.ldts.breakout.Game
-import com.ldts.breakout.controller.PlayingController
+import com.ldts.breakout.controller.PauseController
+import com.ldts.breakout.gui.GUI
 import com.ldts.breakout.gui.KeyBoardObserver
 import com.ldts.breakout.gui.LanternaGUI
 import org.mockito.Mockito
 
-class PlayingStateTest extends spock.lang.Specification{
+class PauseStateTest extends spock.lang.Specification{
 
     def "Teste Start"(){
         given:
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(LanternaGUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
-        def playingState = new PlayingState(game,gui)
+        def previousState = Mockito.mock(GameState.class)
+        def pauseState = new PauseState(game,gui,previousState)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
 
         when:
-        playingState.start()
+        pauseState.start()
 
         then:
         Mockito.verify(keyBoardObserver,Mockito.times(1)).setListener(Mockito.any())
@@ -29,19 +31,17 @@ class PlayingStateTest extends spock.lang.Specification{
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(LanternaGUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
-        def playingController = Mockito.mock(PlayingController.class)
-        def playingState = new PlayingState(game,gui)
+        def pauseController = Mockito.mock(PauseController.class)
+        def pauseState = Mockito.mock(PauseState.class)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-        Mockito.when(playingState.getPlayingController).thenReturn(playingController)
+        Mockito.when(pauseState.getPauseController()).thenReturn(pauseController)
 
         when:
-        playingState.step(game)
+        pauseState.step(game)
 
         then:
-        Mockito.verify(playingController,Mockito.times(1)).step(game)
-
-
+        Mockito.verify(pauseController,Mockito.times(1)).step()
 
     }
 }
