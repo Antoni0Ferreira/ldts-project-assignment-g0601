@@ -1,4 +1,5 @@
 package com.ldts.breakout.gui;
+
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.ldts.breakout.model.Position;
 
@@ -23,12 +24,10 @@ public interface GUI {
 
     void close() throws IOException;
 
-    void addKeyBoardListener(KeyBoardObserver observer);
-
     void drawBall(Position position);
 
     void drawPaddle(Position position);
-    
+
     void drawInfo(int points, int lives);
 
     void drawWall(Position position);
@@ -36,8 +35,7 @@ public interface GUI {
     void drawBrick(int points, Position position);
 
     void drawButton(Position bPos, Position tPos, String text, String textColor);
-    
-    void drawTitle(Position position, String text, String color);
 
+    void drawTitle(Position position, String text, String color);
 
 }

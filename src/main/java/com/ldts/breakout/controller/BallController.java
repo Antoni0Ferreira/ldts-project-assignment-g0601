@@ -1,23 +1,15 @@
 package com.ldts.breakout.controller;
 
+import com.ldts.breakout.Constants;
 import com.ldts.breakout.Game;
+import com.ldts.breakout.model.Ball;
 import com.ldts.breakout.model.Position;
 import com.ldts.breakout.model.arena.Arena;
-import com.ldts.breakout.model.Ball;
-import com.ldts.breakout.Constants;
-import com.ldts.breakout.model.Position;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
 
 import java.awt.*;
 
-public class BallController extends GameController{
-    private  ArenaController arenaController;
+public class BallController extends GameController {
+    private ArenaController arenaController;
     private Ball ball;
     private long start;
 
@@ -50,14 +42,13 @@ public class BallController extends GameController{
                 ball.setDestroyedBrick(false);
             }
 
-
-        ball.getPosition().setX(ball.getPosition().getX() + ball.getDirX());
-        ball.getPosition().setY(ball.getPosition().getY() + ball.getDirY());}
+            ball.getPosition().setX(ball.getPosition().getX() + ball.getDirX());
+            ball.getPosition().setY(ball.getPosition().getY() + ball.getDirY());}
     }
 
 
     public Rectangle getRectBall() {
-        return new Rectangle(ball.getPosition().getX(),ball.getPosition().getY(),Constants.BALL_WIDTH,Constants.BALL_HEIGHT);
+        return new Rectangle(ball.getPosition().getX(),ball.getPosition().getY(),1,1);
     }
 
     public void hitPaddle(){
@@ -70,19 +61,23 @@ public class BallController extends GameController{
         ball.setDestroyedBrick(true);
     }
 
-    @Override
-    public void step(Game game, long time){
-        arenaController.hitsPaddle();
-        if(!ball.getDestroyedBrick())
-            arenaController.hitsBrick();
-            move();
-        this.ball.setLostLife(false);
-    }
-
     public void resetBall(){
         ball.setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));
         ball.setDestroyedBrick(false);
         start= System.currentTimeMillis();
     }
-}
 
+    public Ball getBall(){
+        return ball;
+    }
+
+    public void setBall(Ball ball){ this.ball = ball;}
+
+    @Override
+    public void step(Game game){
+        arenaController.hitsPaddle();
+        if(!ball.getDestroyedBrick())
+            arenaController.hitsBrick();
+        move();
+    }
+}

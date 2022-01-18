@@ -6,6 +6,7 @@ import com.ldts.breakout.model.Paddle;
 import com.ldts.breakout.model.Position;
 
 public class PaddleController {
+
     private final Paddle paddle;
 
     public PaddleController(Paddle paddle){this.paddle = paddle;}
@@ -35,5 +36,6 @@ public class PaddleController {
 
     public void lostLife(){paddle.updateLives();}
 
-    public void resetPaddle(){paddle.setPosition(new Position(Constants.INIT_BALL_X, Constants.INIT_BALL_Y));}
+    public void resetPaddle(){paddle.setPosition(new Position(Constants.INIT_PADDLE_X, Constants.INIT_PADDLE_Y));}
+
 }

@@ -13,19 +13,24 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.ldts.breakout.Constants;
 import com.ldts.breakout.model.Position;
 
-import static com.googlecode.lanterna.Symbols.HEART;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class LanternaGUI implements GUI {
+import static com.googlecode.lanterna.Symbols.HEART;
+
+public class LanternaGUI implements GUI{
+
     private final TerminalScreen screen;
 
     public LanternaGUI() throws IOException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = loadFont();
         Terminal terminal = createTerminal(fontConfig);
         screen = createScreen(terminal);
+    }
+
+    public LanternaGUI(TerminalScreen screen){
+        this.screen = screen;
     }
 
     public TerminalScreen createScreen(Terminal terminal) throws IOException{
@@ -40,12 +45,6 @@ public class LanternaGUI implements GUI {
 
     public Terminal createTerminal(AWTTerminalFontConfiguration fontConfig) throws IOException{
         TerminalSize terminalSize = new TerminalSize(Constants.WIDTH, Constants.HEIGHT);
-        /*DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-        defaultTerminalFactory.setForceAWTOverSwing(true);
-        defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-
-        DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-        Terminal terminal = terminalFactory.createTerminal();*/
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         defaultTerminalFactory.setForceAWTOverSwing(true);
         defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
@@ -55,7 +54,7 @@ public class LanternaGUI implements GUI {
     }
 
     public AWTTerminalFontConfiguration loadFont() throws FontFormatException,IOException{
-        File fontFile = new File("..\\BreakoutGame\\resources\\PressStart2P.ttf");
+        File fontFile = new File("..\\LDTSProject\\resources\\PressStart2P.ttf");
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -115,33 +114,14 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void addKeyBoardListener(KeyBoardObserver observer){
-        ((AWTTerminalFrame) screen.getTerminal()).getComponent(0).addKeyListener(observer);
-    }
-
-    @Override
     public void drawBall(Position position){
-        TextGraphics textGraphics = createTextGraphics();
-        drawText(textGraphics,position,"@","#FFFFFF");
-/*        if (lostLife){
-            try {
-                TimeUnit.MILLISECONDS.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
-/*        textGraphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
-        textGraphics.enableModifiers(SGR.BOLD);
-        textGraphics.setCharacter(new TerminalPosition(position.getX(), position.getY()),FACE_BLACK);*/
+        //TextGraphics textGraphics = createTextGraphics();
+        drawText(screen.newTextGraphics(),position,"@","#FFFFFF");
     }
 
     @Override
     public void drawPaddle(Position position){
-        TextGraphics textGraphics = createTextGraphics();
-        drawRectangle(textGraphics,position,'-',"#FF7000",Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
-/*        textGraphics.setForegroundColor(TextColor.Factory.fromString("#FF7000"));
-        textGraphics.drawRectangle(new TerminalPosition(position.getX(), position.getY()),
-                new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),SOLID_SQUARE);*/
+        drawRectangle(position,'-',"#FF7000",Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
     }
 
 
@@ -158,15 +138,12 @@ public class LanternaGUI implements GUI {
             case Constants.INIT_PADDLE_Y -> color = "#FF7000";
             default -> color = "#FFFFFF";
         }
-        //textGraphics.putString(new TerminalPosition(position.getX(), position.getY()), " ");
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString(color));
         drawText(textGraphics,position," ",color);
     }
 
     @Override
     public void drawBrick(int points, Position position){
 
-        TextGraphics textGraphics = createTextGraphics();
         String color = "";
         switch (points){
             case Constants.RED_BRICK -> color = "#FF0000";
@@ -175,52 +152,23 @@ public class LanternaGUI implements GUI {
             case Constants.YELLOW_BRICK -> color = "#CDFF00";
             case Constants.BLUE_BRICK -> color = "#008FFF";
         }
-        drawRectangle(textGraphics,position,'-',color,Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
-/*        textGraphics.drawRectangle(new TerminalPosition(position.getX(), position.getY()),
-                new TerminalSize(Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT),SOLID_SQUARE);*/
+        drawRectangle(position,'-',color,Constants.PADDLE_WIDTH,Constants.PADDLE_HEIGHT);
     }
 
-
-
-
-/*    @Override
-    public void drawString(String color, int row, String s){
-        TextGraphics textGraphics = createTextGraphics();
-        textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
-        textGraphics.putString(Constants.WIDTH - s.length() / 2,row,s);
-    }
-
-    @Override
-    public int getMenuOptionLine(Menu.Option option){
-        if(option == Menu.Option.START) return 15;
-        else if (option == Menu.Option.INST) return 20;
-        else return 25;
-
-    }
-
-    @Override
-    public void drawMenu(Menu.Option option, Position position){
-        TextGraphics textGraphics = createTextGraphics();
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
-        textGraphics.fillRectangle(new TerminalPosition(position.getX(), position.getY()), getSize(), ' ');
-
-        drawString("#00FF00", 15, "START"); //green
-        drawString("#f2e744", 20, "INSTRUCTIONS");   //yellow
-        drawString("#FF0000", 25, "QUIT");
-
-        Menu.Option selected = option;
-        int col_begin_selected = this.getSize().getColumns() / 2 -3 ;
-        textGraphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
-        textGraphics.putString(col_begin_selected,getMenuOptionLine(option),"&'"); //ja esta atualizado para a fonte nova
-    }*/
 
     public void drawText(TextGraphics textGraphics, Position position, String text, String color){
-        textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
-        textGraphics.enableModifiers(SGR.BOLD);
+        if(text == " "){ //wall draw needs background color
+            textGraphics.setBackgroundColor(TextColor.Factory.fromString(color));
+        }
+        else{
+            textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
+            textGraphics.enableModifiers(SGR.BOLD);
+        }
         textGraphics.putString(position.getX(),position.getY(),text);
     }
 
-    public void drawRectangle(TextGraphics textGraphics, Position position, char character, String color,int width, int height){
+    public void drawRectangle(Position position, char character, String color,int width, int height){
+        TextGraphics textGraphics=screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
         textGraphics.drawRectangle(new TerminalPosition(position.getX(), position.getY()),
                 new TerminalSize(width,height),character);
@@ -228,20 +176,20 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawButton(Position bPos, Position tPos, String text, String textColor){
-        TextGraphics textGraphics=screen.newTextGraphics();
-        drawText(textGraphics, tPos, text, textColor);
+        TextGraphics textGraphics = createTextGraphics();
+        drawText(textGraphics,tPos, text, textColor);
     }
 
     @Override
     public void drawTitle(Position position, String text, String color) {
-        TextGraphics textGraphics = screen.newTextGraphics();
-        drawText(textGraphics, position, text,color);
+        TextGraphics textGraphics = createTextGraphics();
+        drawText(textGraphics,position, text,color);
     }
 
     @Override
     public void drawInfo(int points, int lives){
-        TextGraphics textGraphics = screen.newTextGraphics();
-        drawText(textGraphics, new Position(3, 37), Integer.toString(points), "#FF00FF");
-        drawText(textGraphics, new Position(53, 37), Integer.toString(lives) + HEART, "#FF0000");
+        TextGraphics textGraphics = createTextGraphics();
+        drawText(textGraphics,new Position(3, 37), Integer.toString(points), "#FF00FF");
+        drawText(textGraphics,new Position(53, 37), Integer.toString(lives) + HEART, "#FF0000");
     }
 }

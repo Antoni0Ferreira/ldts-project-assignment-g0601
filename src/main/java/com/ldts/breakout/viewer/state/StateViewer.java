@@ -8,9 +8,9 @@ import java.util.List;
 import java.io.IOException;
 
 public abstract class StateViewer {
-    protected final GUI gui;
+    protected GUI gui;
     private final TextGraphics textGraphics;
-    protected final List<Button> buttons;
+    protected List<Button> buttons;
 
     public StateViewer(GUI gui, List<Button> buttons) {
         this.gui = gui;
@@ -26,7 +26,7 @@ public abstract class StateViewer {
         }
     }
 
-    protected int getYActiveButton(){
+    public int getYActiveButton(){
         for(Button button:buttons){
             if(button.isActive()) return button.getPosition().getY();
         }
@@ -34,4 +34,8 @@ public abstract class StateViewer {
     }
 
     protected void drawBackground() {gui.drawBackground(textGraphics);}
+
+    public void setButtons(List<Button> buttons) {this.buttons = buttons;}
+
+    public void setGui(GUI gui) {this.gui = gui;}
 }

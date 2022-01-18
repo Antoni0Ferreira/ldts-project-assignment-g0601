@@ -31,11 +31,11 @@ public class PlayingController extends GameController implements KeyBoardListene
     private void changeState(GameState gameState){this.gameState.changeState(gameState);}
 
     @Override
-    public void step(Game game, long time) throws IOException {
+    public void step(Game game) throws IOException {
         if(initial){
             arenaController.getBallController().startBallTimer();
         }
-        arenaController.step(game,time);
+        arenaController.step(game);
         playingViewer.draw();
 
         if(getModel().getPaddle().getLives() == 0){
@@ -46,7 +46,7 @@ public class PlayingController extends GameController implements KeyBoardListene
         }
         this.initial = false;
     }
-    
+
     @Override
     public void keyPressed(GUI.ACTION action)  {
         if(action == GUI.ACTION.QUIT){
@@ -58,22 +58,3 @@ public class PlayingController extends GameController implements KeyBoardListene
         }
         arenaController.doAction(action);
     }
-
-    public void checkButtons() {
-        for(Button button: gameState.getButtons()) {
-            if(!button.isActive()) continue;
-
-            if (!button.getCommand().execute()) button.deactivate();
-        }
-    }
-    
-    public ArenaController getArenaController() {return arenaController;}
-    
-    public void setupModel(Arena arena){
-        this.arenaController = new ArenaController(gameState,gui,arena);
-        this.setModel(arena);
-    }
-
-
-
-}

@@ -5,6 +5,7 @@ import com.ldts.breakout.Game;
 import java.io.IOException;
 
 public abstract class Controller<T> {
+
     private T model;
 
     public Controller(T model) {this.model = model;}
@@ -13,7 +14,6 @@ public abstract class Controller<T> {
 
     public void setModel(T model) {this.model = model;}
 
-    public abstract void step(Game game, long time ) throws IOException;
+    public abstract void step(Game game) throws IOException;
 
 }
-
