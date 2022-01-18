@@ -76,7 +76,7 @@ class EndGameControllerTest extends spock.lang.Specification{
 
         then:
         button1.getCommand().execute() == true
-        
+
     }
 }
 

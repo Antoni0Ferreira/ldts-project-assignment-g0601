@@ -18,9 +18,28 @@ public class EndGameController implements KeyBoardListener {
         this.endGameViewer = new EndGameViewer(gui, gameState.getButtons(), gameWon);
     }
 
-    @Override
-    public void keyPressed(GUI.ACTION action) throws IOException {
+    public void step() throws IOException {
+        endGameViewer.draw();
+    }
 
+    private int getActiveButton(){
+        for(int i = 0; i < gameState.getButtons().size(); i++){
+            if(gameState.getButtons().get(i).isActive()) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public void keyPressed(GUI.ACTION action) {
+        if(action == GUI.ACTION.QUIT){
+            gameState.changeState(null);
+        }
+
+        if(action == GUI.ACTION.CHOOSE){
+            int index = getActiveButton();
+            if(index != -1)
+                gameState.getButtons().get(index).getCommand().execute();
+        }
     }
 }
 
