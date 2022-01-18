@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public abstract class GameState {
     protected Game game;
-    private final List<Button> buttons;
+    private List<Button> buttons;
 
     public GameState(Game game, List<Button> buttons) {
         this.game = game;
@@ -22,6 +22,7 @@ public abstract class GameState {
     public void setGame(Game game){this.game = game;}
 
     public List<Button> getButtons(){return buttons;}
+    public void setButtons(List<Button> buttons) {this.buttons = buttons;}
 
     public abstract void start();
 

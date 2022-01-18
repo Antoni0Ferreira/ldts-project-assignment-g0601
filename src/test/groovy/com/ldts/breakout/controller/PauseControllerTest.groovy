@@ -1,8 +1,10 @@
 package com.ldts.breakout.controller
 
+import com.ldts.breakout.Game
 import com.ldts.breakout.gui.GUI
 import com.ldts.breakout.model.Button
 import com.ldts.breakout.model.Position
+import com.ldts.breakout.model.command.Command
 import com.ldts.breakout.state.PauseState
 import com.ldts.breakout.model.command.MenuButtonCommand
 import org.mockito.Mockito
@@ -57,6 +59,8 @@ class PauseControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(button1).deactivate()
         Mockito.doCallRealMethod().when(button1).isActive()
         Mockito.doCallRealMethod().when(button1).getPosition()
+        Mockito.doCallRealMethod().when(button1).setCommand(Mockito.any(Command))
+        Mockito.doCallRealMethod().when(button1).getCommand()
 
         def button2 = Mockito.mock(Button.class)
         Mockito.doCallRealMethod().when(button2).setPosition(Mockito.any())
@@ -64,6 +68,8 @@ class PauseControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(button2).deactivate()
         Mockito.doCallRealMethod().when(button2).isActive()
         Mockito.doCallRealMethod().when(button2).getPosition()
+        Mockito.doCallRealMethod().when(button2).setCommand(Mockito.any(Command))
+        Mockito.doCallRealMethod().when(button2).getCommand()
 
         button1.setPosition(new Position(1,1))
         button2.setPosition(new Position(1,2))
@@ -75,13 +81,22 @@ class PauseControllerTest extends spock.lang.Specification{
         def pauseState = Mockito.mock(PauseState.class)
         Mockito.doCallRealMethod().when(pauseState).getButtons()
         Mockito.doCallRealMethod().when(pauseState).setButtons(Mockito.anyList())
+        Mockito.doCallRealMethod().when(pauseState).changeState(Mockito.any())
+        Mockito.doCallRealMethod().when(pauseState).setGame(Mockito.any())
+
+        def game = Mockito.mock(Game.class)
+        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
+
 
         pauseState.setButtons(buttons)
+        pauseState.setGame(game)
 
         def gui = Mockito.mock(GUI.class)
         def pauseController = new PauseController(pauseState,gui)
 
         def command = Mockito.mock(MenuButtonCommand.class)
+        Mockito.doCallRealMethod().when(command).execute()
+
         button1.setCommand(command)
         button2.setCommand(command)
 
@@ -106,7 +121,7 @@ class PauseControllerTest extends spock.lang.Specification{
         pauseController.keyPressed(action)
 
         then:
-        pauseController.getGameState() == null
+        game.getGameState() == null
 
         when:
         action = GUI.ACTION.CHOOSE
