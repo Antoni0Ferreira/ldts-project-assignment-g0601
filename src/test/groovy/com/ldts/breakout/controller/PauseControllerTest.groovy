@@ -87,7 +87,6 @@ class PauseControllerTest extends spock.lang.Specification{
         def game = Mockito.mock(Game.class)
         Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
 
-
         pauseState.setButtons(buttons)
         pauseState.setGame(game)
 
@@ -128,7 +127,7 @@ class PauseControllerTest extends spock.lang.Specification{
         pauseController.keyPressed(action)
 
         then:
-        button1.getCommand().execute() == true
+        button1.getCommand().execute()
 
     }
 }
