@@ -5,7 +5,6 @@ import com.ldts.breakout.controller.EndGameController
 import com.ldts.breakout.gui.GUI
 import com.ldts.breakout.gui.KeyBoardObserver
 import com.ldts.breakout.gui.LanternaGUI
-import com.ldts.breakout.model.command.Command
 import org.mockito.Mockito
 
 class EndGameStateTest extends spock.lang.Specification{
@@ -15,7 +14,7 @@ class EndGameStateTest extends spock.lang.Specification{
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(GUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
-        def won = Mockito.anyBoolean()
+        def won = true
         def endGameState = new EndGameState(game,gui,won)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
@@ -27,13 +26,13 @@ class EndGameStateTest extends spock.lang.Specification{
         Mockito.verify(keyBoardObserver,Mockito.times(1)).setListener(Mockito.any())
     }
 
-    def "Teste Step()"(){
+    def "Teste Step"(){
         given:
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(LanternaGUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
         def endGameController = Mockito.mock(EndGameController.class)
-        def won = Mockito.anyBoolean()
+        def won = true
 
         def endGameState = new EndGameState(game,gui,won)
         endGameState.setEndGameController(endGameController)
