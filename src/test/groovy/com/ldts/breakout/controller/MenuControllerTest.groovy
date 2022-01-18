@@ -5,6 +5,7 @@ import com.ldts.breakout.gui.GUI
 import com.ldts.breakout.model.Position
 import com.ldts.breakout.model.command.MenuButtonCommand
 import com.ldts.breakout.state.GameState
+import com.ldts.breakout.state.MenuState
 import org.mockito.Mock
 import org.mockito.Mockito
 
@@ -15,6 +16,7 @@ class MenuControllerTest extends spock.lang.Specification{
     def "Teste ao getActiveButton"(){
 
         given:
+        def gui = Mockito.mock(GUI.class)
         def button1 = Mockito.mock(Button.class)
         Mockito.doCallRealMethod().when(button1).activate()
         Mockito.doCallRealMethod().when(button1).deactivate()
@@ -34,7 +36,7 @@ class MenuControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(gameState).getButtons()
         gameState.setButtons(buttons)
 
-        def menuController = new MenuController(gameState)
+        def menuController = new MenuController(gameState, gui)
 
         when:
         int index = menuController.getActiveButton()
@@ -52,6 +54,8 @@ class MenuControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(button1).deactivate()
         Mockito.doCallRealMethod().when(button1).isActive()
         Mockito.doCallRealMethod().when(button1).getPosition()
+        Mockito.doCallRealMethod().when(button1).setCommand(Mockito.any())
+        Mockito.doCallRealMethod().when(button1).getCommand()
 
         def button2 = Mockito.mock(Button.class)
         Mockito.doCallRealMethod().when(button2).setPosition(Mockito.any())
@@ -59,6 +63,8 @@ class MenuControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(button2).deactivate()
         Mockito.doCallRealMethod().when(button2).isActive()
         Mockito.doCallRealMethod().when(button2).getPosition()
+        Mockito.doCallRealMethod().when(button2).setCommand(Mockito.any())
+        Mockito.doCallRealMethod().when(button2).getCommand()
 
         def button3 = Mockito.mock(Button.class)
         Mockito.doCallRealMethod().when(button3).setPosition(Mockito.any())
@@ -66,6 +72,8 @@ class MenuControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(button3).deactivate()
         Mockito.doCallRealMethod().when(button3).isActive()
         Mockito.doCallRealMethod().when(button3).getPosition()
+        Mockito.doCallRealMethod().when(button3).setCommand(Mockito.any())
+        Mockito.doCallRealMethod().when(button3).getCommand()
 
         button1.setPosition(new Position(1,1))
         button2.setPosition(new Position(1,2))
@@ -76,20 +84,23 @@ class MenuControllerTest extends spock.lang.Specification{
 
         List<Button> buttons = Arrays.asList(button1,button2,button3)
 
-        def menuSate = Mockito.mock(GameState.class)
-        Mockito.doCallRealMethod().when(menuSate).getButtons()
-        Mockito.doCallRealMethod().when(menuSate).setButtons(Mockito.anyList())
+        def menuState = Mockito.mock(GameState.class)
+        Mockito.doCallRealMethod().when(menuState).getButtons()
+        Mockito.doCallRealMethod().when(menuState).setButtons(Mockito.anyList())
         Mockito.doCallRealMethod().when(menuState).changeState(Mockito.any())
         Mockito.doCallRealMethod().when(menuState).setGame(Mockito.any())
+        Mockito.doCallRealMethod().when(menuState).getGame()
 
         def game = Mockito.mock(Game.class)
         Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
 
-        menuSate.setButtons(buttons)
-        menuSate.setGame(game)
+
+        menuState.setButtons(buttons)
+        game.setGameState(menuState)
+        menuState.setGame(game)
 
         def gui = Mockito.mock(GUI.class)
-        def menuController = new MenuController(menuSate,gui)
+        def menuController = new MenuController(menuState,gui)
 
         def command = Mockito.mock(MenuButtonCommand.class)
         Mockito.doCallRealMethod().when(command).execute()
@@ -145,7 +156,7 @@ class MenuControllerTest extends spock.lang.Specification{
         menuController.keyPressed(action)
 
         then:
-        game.getGameState() == null
+        menuState.getGame().getGameState() == null
 
         when:
         action = GUI.ACTION.CHOOSE
