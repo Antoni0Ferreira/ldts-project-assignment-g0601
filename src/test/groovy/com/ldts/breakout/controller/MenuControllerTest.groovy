@@ -82,18 +82,34 @@ class MenuControllerTest extends spock.lang.Specification{
         button2.deactivate()
         button3.deactivate()
 
+        def game = Mockito.mock(Game.class)
+        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
+        Mockito.doCallRealMethod().when(game).getGameState()
+
+        def command = Mockito.mock(MenuButtonCommand.class)
+        def gameState = Mockito.mock(GameState.class)
+
+        Mockito.doCallRealMethod().when(gameState).changeState(Mockito.any())
+        Mockito.doCallRealMethod().when(gameState).setGame(Mockito.any())
+        Mockito.doCallRealMethod().when(command).setNextState(Mockito.any())
+        Mockito.doCallRealMethod().when(command).execute()
+
+        gameState.setGame(game)
+        command.setNextState(gameState)
+
+        button1.setCommand(command)
+        button2.setCommand(command)
+        button3.setCommand(command)
+
         List<Button> buttons = Arrays.asList(button1,button2,button3)
 
         def menuState = Mockito.mock(GameState.class)
+
         Mockito.doCallRealMethod().when(menuState).getButtons()
         Mockito.doCallRealMethod().when(menuState).setButtons(Mockito.anyList())
         Mockito.doCallRealMethod().when(menuState).changeState(Mockito.any())
         Mockito.doCallRealMethod().when(menuState).setGame(Mockito.any())
         Mockito.doCallRealMethod().when(menuState).getGame()
-
-        def game = Mockito.mock(Game.class)
-        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
-
 
         menuState.setButtons(buttons)
         game.setGameState(menuState)
@@ -101,13 +117,6 @@ class MenuControllerTest extends spock.lang.Specification{
 
         def gui = Mockito.mock(GUI.class)
         def menuController = new MenuController(menuState,gui)
-
-        def command = Mockito.mock(MenuButtonCommand.class)
-        Mockito.doCallRealMethod().when(command).execute()
-
-        button1.setCommand(command)
-        button2.setCommand(command)
-        button3.setCommand(command)
 
         when:
         def action = GUI.ACTION.DOWN
@@ -159,11 +168,12 @@ class MenuControllerTest extends spock.lang.Specification{
         menuState.getGame().getGameState() == null
 
         when:
+        menuState.getGame().setGameState(menuState)
         action = GUI.ACTION.CHOOSE
         menuController.keyPressed(action)
 
         then:
-        button2.getCommand().execute()
+        menuState.getGame().getGameState() == gameState
 
     }
 }

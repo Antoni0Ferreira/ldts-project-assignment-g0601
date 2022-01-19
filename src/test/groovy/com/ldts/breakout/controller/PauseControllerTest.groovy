@@ -51,8 +51,7 @@ class PauseControllerTest extends spock.lang.Specification{
         i == 0
     }
 
-
-    def "Teste ao keyPressed #2"() {
+    def "Teste ao keyPressed"() {
         given:
         def button1 = Mockito.mock(Button.class)
         Mockito.doCallRealMethod().when(button1).setPosition(Mockito.any())
@@ -77,12 +76,21 @@ class PauseControllerTest extends spock.lang.Specification{
         button1.activate()
         button2.deactivate()
 
+        def game = Mockito.mock(Game.class)
+        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
+        Mockito.doCallRealMethod().when(game).getGameState()
+
         def command = Mockito.mock(MenuButtonCommand.class)
         def gameState = Mockito.mock(GameState.class)
+
+        Mockito.doCallRealMethod().when(gameState).changeState(Mockito.any())
+        Mockito.doCallRealMethod().when(gameState).setGame(Mockito.any())
         Mockito.doCallRealMethod().when(command).setNextState(Mockito.any())
         Mockito.doCallRealMethod().when(command).execute()
 
-        command.setNextState(null)
+        gameState.setGame(game)
+        command.setNextState(gameState)
+
         button1.setCommand(command)
         button2.setCommand(command)
 
@@ -95,10 +103,6 @@ class PauseControllerTest extends spock.lang.Specification{
         Mockito.doCallRealMethod().when(pauseState).changeState(Mockito.any())
         Mockito.doCallRealMethod().when(pauseState).setGame(Mockito.any())
         Mockito.doCallRealMethod().when(pauseState).getGame()
-
-        def game = Mockito.mock(Game.class)
-        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
-        Mockito.doCallRealMethod().when(game).getGameState()
 
         pauseState.setButtons(buttons)
         game.setGameState(pauseState)
@@ -123,15 +127,15 @@ class PauseControllerTest extends spock.lang.Specification{
         button1.isActive()
         !button2.isActive()
 
-        /*when:
+        when:
         action = GUI.ACTION.QUIT
         pauseController.keyPressed(action)
 
         then:
-        pauseState.getGame().getGameState() == null*/
+        pauseState.getGame().getGameState() == null
 
         when:
-        pauseState.getGame().setGameState(gameState)
+        pauseState.getGame().setGameState(pauseState)
         action = GUI.ACTION.CHOOSE
         pauseController.keyPressed(action)
 

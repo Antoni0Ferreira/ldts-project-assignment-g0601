@@ -12,7 +12,6 @@ import com.ldts.breakout.gui.GUI
 import org.mockito.Mockito
 
 class EndGameControllerTest extends spock.lang.Specification{
-    def endGameController
 
     def "Teste ao getActiveButton"(){
         given:
@@ -60,39 +59,54 @@ class EndGameControllerTest extends spock.lang.Specification{
         button1.setPosition(new Position(1, 1))
         button1.activate()
 
+        def game = Mockito.mock(Game.class)
+        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
+        Mockito.doCallRealMethod().when(game).getGameState()
+
+        def command = Mockito.mock(MenuButtonCommand.class)
+        def gameState = Mockito.mock(GameState.class)
+
+        Mockito.doCallRealMethod().when(gameState).changeState(Mockito.any())
+        Mockito.doCallRealMethod().when(gameState).setGame(Mockito.any())
+        Mockito.doCallRealMethod().when(command).setNextState(Mockito.any())
+        Mockito.doCallRealMethod().when(command).execute()
+
+        gameState.setGame(game)
+        command.setNextState(gameState)
+
+        button1.setCommand(command)
+
         List<Button> buttons = Arrays.asList(button1)
 
         def endGameState = Mockito.mock(GameState.class)
+
         Mockito.doCallRealMethod().when(endGameState).getButtons()
         Mockito.doCallRealMethod().when(endGameState).setButtons(Mockito.anyList())
-
-        def game = Mockito.mock(Game.class)
-        Mockito.doCallRealMethod().when(game).setGameState(Mockito.any())
+        Mockito.doCallRealMethod().when(endGameState).changeState(Mockito.any())
+        Mockito.doCallRealMethod().when(endGameState).setGame(Mockito.any())
+        Mockito.doCallRealMethod().when(endGameState).getGame()
 
         endGameState.setButtons(buttons)
+        game.setGameState(endGameState)
         endGameState.setGame(game)
 
         def gui = Mockito.mock(GUI.class)
         def endGameController = new EndGameController(endGameState, gui, true)
-
-        def command = Mockito.mock(MenuButtonCommand.class)
-        Mockito.doCallRealMethod().when(command).execute()
-
-        button1.setCommand(command)
 
         when:
         def action = GUI.ACTION.QUIT
         endGameController.keyPressed(action)
 
         then:
-        game.getGameState() == null
+        endGameState.getGame().getGameState() == null
 
         when:
+        endGameState.getGame().setGameState(endGameState)
         action = GUI.ACTION.CHOOSE
         endGameController.keyPressed(action)
 
         then:
-        button1.getCommand().execute() == true
+        endGameState.getGame().getGameState() == gameState
 
     }
 }
