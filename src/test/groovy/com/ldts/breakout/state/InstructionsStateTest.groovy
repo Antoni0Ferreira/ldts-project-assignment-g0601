@@ -31,15 +31,14 @@ class InstructionsStateTest extends spock.lang.Specification{
         def gui = Mockito.mock(LanternaGUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
         def instructionsController = Mockito.mock(InstructionsController.class)
-        def won = true
 
-        def endGameState = new EndGameState(game,gui,won)
-        endGameState.setEndGameController(instructionsController)
+        def instructionsState = new InstructionsState(game,gui)
+        instructionsState.setInstructionsController(instructionsController)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
 
         when:
-        endGameState.step(game)
+        instructionsState.step(game)
 
         then:
         Mockito.verify(instructionsController,Mockito.times(1)).step()
