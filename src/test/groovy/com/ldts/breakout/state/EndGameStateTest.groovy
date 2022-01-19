@@ -1,23 +1,26 @@
 package com.ldts.breakout.state
+
 import com.ldts.breakout.Game
-import com.ldts.breakout.controller.MenuController
+import com.ldts.breakout.controller.EndGameController
+import com.ldts.breakout.gui.GUI
 import com.ldts.breakout.gui.KeyBoardObserver
 import com.ldts.breakout.gui.LanternaGUI
 import org.mockito.Mockito
 
-class MenuStateTest extends spock.lang.Specification{
+class EndGameStateTest extends spock.lang.Specification{
 
     def "Teste Start"(){
         given:
         def game = Mockito.mock(Game.class)
-        def gui = Mockito.mock(LanternaGUI.class)
+        def gui = Mockito.mock(GUI.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
-        def menuState = new MenuState(game,gui)
+        def won = true
+        def endGameState = new EndGameState(game,gui,won)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
 
         when:
-        menuState.start()
+        endGameState.start()
 
         then:
         Mockito.verify(keyBoardObserver,Mockito.times(1)).setListener(Mockito.any())
@@ -27,19 +30,19 @@ class MenuStateTest extends spock.lang.Specification{
         given:
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(LanternaGUI.class)
-        def menuController = Mockito.mock(MenuController.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
-        def menuState = new MenuState(game,gui)
+        def endGameController = Mockito.mock(EndGameController.class)
+        def won = true
+
+        def endGameState = new EndGameState(game,gui,won)
+        endGameState.setEndGameController(endGameController)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-        Mockito.when(menuState.getMenuController()).thenReturn(menuController)
+
         when:
-        menuState.step(game)
+        endGameState.step(game)
 
         then:
-        Mockito.verify(menuController,Mockito.times(1)).step()
-
+        Mockito.verify(endGameController,Mockito.times(1)).step()
     }
-
-
 }
