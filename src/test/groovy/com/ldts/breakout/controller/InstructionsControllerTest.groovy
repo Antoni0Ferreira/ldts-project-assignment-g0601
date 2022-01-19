@@ -95,14 +95,14 @@ class InstructionsControllerTest extends spock.lang.Specification {
         instructionsController.keyPressed(action)
 
         then:
-        instructionsController.getGame().getGameState() == null
+        instructionsState.getGame().getGameState() == null
 
         when:
-        instructionsController.getGame().setGameState(instructionsState)
+        instructionsState.getGame().setGameState(instructionsState)
         action = GUI.ACTION.CHOOSE
         instructionsController.keyPressed(action)
 
         then:
-        instructionsController.getGame().getGameState() == gameState
+        instructionsState.getGame().getGameState() == gameState
     }
 }
