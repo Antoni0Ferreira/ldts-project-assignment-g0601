@@ -114,6 +114,11 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
+    public void addKeyBoardListener(KeyBoardObserver observer){
+        ((AWTTerminalFrame) screen.getTerminal()).getComponent(0).addKeyListener(observer);
+    }
+
+    @Override
     public void drawBall(Position position){
         //TextGraphics textGraphics = createTextGraphics();
         drawText(screen.newTextGraphics(),position,"@","#FFFFFF");

@@ -24,6 +24,8 @@ public interface GUI {
 
     void close() throws IOException;
 
+    void addKeyBoardListener(KeyBoardObserver observer);
+
     void drawBall(Position position);
 
     void drawPaddle(Position position);
