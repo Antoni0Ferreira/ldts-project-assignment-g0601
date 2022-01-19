@@ -34,7 +34,7 @@ class MenuStateTest extends spock.lang.Specification{
         menuState.setMenuController(menuController)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-        
+
         when:
         menuState.step(game)
 
