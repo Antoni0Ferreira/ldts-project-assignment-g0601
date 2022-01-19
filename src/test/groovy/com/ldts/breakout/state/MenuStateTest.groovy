@@ -27,12 +27,14 @@ class MenuStateTest extends spock.lang.Specification{
         given:
         def game = Mockito.mock(Game.class)
         def gui = Mockito.mock(LanternaGUI.class)
-        def menuController = Mockito.mock(MenuController.class)
         def keyBoardObserver = Mockito.mock(KeyBoardObserver.class)
+        def menuController = Mockito.mock(MenuController.class)
+
         def menuState = new MenuState(game,gui)
+        menuState.setMenuController(menuController)
 
         Mockito.when(game.getKeyBoardObserver()).thenReturn(keyBoardObserver)
-        Mockito.when(menuState.getMenuController()).thenReturn(menuController)
+        
         when:
         menuState.step(game)
 
