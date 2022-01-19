@@ -15,9 +15,6 @@ public class MenuButtonCommand implements Command{
 
     }
 
-    @Override
-    public void undo() {nextState.changeState(nextState);}
-
     public GameState getNextState() {return nextState;}
 
     public void setNextState(GameState nextState){ this.nextState = nextState;}

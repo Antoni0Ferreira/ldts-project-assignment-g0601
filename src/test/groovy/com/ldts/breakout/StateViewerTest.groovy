@@ -1,9 +1,7 @@
 package com.ldts.breakout
 
-import com.ldts.breakout.gui.GUI
 import com.ldts.breakout.model.Button
 import com.ldts.breakout.model.Position
-import com.ldts.breakout.viewer.ButtonViewer
 import com.ldts.breakout.viewer.state.StateViewer
 import org.mockito.Mockito
 
