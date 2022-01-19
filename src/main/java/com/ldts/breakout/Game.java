@@ -1,4 +1,5 @@
 package com.ldts.breakout;
+import com.googlecode.lanterna.screen.Screen;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.gui.KeyBoardObserver;
 import com.ldts.breakout.gui.LanternaGUI;
