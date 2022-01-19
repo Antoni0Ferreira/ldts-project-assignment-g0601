@@ -3,7 +3,7 @@ package com.ldts.breakout.model.command;
 import com.ldts.breakout.state.GameState;
 
 public class MenuButtonCommand implements Command{
-    private final GameState nextState;
+    private GameState nextState;
 
     public MenuButtonCommand(GameState nextState){this.nextState = nextState;}
 
@@ -19,4 +19,6 @@ public class MenuButtonCommand implements Command{
     public void undo() {nextState.changeState(nextState);}
 
     public GameState getNextState() {return nextState;}
+
+    public void setNextState(GameState nextState){ this.nextState = nextState;}
 }
