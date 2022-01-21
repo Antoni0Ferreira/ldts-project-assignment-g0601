@@ -9,8 +9,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-//import java.util.Formatter
-
 public class Game {
     private int fps;
     private GameState gameState;
