@@ -56,6 +56,7 @@ public class PlayingController extends GameController implements KeyBoardListene
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return;
         }
         arenaController.doAction(action);
     }

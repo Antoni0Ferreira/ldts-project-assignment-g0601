@@ -1,5 +1,4 @@
 package com.ldts.breakout;
-import com.googlecode.lanterna.screen.Screen;
 import com.ldts.breakout.gui.GUI;
 import com.ldts.breakout.gui.KeyBoardObserver;
 import com.ldts.breakout.gui.LanternaGUI;
@@ -9,6 +8,8 @@ import com.ldts.breakout.state.MenuState;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+//import java.util.Formatter
 
 public class Game {
     private int fps;
@@ -48,13 +49,11 @@ public class Game {
         gui.close();
     }
 
-
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
         if (gameState != null)
             this.gameState.start();
     }
-
     public GameState getGameState(){
         return gameState;
     }

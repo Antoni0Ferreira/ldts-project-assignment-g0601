@@ -1,13 +1,16 @@
 package com.ldts.breakout.controller
 
 import com.ldts.breakout.Constants
+import com.ldts.breakout.model.Brick
 import com.ldts.breakout.model.Position
 import com.ldts.breakout.model.arena.Arena
 import org.mockito.Mockito
 import com.ldts.breakout.model.Ball
 import com.ldts.breakout.Game
+import com.ldts.breakout.model.Paddle
 
 import java.awt.Rectangle
+import java.rmi.MarshalledObject
 
 class BallControllerTest extends spock.lang.Specification{
     Ball ball
@@ -16,22 +19,11 @@ class BallControllerTest extends spock.lang.Specification{
     BallController ballController
 
     def setup(){
-        this.ball = Mockito.mock(Ball.class)
-        Mockito.doCallRealMethod().when(ball).setDirX(Mockito.anyInt())
-        Mockito.doCallRealMethod().when(ball).setDirY(Mockito.anyInt())
-        Mockito.doCallRealMethod().when(ball).getDirX()
-        Mockito.doCallRealMethod().when(ball).getDirY()
-        Mockito.doCallRealMethod().when(ball).getPosition()
-        Mockito.doCallRealMethod().when(ball).getDestroyedBrick()
-        Mockito.doCallRealMethod().when(ball).setDestroyedBrick(Mockito.anyBoolean())
-        Mockito.doCallRealMethod().when(ball).setPosition(Mockito.any())
-        ball.setDirX(1)
+        this.ball = new Ball()
         ball.setDirY(-1)
-        ball.setPosition(new Position(Constants.INIT_BALL_X,Constants.INIT_BALL_Y))
-
         this.arena = Mockito.mock(Arena.class)
         this.arenaController = Mockito.mock(ArenaController.class)
-        this.ballController = Mockito.mock(BallController.class)
+        this.ballController = new BallController(arena,arenaController,ball)
 
     }
 
@@ -128,43 +120,99 @@ class BallControllerTest extends spock.lang.Specification{
 
     def "Teste ao step #1" () {
         given:
-        ball.setDestroyedBrick(false)
-        arenaController.setBallController(ballController)
         def game = Mockito.mock(Game.class)
-        def ballController = new BallController(arena, arenaController,ball)
-        Mockito.doCallRealMethod().when(arenaController).setModel(Mockito.any())
-        arenaController.setModel(arena)
-        arenaController.setBallController(ballController)
-        Mockito.doCallRealMethod().when(arenaController).hitsBrick()
-        Mockito.doCallRealMethod().when(arenaController).hitsPaddle()
-        //Mockito.doCallRealMethod().when(ballController).getRectBall()
-        ball.setPosition(new Position(5,5))
-        //Mockito.when(ballController.getRectBall()).thenReturn(new Rectangle(5,5,1,1))
-
+        ballController.getBall().setDestroyedBrick(false)
+        ballController.setArenaController(arenaController)
 
         when:
         ballController.step(game)
 
         then:
-        Mockito.verify(arenaController,Mockito.times(1)).hitsPaddle()
-        Mockito.verify(arenaController,Mockito.times(1)).hitsBrick()
+        ball.getPosition() == new Position(Constants.INIT_BALL_X + ball.getDirX(), Constants.INIT_BALL_Y + ball.getDirY())
+
 
     }
 
     def "Teste ao step #2"(){
         given:
-        this.arenaController = Mockito.mock(ArenaController.class)
         def game = Mockito.mock(Game.class)
         ball.setDestroyedBrick(true)
-        def ballController = new BallController(arena, arenaController, ball)
 
+        def paddle = Mockito.mock(Paddle.class)
+        def paddleController = Mockito.mock(PaddleController.class)
+        Mockito.when(paddle.getRect()).thenReturn(new Rectangle(Constants.INIT_BALL_X - 2, Constants.INIT_BALL_Y, 7, 1))
+        Mockito.when(paddleController.getPaddle()).thenReturn(paddle)
+        Mockito.doCallRealMethod().when(arenaController).hitsPaddle()
+
+        def ballController = new BallController(arena,arenaController,ball)
+
+        Mockito.doCallRealMethod().when(arenaController).setPaddleController(Mockito.any())
+        arenaController.setPaddleController(paddleController)
+        Mockito.doCallRealMethod().when(arenaController).setBallController(Mockito.any())
+        arenaController.setBallController(ballController)
 
         when:
         ballController.step(game)
 
         then:
-        Mockito.verify(arenaController,Mockito.times(1)).hitsPaddle()
-        Mockito.verify(arenaController,Mockito.times(0)).hitsBrick()
+        ballController.getBall().getDirY() == 1
+        ballController.getBall().getDirX() == 1
+
+        when:
+        ballController.getBall().setPosition(new Position(5, 5))
+        ballController.step(game)
+        then:
+        ballController.getBall().getDirY() == 1
+        ballController.getBall().getDirX() == 1
+
+
+    }
+
+    def "Teste ao step #3"(){
+        given:
+        def game = Mockito.mock(Game.class)
+        ball.setDestroyedBrick(false)
+
+        def paddle = Mockito.mock(Paddle.class)
+        def paddleController = Mockito.mock(PaddleController.class)
+
+        def brick = Mockito.mock(Brick.class)
+        Mockito.when(brick.getRect()).thenReturn(new Rectangle(Constants.INIT_BALL_X - 3, Constants.INIT_BALL_Y, 7, 1))
+        Mockito.doCallRealMethod().when(arenaController).setBrickList(Mockito.anyList())
+        arenaController.setBrickList(Arrays.asList(brick))
+
+        Mockito.doCallRealMethod().when(arenaController).hitsBrick()
+
+        def ballController = new BallController(arena,arenaController,ball)
+
+        Mockito.doCallRealMethod().when(arenaController).setBallController(Mockito.any())
+        arenaController.setBallController(ballController)
+        Mockito.doCallRealMethod().when(arenaController).setPaddleController(Mockito.any())
+        arenaController.setPaddleController(paddleController)
+
+        when:
+        ballController.step(game)
+
+        then:
+        ballController.getBall().getDirY() == 1
+        ballController.getBall().getDirX() == 1
+
+        when:
+        ballController.getBall().setPosition(new Position(5, 5))
+        ballController.step(game)
+        then:
+        ballController.getBall().getDirY() == 1
+        ballController.getBall().getDirX() == 1
+
+        when:
+        ball.setDestroyedBrick(true)
+        ballController.step(game)
+
+        then:
+        ballController.getBall().getDirY() == 1
+        ballController.getBall().getDirX() == 1
+
+
 
     }
 }

@@ -15,7 +15,6 @@ public abstract class GameState {
         this.buttons = buttons;
     }
 
-
     public void changeState(GameState gameState){this.game.setGameState(gameState);}
 
     public Game getGame(){return game;}

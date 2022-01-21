@@ -70,7 +70,6 @@ public class BallController extends GameController {
     public Ball getBall(){
         return ball;
     }
-
     public void setBall(Ball ball){ this.ball = ball;}
 
     @Override
@@ -80,4 +79,7 @@ public class BallController extends GameController {
             arenaController.hitsBrick();
         move();
     }
+
+    public void setArenaController(ArenaController arenaController) {this.arenaController = arenaController;}
+    public ArenaController getArenaController(){ return arenaController;}
 }

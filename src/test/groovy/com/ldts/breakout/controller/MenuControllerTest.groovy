@@ -14,7 +14,6 @@ import com.ldts.breakout.model.Button
 class MenuControllerTest extends spock.lang.Specification{
 
     def "Teste ao getActiveButton"(){
-
         given:
         def gui = Mockito.mock(GUI.class)
         def button1 = Mockito.mock(Button.class)
@@ -43,7 +42,6 @@ class MenuControllerTest extends spock.lang.Specification{
 
         then:
         index == 1
-
     }
 
     def "Teste ao keyPressed"(){

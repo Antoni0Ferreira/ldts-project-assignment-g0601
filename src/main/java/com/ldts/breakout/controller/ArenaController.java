@@ -16,11 +16,10 @@ import java.util.List;
 public class ArenaController extends GameController {
 
     private final GameState gameState;
-    private final ArenaViewer arenaViewer;
+    private ArenaViewer arenaViewer;
     private BallController ballController;
     private PaddleController paddleController;
     private List<Brick> brickList;
-    private boolean gameStart;
 
     public ArenaController(GameState gameState, GUI gui, Arena arena){
         super(arena);
@@ -32,7 +31,6 @@ public class ArenaController extends GameController {
     }
 
     public PaddleController getPaddleController(){return paddleController;}
-
     public BallController getBallController(){return ballController;}
 
     public void doAction(GUI.ACTION action){
@@ -46,15 +44,6 @@ public class ArenaController extends GameController {
         ballController.step(game);
         lostLife();
         arenaViewer.draw();
-        if(paddleController.getPaddle().getLives() == 0){
-
-            gameState.changeState(new MenuState(this.gameState.getGame(), arenaViewer.getGui()));
-        }
-        else if(paddleController.getPaddle().getPoints() == Constants.MAX_POINTS){
-
-            gameState.changeState(new MenuState(this.gameState.getGame(), arenaViewer.getGui()));
-        }
-
     }
 
     public boolean hitsPaddle(){
@@ -65,30 +54,28 @@ public class ArenaController extends GameController {
         return false;
     }
 
-
     public boolean hitsBrick(){
         for(Brick brick: brickList){
             if(ballController.getRectBall().intersects(brick.getRect()) && !brick.isDestroyed()){
                 ballController.hitBrick();
                 brick.setDestroyed(true);
                 paddleController.addPoints(brick.getPoints());
-                brickList.remove(brick);
                 return true;
             }
         }
         return false;
     }
+
     public void lostLife(){
-        if (ballController.getModel().getBall().getPosition().getY() > Constants.INIT_PADDLE_Y) {
+        if (ballController.getBall().getPosition().getY() > Constants.INIT_PADDLE_Y) {
             paddleController.lostLife();
             ballController.resetBall();
         }
     }
 
-    public ArenaViewer getArenaViewer() {
-        return arenaViewer;
-    }
-
     public void setBallController(BallController ballController){this.ballController = ballController;}
+    public void setPaddleController(PaddleController paddleController){this.paddleController = paddleController;}
+    public void setBrickList(List<Brick> brickList){this.brickList = brickList;}
+    public void setArenaViewer(ArenaViewer arenaViewer) {this.arenaViewer = arenaViewer;}
 
 }

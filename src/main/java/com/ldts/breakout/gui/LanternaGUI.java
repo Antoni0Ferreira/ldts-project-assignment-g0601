@@ -13,9 +13,12 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.ldts.breakout.Constants;
 import com.ldts.breakout.model.Position;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.googlecode.lanterna.Symbols.HEART;
 
@@ -50,6 +53,8 @@ public class LanternaGUI implements GUI{
         defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         Terminal terminal = defaultTerminalFactory.createTerminal();
         ((AWTTerminalFrame)terminal).setTitle("Breakout");
+        ImageIcon img = new ImageIcon("Tony.png");
+        ((AWTTerminalFrame) terminal).setIconImage(img.getImage());
         return terminal;
     }
 
@@ -120,7 +125,6 @@ public class LanternaGUI implements GUI{
 
     @Override
     public void drawBall(Position position){
-        //TextGraphics textGraphics = createTextGraphics();
         drawText(screen.newTextGraphics(),position,"@","#FFFFFF");
     }
 
