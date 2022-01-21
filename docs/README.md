@@ -10,7 +10,9 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 - **Moving Paddle** - The paddle will move to the left/right when the left/right arrow key is pressed. (1)
 - **Constantly Moving Ball** - The ball will have an autonomous and continuous movement, which is created by a thread. (2)
 - **Hitting the Ball** - By moving the paddle, the player will try to hit the ball.
-- **Destroying a Brick** - When you can destroy a brick by bouncing the ball on it, you will get a certain amount of points.
+- **Destroying a Brick** - When you destroy a brick by bouncing the ball on it, you will get a certain amount of points.
+- **Playing Lives** - You only get 3 lives to try and destroy all of the bricks. When you lose a life, the ball will reset to its original position
+- **Simple Main Menu** - A main menu that will let you start the game, read the instructions or exit.
 
 (1)
 
