@@ -7,34 +7,35 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 ### IMPLEMENTED FEATURES 
 
-- **Moving Paddle** - The paddle will move to the left/right when the left/right arrow key is pressed. (1)
-- **Constantly Moving Ball** - The ball will have an autonomous and continuous movement, which is created by a thread. (2)
+- **Moving Paddle** - The paddle will move to the left/right when the left/right arrow key is pressed.
+
+![](https://i.imgur.com/pdbCog1.gif)
+
+- **Constantly Moving Ball** - The ball will have an autonomous and continuous movement, which is created by a thread.
+
+![](https://i.imgur.com/Fw9sTxW.gif)
+
 - **Hitting the Ball** - By moving the paddle, the player will try to hit the ball.
+
+![](https://i.imgur.com/GjSj3N5.gif)
+
 - **Destroying a Brick** - When you destroy a brick by bouncing the ball on it, you will get a certain amount of points.
+
+![](https://i.imgur.com/iEjteBz.gif)
+
 - **Playing Lives** - You only get 3 lives to try and destroy all of the bricks. When you lose a life, the ball will reset to its original position
+
+![](https://i.imgur.com/6btd2CU.gif)
+
 - **Simple Main Menu** - A main menu that will let you start the game, read the instructions or exit.
 
-(1)
+![](https://i.imgur.com/Z8LTFNU.gif)
 
-![](https://i.imgur.com/prkkDuH.png)
-![](https://i.imgur.com/9HpwUqQ.png)
+- **Simple Pause Menu** - When you're playing the game, you can hit 'q' on the keyboard to pause the game.
 
-(2)
-
-![](https://i.imgur.com/kmFUiVX.png)
+![](https://i.imgur.com/51KOW6K.gif)
 
 ### PLANNED FEATURES  
-
-- **Simple Main Menu** - A main menu that will let you start the game, read the instructions or close it. (1)
-- **Player Lives** - The player will only have 3 lives to try and win the game. (2)
-
-(1)
-
-![](https://i.imgur.com/SleueHm.png)
-
-(2)
-
-![](https://i.imgur.com/UueNvJd.png)
 
 ### DESIGN  
 
