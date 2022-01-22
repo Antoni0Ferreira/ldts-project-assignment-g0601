@@ -12,15 +12,6 @@ You can find the more detailed report [here](https://github.com/FEUP-LDTS-2021/l
 Please click [here](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/docs/Class%20UML%20Diagram.png) for the project's UML Diagram (open the image on
 another tab for a better view!).
 
-### IMAGES
+### SMALL DEMO
 
-![](https://i.imgur.com/qZc2FTw.png)
-
-![](https://i.imgur.com/C4x6mxn.png)
-![](https://i.imgur.com/7Xc3a4Z.png)
-
-![](https://i.imgur.com/rF3vE8Z.png)
-![](https://i.imgur.com/pyVT9Tm.png)
-
-![](https://i.imgur.com/o00uOxr.png)
-![](https://i.imgur.com/98CeRx0.png)
+![](https://i.imgur.com/s51d9YL.gif)
