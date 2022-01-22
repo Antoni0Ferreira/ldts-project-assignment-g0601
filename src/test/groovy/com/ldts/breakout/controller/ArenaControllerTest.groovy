@@ -181,7 +181,7 @@ class ArenaControllerTest extends spock.lang.Specification{
         given:
         def ball = Mockito.mock(Ball.class)
         def ballController = Mockito.mock(BallController.class)
-        def game = new Game(20)
+        def game = Mockito.mock(Game.class)
         def arenaViewer = Mockito.mock(ArenaViewer.class)
 
         Mockito.when(ballController.getBall()).thenReturn(ball)
