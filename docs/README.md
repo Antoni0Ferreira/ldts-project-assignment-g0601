@@ -35,11 +35,14 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 ![](https://i.imgur.com/51KOW6K.gif)
 
-### PLANNED FEATURES  
+### PLANNED FEATURES
+
+Although we are quite happy with the finished product, there's still some features we would like to see implemented, especifically the introduction of
+diferent levels or changes in the ball's speed.
 
 ### DESIGN  
 
-At this stage of the project, the number of design patterns implemented is quite low. However, in the later stages, this number will definitely increase.
+At this stage of the project, we have implemented 4 different design patterns:
 
 -------
 
@@ -69,6 +72,92 @@ The use of the Factory pattern in the current design allows us to have the follo
 - As we previously stated, when we create a new class, we already have, in this case, a draw method, since it extends the class Element. To make it specific to the class, we'll
 only have to **Override** the draw method.
 
+#### HAVING ONLY ONE INSTANCE OF THE CLASS 'GAME'
+
+**Problem in Context**
+
+For this project, we considered that it was good practice to avoid having multiple instances of the class 'Game'
+
+**The Pattern**
+
+With this in mind, our team decided to introduce the Singleton pattern, to only have one "Game".
+
+**Implementation**
+
+![]()
+
+The following link shows how the pattern was introduced in our code:
+
+- [Game](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Game.java)
+
+**Consequences**
+
+The use of the Singleton pattern in the current design allows us to have the following consequences:
+- Even though this pattern could be caracterized as an "antipattern", since its use is on the decline, it ensures us that only one object of the class 'Game' will
+be created and used through out the whole runtime of the program;
+- However, this pattern has many disavantages, like an increase in difficulty in the testing of the code and the breaking of our code's modularity.
+
+#### A BETTER WAY TO ORGANIZE OUR CODE
+
+**Problem in Context**
+
+While we were in the earlier stages of this project, our code was getting quite messy and we couldn't understand the overall flow of our methods (for example,
+the draw method of the class 'Arena' was getting mixed up with the method that allowed the paddle to move).
+
+**The Pattern**
+
+This way, we came to the conclusion that we should restructure our classes and apply the Model-View-Controller (MVC) pattern, in order to divide our project into 3 different
+main parts for a better organization of our code.
+
+**Implementation**
+
+![]()
+
+The following link shows how the pattern was introduced in our code:
+
+- [Model](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/main/java/com/ldts/breakout/model)
+- [Controller](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/main/java/com/ldts/breakout/controller)
+- [View](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/main/java/com/ldts/breakout/viewer)
+
+**Consequences**
+
+The use of the MVC pattern in the current design allows us to have the following consequences:
+- As we already stated, with this pattern, our project now has a better structure, where, for each element of our game, we created 3 different classes
+that handle different tasks: the Model classes only represent our data, the View classes display the models and sends the player's actions to a controller and the Controller
+classes provide data from the models to the viewers and interpret the player's actions.
+
+#### PRESSING THE ARROW KEYS
+
+**Problem in Context**
+
+In this game, as we mentioned before, the player gets to control a paddle with the left/right arrow keys of its keyboard. Even though it worked, in the beginning stages
+this project, we had a very simple and naïve method of moving this paddle. We also wanted to have a main menu where the player could chose an option by pressing diferent arrow
+keys and the 'Enter' key.
+
+**The Pattern**
+
+To solve this issue, we applied the Observer pattern, where we created a keyboard observer in our class 'Game' whose job is to observe and be notified when the keys of the 
+keyboard are being pressed. We also set a listener on our 'State' classes, which is the same keyboard observer from the game. In this case, the listener will have an
+action associated to it, which determines what will happen in the game (play the game, read the instructions, quit the gane...) 
+
+**Implementation**
+
+![]()
+
+The following link shows how the pattern was introduced in our code:
+
+- [KeyBoardObserver](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/gui/KeyBoardObserver.java)
+- [LaternaGUI](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/gui/LanternaGUI.java)
+- [Game](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/Game.java)
+- [KeyBoardListener](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/KeyBoardListener.java)
+- [PlayingState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/PlayingState.java) (an example)
+
+**Consequences**
+
+The use of the Observer pattern in the current design allows us to have the following consequences:
+- Now when we press a key, the classes that have features that depend on the keyboard won't keep asking, in this case, the class 'Game' if a key was pressed. Using the
+keyboard observer and listener, the classes will be notified when a key is pressed.
+
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
 Although we identified various code smells, there's the need to point out that some will not be changed in the final version of the code, since we couldn't find any
@@ -84,21 +173,33 @@ solution for them.
 - **Points**
 - **Position**
 - **Wall**
+- **Brick**
+- **Button**
+- **Arena**
 
 Even though they help us organize our code, these classes don't do anything special, they're basically data containers 
 for other classes, due to the fact of them not having any additional functionality.
 
-A way to solve this problematic situation could be the implementation of the **Move Method**, where we include, for example, the points system in the Arena class.
+A way to solve this problematic situation could be the implementation of the **Move Method**, where we include, for example, the points or the player lives system in the Arena
+class.
+
+**Duplicate Code**
+
+In the 'Controller' classes that have a non-empty list of buttons, we introduced a method called 'getActiveButton()', which, as the name already states, will return the
+index of the active button in class' buttons list. However, this method is practically identical in every class that it is implemented.
+
+In this case, to solve this problem, we need to apply the **Extract Method**, followed by the **Pull up Method**, where we move the 'getActiveButton()' method
+into the the 'GameController' abstract class.
 
 #### BLOATERS
 
-**Large Class**
+**Long Methods**
 
-While implementing the code for our game, we've come to realize that the size of our Arena class was growing quite rapidly, since it deals with a lot of features, like the
-paddle movement, the creation of walls and bricks, the verification of the requirements for ending the game...
+After restructuring our project, we've come to notice that the size of our 'keyPressed' methods are quite big, since they're only made up of if-elses/switch cases that
+consider all of the possible actions or used keyboard keys in the game.
 
-With this in mind, in order to minimize the size of this class, we could apply the **Extract Method**, where we seperate many of its methods into diferent components
-and other classes.
+With this in mind, in order to minimize the size of these methods, we could apply the **Extract Method**, where we seperate many of their if-elses/switch cases into diferent
+components and other methods/classes.
 
 **Primitive Obsession**
 
@@ -110,7 +211,29 @@ So, to solve this problem, we can only define the important constants and utiliz
 ### TESTING
 
 #### COVERAGE REPORT
-![](https://i.imgur.com/o3fuFIc.png)
+![](https://i.imgur.com/OzsLgL2.png)
+- Controller
+
+![](https://i.imgur.com/v7aZDyN.png)
+
+- GUI
+
+![](https://i.imgur.com/LHqpE6I.png)
+
+- Model
+
+![](https://i.imgur.com/AFJq8HQ.png)
+![](https://i.imgur.com/G0l4xP9.png)
+![](https://i.imgur.com/LcJfCvn.png)
+
+- State
+
+![](https://i.imgur.com/XwwE5FR.png)
+
+- Viewer
+
+![](https://i.imgur.com/8MgzKng.png)
+![](https://i.imgur.com/9Wxuj3O.png)
 
 #### MUTATION TEST
 You can check this [link](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/test/pitest/202201070024) for the mutation test.
