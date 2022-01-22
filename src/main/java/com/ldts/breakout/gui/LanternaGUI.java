@@ -53,7 +53,7 @@ public class LanternaGUI implements GUI{
         defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         Terminal terminal = defaultTerminalFactory.createTerminal();
         ((AWTTerminalFrame)terminal).setTitle("Breakout");
-        ImageIcon img = new ImageIcon("icon.png");
+        ImageIcon img = new ImageIcon("resources/icon.png");
         ((AWTTerminalFrame) terminal).setIconImage(img.getImage());
         return terminal;
     }
