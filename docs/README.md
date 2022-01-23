@@ -111,7 +111,7 @@ main parts for a better organization of our code.
 
 **Implementation**
 
-![]()
+![](https://i.imgur.com/PvKetih.png)
 
 The following link shows how the pattern was introduced in our code:
 
