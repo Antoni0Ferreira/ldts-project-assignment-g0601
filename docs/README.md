@@ -111,7 +111,7 @@ main parts for a better organization of our code.
 
 **Implementation**
 
-![]()
+![](https://i.imgur.com/PvKetih.png)
 
 The following link shows how the pattern was introduced in our code:
 
@@ -236,7 +236,7 @@ So, to solve this problem, we can only define the important constants and utiliz
 ![](https://i.imgur.com/9Wxuj3O.png)
 
 #### MUTATION TEST
-You can check this [link](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/test/pitest/202201070024) for the mutation test.
+You can check this [link](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/test/pitest/202201221447) for the mutation test.
 
 ### SELF-EVALUATION
 
