@@ -62,7 +62,7 @@ public class Game {
 
     public static Game getInstance() throws IOException, URISyntaxException, FontFormatException {
         if (singleton == null) {
-            singleton = new Game(60);
+            singleton = new Game(15);
         }
         return singleton;
     }
