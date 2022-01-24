@@ -84,7 +84,7 @@ With this in mind, our team decided to introduce the Singleton pattern, to only 
 
 **Implementation**
 
-![]()
+![](https://i.imgur.com/CjqlSWB.png)
 
 The following link shows how the pattern was introduced in our code:
 
@@ -142,9 +142,9 @@ action associated to it, which determines what will happen in the game (play the
 
 **Implementation**
 
-![]()
+![](https://i.imgur.com/pMQK2Eu.png)
 
-The following link shows how the pattern was introduced in our code:
+The following links shows how the pattern was introduced in our code:
 
 - [KeyBoardObserver](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/gui/KeyBoardObserver.java)
 - [LaternaGUI](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/gui/LanternaGUI.java)
@@ -157,6 +157,64 @@ The following link shows how the pattern was introduced in our code:
 The use of the Observer pattern in the current design allows us to have the following consequences:
 - Now when we press a key, the classes that have features that depend on the keyboard won't keep asking, in this case, the class 'Game' if a key was pressed. Using the
 keyboard observer and listener, the classes will be notified when a key is pressed.
+
+#### HAVING A MAIN MENU
+
+**Problem in Context**
+
+When we normally load up a game, it usually starts on a main menu where you can do many things. That being said,
+the team decided to introduce this concept and let the player start the game in a main menu, that lets him read the instructions, play the game or simply quit. We also wanted
+to print a simple message when the game ended, letting the player know if he had lost or won the game.
+
+**The Pattern**
+
+The option we had for this concept was to implement the State pattern. For all of the possible states we created different classes, which extend an abstract class called
+'GameState'. These states represent different moments in the game (we have classes like 'MenuState', 'PlayingState', 'PauseState', etc.).
+
+**Implementation**
+
+![](https://i.imgur.com/g2c2V3k.png)
+
+The following link shows how the pattern was introduced in our code:
+
+- [GameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/GameState.java)
+- [MenuState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/MenuState.java)
+- [PlayingState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/PlayingState.java)
+- [PauseState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/PlayingState.java)
+- [InstructionsState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/InstructionsState.java)
+- [EndGameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/EndGameState.java)
+
+**Consequences**
+
+The use of the State pattern in the current design allows us to have the following consequences:
+- Bigger number of classes
+- Depending on the context, we'll have an active state that leads the program to only focus on the methods related to the state in question
+
+#### CHANGING FROM ONE STATE TO ANOTHER
+
+**Problem in Context**
+
+When we decided to introduce a menu to our game, we had the idea to implement buttons, 
+which have the main job of letting the player travel from the main menu into the actual game, for example.
+
+**The Pattern**
+
+In order to do this task, we implemented the Command Pattern, where for every button created we associated a Menu Button Command that can be executed with the pressing of a
+keyboard key. When executed, the command in question will change the current state into another.
+
+**Implementation**
+
+![](https://i.imgur.com/SeKmyGz.png)
+
+The following link shows how the pattern was introduced in our code:
+
+- [Command](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/main/java/com/ldts/breakout/model/command)
+- [Button](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/Button.java)
+
+**Consequences**
+
+The use of the Command pattern in the current design allows us to have the following consequences:
+- With this pattern, we can transition between states, allowing our game the flow properly.
 
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
