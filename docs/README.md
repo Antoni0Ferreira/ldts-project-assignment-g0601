@@ -11,7 +11,7 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 ![](https://i.imgur.com/pdbCog1.gif)
 
-- **Constantly Moving Ball** - The ball will have an autonomous and continuous movement, which is created by a thread.
+- **Constantly Moving Ball** - The ball will have an autonomous and continuous movement.
 
 ![](https://i.imgur.com/Fw9sTxW.gif)
 
