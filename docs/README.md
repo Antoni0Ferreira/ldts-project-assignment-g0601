@@ -64,7 +64,7 @@ shared by the majority of the classes. This way, we don't have to keep implement
 
 The following link shows how the pattern was introduced in our code:
 
- - [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/58c0d9f6bd605b9fa3c9250d5515d748c0604045/src/main/java/com/ldts/breakout/model/Element.java)
+ - [Element](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/Element.java)
 
 **Consequences**
 
@@ -180,7 +180,7 @@ The following link shows how the pattern was introduced in our code:
 - [GameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/GameState.java)
 - [MenuState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/MenuState.java)
 - [PlayingState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/PlayingState.java)
-- [PauseState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/PlayingState.java)
+- [PauseState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/PauseState.java)
 - [InstructionsState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/InstructionsState.java)
 - [EndGameState](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/state/EndGameState.java)
 
