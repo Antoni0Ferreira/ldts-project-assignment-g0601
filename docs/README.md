@@ -68,7 +68,7 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the Factory pattern in the current design has the following outcome:
+The use of the Factory pattern in the current design results in:
 - As we previously stated, when we create a new class, we already have, in this case, a Position object and all of its methods, since it extends the Element class.
 
 #### HAVING ONLY ONE INSTANCE OF THE CLASS 'GAME'
@@ -120,6 +120,7 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
+The use of the Model-View-Controller (MVC) pattern in the current design results in:
 - As we already stated, with this pattern, our project now has a better structure, where, for each element of our game, we created 3 different classes
 that handle different tasks: the Model classes only represent our data, the View classes display the models and sends the player's actions to a controller and the Controller
 classes provide data from the models to the viewers and interpret the player's actions.
@@ -152,7 +153,7 @@ The following links shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the Observer pattern in the current design allows us to have the following consequence:
+The use of the Observer pattern in the current design results in:
 - Now when we press a key, the classes that have features that depend on the keyboard won't keep asking, in this case, the class 'Game', if a key was pressed. Using the
 keyboard observer and listener, the classes will be notified when a key is pressed. 
 In other words, we have an abstract coupling between a subject (Keyboard) and an observer (Game).
@@ -185,7 +186,7 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the State pattern in the current design leads us in to have the following consequences:
+The use of the State pattern in the current design results in:
 - Bigger number of classes.
 - Depending on the context, we'll have an active state that leads the program to only focus on the methods related to the state in question.
 - The localization and partitioning behavior for the different states.
@@ -214,7 +215,7 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the Command pattern in the current design allows us to have the following consequences:
+The use of the Command pattern in the current design results in:
 - With this pattern, we can transition between states, allowing our game to flow properly.
 - The commands can be extended and manipulated like any other object. An example of this is that these commands are parameters of the Button constructor.
 - To add a new command is fairly easy.
