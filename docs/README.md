@@ -51,7 +51,7 @@ At this stage of the project, we have implemented 6 different design patterns:
 **Problem in Context**
 
 In this project, we felt the need to create different objects, but with a lot in common, leading to many methods
-that do the same (for example, a draw method). 
+that do the same. 
 
 **The Pattern**
 
