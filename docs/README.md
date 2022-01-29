@@ -69,8 +69,7 @@ The following link shows how the pattern was introduced in our code:
 **Consequences**
 
 The use of the Factory pattern in the current design allows us to have the following consequence:
-- As we previously stated, when we create a new class, we already have, in this case, a draw method, since it extends the class Element. To make it specific to the class, we'll
-only have to **Override** the draw method.
+- As we previously stated, when we create a new class, we already have, in this case, a Position object and all of its methods, since it extends the Element class.
 
 #### HAVING ONLY ONE INSTANCE OF THE CLASS 'GAME'
 
