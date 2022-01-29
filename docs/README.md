@@ -37,7 +37,7 @@ This project was developed by António Ferreira (up202004735@fe.up.pt), João Ma
 
 ### PLANNED FEATURES
 
-Although we are quite happy with the finished product, there's still some features we would like to see implemented, especifically the introduction of
+Although we are quite happy with the finished product, there's still some features we would like to see implemented, specifically the introduction of
 different levels or changes in the ball's speed.
 
 ### DESIGN  
