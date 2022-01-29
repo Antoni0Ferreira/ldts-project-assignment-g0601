@@ -68,7 +68,7 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the Factory pattern in the current design allows us to have the following consequence:
+The use of the Factory pattern in the current design has the following outcome:
 - As we previously stated, when we create a new class, we already have, in this case, a Position object and all of its methods, since it extends the Element class.
 
 #### HAVING ONLY ONE INSTANCE OF THE CLASS 'GAME'
