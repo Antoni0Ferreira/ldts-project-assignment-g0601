@@ -42,7 +42,7 @@ diferent levels or changes in the ball's speed.
 
 ### DESIGN  
 
-At this stage of the project, we have implemented 4 different design patterns:
+At this stage of the project, we have implemented 6 different design patterns:
 
 -------
 
@@ -102,12 +102,12 @@ be created and used through out the whole runtime of the program;
 **Problem in Context**
 
 While we were in the earlier stages of this project, our code was getting quite messy and we couldn't understand the overall flow of our methods (for example,
-the draw method of the class 'Arena' was getting mixed up with the method that allowed the paddle to move).
+the method that made the ball constantly move was getting mixed up with the method that allowed the paddle to move).
 
 **The Pattern**
 
-This way, we came to the conclusion that we should restructure our classes and apply the Model-View-Controller (MVC) pattern, in order to divide our project into 3 different
-main parts for a better organization of our code.
+This way, we came to the conclusion that we should restructure our classes, and overall arquitecture of our project, and apply the Model-View-Controller (MVC) pattern, 
+in order  to divide our project into 3 different main parts for a better organization of our code.
 
 **Implementation**
 
@@ -131,8 +131,8 @@ classes provide data from the models to the viewers and interpret the player's a
 **Problem in Context**
 
 In this game, as we mentioned before, the player gets to control a paddle with the left/right arrow keys of its keyboard. Even though it worked, in the beginning stages
-this project, we had a very simple and naïve method of moving this paddle. We also wanted to have a main menu where the player could chose an option by pressing diferent arrow
-keys and the 'Enter' key.
+of this project, we had a very simple and naïve method of moving this paddle. On the other hand, we also wanted to have a main menu where the player could chose an option 
+by pressing  diferent arrow keys and the 'Enter' key.
 
 **The Pattern**
 
@@ -155,16 +155,17 @@ The following links shows how the pattern was introduced in our code:
 **Consequences**
 
 The use of the Observer pattern in the current design allows us to have the following consequences:
-- Now when we press a key, the classes that have features that depend on the keyboard won't keep asking, in this case, the class 'Game' if a key was pressed. Using the
-keyboard observer and listener, the classes will be notified when a key is pressed.
+- Now when we press a key, the classes that have features that depend on the keyboard won't keep asking, in this case, the class 'Game', if a key was pressed. Using the
+keyboard observer and listener, the classes will be notified when a key is pressed. 
+In other words, we have an abstract coupling between a subject (Keyboard) and an observer (Game).
 
-#### HAVING A MAIN MENU
+#### HAVING A MAIN MENU/DIFFERENT SCREENS
 
 **Problem in Context**
 
-When we normally load up a game, it usually starts on a main menu where you can do many things. That being said,
+When we normally load up a game, it usually starts on a menu where you can do many things. That being said,
 the team decided to introduce this concept and let the player start the game in a main menu, that lets him read the instructions, play the game or simply quit. We also wanted
-to print a simple message when the game ended, letting the player know if he had lost or won the game.
+to print a simple message when the game ended, letting the player know if he had lost or won the game, and introduce a pause menu, allowing the user to stop the game.
 
 **The Pattern**
 
@@ -186,9 +187,10 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the State pattern in the current design allows us to have the following consequences:
+The use of the State pattern in the current design leads us in to have the following consequences:
 - Bigger number of classes
 - Depending on the context, we'll have an active state that leads the program to only focus on the methods related to the state in question
+- The localization and partitioning behavior for the different states.
 
 #### CHANGING FROM ONE STATE TO ANOTHER
 
@@ -200,7 +202,7 @@ which have the main job of letting the player travel from the main menu into the
 **The Pattern**
 
 In order to do this task, we implemented the Command Pattern, where for every button created we associated a Menu Button Command that can be executed with the pressing of a
-keyboard key. When executed, the command in question will change the current state into another.
+specific keyboard key (like the 'Enter' key). When executed, the command in question will change the current state into another.
 
 **Implementation**
 
@@ -209,17 +211,20 @@ keyboard key. When executed, the command in question will change the current sta
 The following link shows how the pattern was introduced in our code:
 
 - [Command](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/main/java/com/ldts/breakout/model/command)
+- [MenuButtonCommand](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/command/MenuButtonCommand.java)
 - [Button](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/Button.java)
 
 **Consequences**
 
 The use of the Command pattern in the current design allows us to have the following consequences:
 - With this pattern, we can transition between states, allowing our game the flow properly.
+- The commands can be extended and manipulated like any other object. An example of this is that these command are parameters of the Button constructor
+- To add a new command is fairly easy.
 
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-Although we identified various code smells, there's the need to point out that some will not be changed in the final version of the code, since we couldn't find any
-solution for them.
+Although, during this project, we came across many different code smells, there's the need to point out that some weren't refactored in the 
+final version of the code, since we couldn't find any solution for them.
 
 ------
 
@@ -244,9 +249,9 @@ class.
 **Duplicate Code**
 
 In the 'Controller' classes that have a non-empty list of buttons, we introduced a method called 'getActiveButton()', which, as the name already states, will return the
-index of the active button in class' buttons list. However, this method is practically identical in every class that it is implemented.
+index of the active button in class' buttons list. However, this method is practically identical in every class that is implemented.
 
-In this case, to solve this problem, we need to apply the **Extract Method**, followed by the **Pull up Method**, where we move the 'getActiveButton()' method
+In this case, to solve this problem, we need to apply **Pull up Method**, where we move the 'getActiveButton()' method
 into the the 'GameController' abstract class.
 
 #### BLOATERS
@@ -257,7 +262,7 @@ After restructuring our project, we've come to notice that the size of our 'keyP
 consider all of the possible actions or used keyboard keys in the game.
 
 With this in mind, in order to minimize the size of these methods, we could apply the **Extract Method**, where we seperate many of their if-elses/switch cases into diferent
-components and other methods/classes.
+newo methods.
 
 **Primitive Obsession**
 
@@ -265,6 +270,16 @@ At the start of this project, we were determined to use the minimum number of sc
 values that stay constant and aren't modifiable. However, the number of constants used are quite high and many are defined by using other constants.
 
 So, to solve this problem, we can only define the important constants and utilize the rest in all of their respective classes.
+
+#### COUPLERS
+
+**Message Chains**
+
+Once we implemented the MCV pattern, we realized that we introduced a frequent message chain between our State, Controller and Viewer classes (for example, MenuState.step() ->
+MenuController.step() -> menuViewer.draw()).
+
+That being taken into consideration, to solve this code smell, we could implement the **Hide Delegate** method, where we create, in our Controller classes, for example,
+a method that delegates the call to our Viewer objects.
 
 ### TESTING
 
