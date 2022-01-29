@@ -153,7 +153,7 @@ The following links shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the Observer pattern in the current design allows us to have the following consequences:
+The use of the Observer pattern in the current design allows us to have the following consequence:
 - Now when we press a key, the classes that have features that depend on the keyboard won't keep asking, in this case, the class 'Game', if a key was pressed. Using the
 keyboard observer and listener, the classes will be notified when a key is pressed. 
 In other words, we have an abstract coupling between a subject (Keyboard) and an observer (Game).
