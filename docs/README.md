@@ -120,7 +120,6 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the MVC pattern in the current design allows us to have the following consequence:
 - As we already stated, with this pattern, our project now has a better structure, where, for each element of our game, we created 3 different classes
 that handle different tasks: the Model classes only represent our data, the View classes display the models and sends the player's actions to a controller and the Controller
 classes provide data from the models to the viewers and interpret the player's actions.
