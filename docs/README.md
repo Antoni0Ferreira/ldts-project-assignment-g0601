@@ -91,7 +91,7 @@ The following link shows how the pattern was introduced in our code:
 
 **Consequences**
 
-The use of the Singleton pattern in the current design allows us to have the following consequences:
+The use of the Singleton pattern in the current design results in:
 - Even though this pattern could be caracterized as an "antipattern", since its use is on the decline, it ensures us that only one object of the class 'Game' will
 be created and used through out the whole runtime of the program;
 - However, this pattern has many disadvantages, like an increase in difficulty in the testing of the code and the breaking of our code's modularity.
