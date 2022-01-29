@@ -187,8 +187,8 @@ The following link shows how the pattern was introduced in our code:
 **Consequences**
 
 The use of the State pattern in the current design leads us in to have the following consequences:
-- Bigger number of classes
-- Depending on the context, we'll have an active state that leads the program to only focus on the methods related to the state in question
+- Bigger number of classes.
+- Depending on the context, we'll have an active state that leads the program to only focus on the methods related to the state in question.
 - The localization and partitioning behavior for the different states.
 
 #### CHANGING FROM ONE STATE TO ANOTHER
@@ -209,15 +209,15 @@ specific keyboard key (like the 'Enter' key). When executed, the command in ques
 
 The following link shows how the pattern was introduced in our code:
 
-- [Command](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/tree/master/src/main/java/com/ldts/breakout/model/command)
+- [Command](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/command/Command.java)
 - [MenuButtonCommand](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/command/MenuButtonCommand.java)
 - [Button](https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0601/blob/master/src/main/java/com/ldts/breakout/model/Button.java)
 
 **Consequences**
 
 The use of the Command pattern in the current design allows us to have the following consequences:
-- With this pattern, we can transition between states, allowing our game the flow properly.
-- The commands can be extended and manipulated like any other object. An example of this is that these command are parameters of the Button constructor
+- With this pattern, we can transition between states, allowing our game to flow properly.
+- The commands can be extended and manipulated like any other object. An example of this is that these commands are parameters of the Button constructor.
 - To add a new command is fairly easy.
 
 ### KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
@@ -248,9 +248,9 @@ class.
 **Duplicate Code**
 
 In the 'Controller' classes that have a non-empty list of buttons, we introduced a method called 'getActiveButton()', which, as the name already states, will return the
-index of the active button in class' buttons list. However, this method is practically identical in every class that is implemented.
+index of the active button in the class' buttons list. However, this method is practically identical in every class that is implemented.
 
-In this case, to solve this problem, we need to apply **Pull up Method**, where we move the 'getActiveButton()' method
+In this case, to solve this problem, we need to apply the **Pull up Method**, where we move the 'getActiveButton()' method
 into the the 'GameController' abstract class.
 
 #### BLOATERS
@@ -261,7 +261,7 @@ After restructuring our project, we've come to notice that the size of our 'keyP
 consider all of the possible actions or used keyboard keys in the game.
 
 With this in mind, in order to minimize the size of these methods, we could apply the **Extract Method**, where we seperate many of their if-elses/switch cases into diferent
-newo methods.
+new methods.
 
 **Primitive Obsession**
 
